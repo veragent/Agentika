@@ -5,8 +5,8 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 export const metadata = {
-  title: "Public Roadmap | AI3 Web3AI Hub",
-  description: "See what we are building and vote on upcoming features for the AI3 platform.",
+  title: "Public Roadmap | AGENTIKA AGENTIKA",
+  description: "See what we are building and vote on upcoming features for the AGENTIKA platform.",
 }
 
 type RoadmapPhase = "done" | "in-progress" | "planned" | "future";
@@ -79,7 +79,7 @@ const ROADMAP: RoadmapPhaseData[] = [
       { id: "f2", title: "Autonomous AI Learning Agents", description: "Personal AI tutors that adapt to your pace and learning style.", votes: 467, priority: "medium" },
       { id: "f3", title: "Decentralized AI Infrastructure", description: "On-chain compute for decentralized AI model training and inference.", votes: 289, priority: "low" },
       { id: "f4", title: "Multi-Agent AI Workflows", description: "Orchestrate multiple AI agents for complex research and content creation.", votes: 234, priority: "low" },
-      { id: "f5", title: "Public SDK", description: "JavaScript/Python client library for the AI3 Developer API.", votes: 198, priority: "low" },
+      { id: "f5", title: "Public SDK", description: "JavaScript/Python client library for the AGENTIKA Developer API.", votes: 198, priority: "low" },
     ],
   },
 ];
@@ -101,7 +101,7 @@ export default function RoadmapPage() {
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Track our progress and see what&#39;s coming next. Vote counts reflect community interest from GitHub Issues and user surveys.
         </p>
-        <a href="https://github.com/abraham-yusuf/web3ai-hub/issues" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline" }), "mt-6")}>
+        <a href="https://github.com/abraham-yusuf/AGENTIKA/issues" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline" }), "mt-6")}>
           💡 Suggest a Feature on GitHub
         </a>
       </div>
@@ -148,7 +148,7 @@ export default function RoadmapPage() {
           Open an issue on GitHub or join our community to suggest features and vote.
         </p>
         <div className="flex justify-center gap-4 flex-wrap">
-          <a href="https://github.com/abraham-yusuf/web3ai-hub/issues/new" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants())}>
+          <a href="https://github.com/abraham-yusuf/AGENTIKA/issues/new" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants())}>
             Open GitHub Issue
           </a>
           <Link href="/contribute" className={cn(buttonVariants({ variant: "outline" }))}>

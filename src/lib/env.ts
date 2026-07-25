@@ -17,7 +17,7 @@ const serverEnvSchema = z
     NEXTAUTH_URL: z.string().url().optional(),
 
     // Bootstrap admin (initial setup only — ignore in production)
-    ADMIN_EMAIL: z.string().email().default("admin@web3aihub.com"),
+    ADMIN_EMAIL: z.string().email().default("admin@AGENTIKA.com"),
     ADMIN_PASSWORD: z.string().min(8).default("admin12345"),
 
     // AI Providers (at least one recommended)

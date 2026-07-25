@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isEn = loc === "en"
 
   return {
-    title: "Glossary — AI3",
+    title: "Glossary — AGENTIKA",
     description: isEn
       ? "Browse AI and Web3 terms and definitions in our comprehensive glossary."
       : "Jelajahi istilah dan definisi AI serta Web3 dalam glosarium komprehensif kami.",

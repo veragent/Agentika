@@ -266,7 +266,7 @@ export default function CompareToolsPage() {
                   "@type": "ListItem",
                   position: index + 1,
                   name: tool.name,
-                  url: `${process.env.NEXT_PUBLIC_BASE_URL ?? "https://ai3.my.id"}/ai-tools/${tool.slug}`,
+                  url: `${process.env.NEXT_PUBLIC_BASE_URL ?? "https://agentika.my.id"}/ai-tools/${tool.slug}`,
                   description: tool.tagline,
                 })),
                 numberOfItems: tools.length,
@@ -524,6 +524,6 @@ function buildMarkdownTable(tools: ToolData[]): string {
     separator,
     ...rows.map(formatRow),
     "",
-    `Generated from AI3 - AI Tools Directory`,
+    `Generated from AGENTIKA - AI Tools Directory`,
   ].join("\n")
 }

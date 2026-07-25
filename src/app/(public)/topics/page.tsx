@@ -19,8 +19,8 @@ export default async function TopicsIndexPage() {
   })
 
   const websiteJsonLd = buildWebsiteJsonLd(
-    process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id",
-    "AI3"
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id",
+    "AGENTIKA"
   )
 
   return (

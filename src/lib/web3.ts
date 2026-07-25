@@ -8,7 +8,7 @@ export const config = createConfig({
   chains: [mainnet, arbitrum, optimism, base, polygon],
   connectors: [
     injected(),
-    coinbaseWallet({ appName: "AI3" }),
+    coinbaseWallet({ appName: "AGENTIKA" }),
     walletConnect({ projectId }),
   ],
   transports: {

@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AI3 Hub",
-    short_name: "AI3",
+    name: "AGENTIKA Hub",
+    short_name: "AGENTIKA",
     description: "Belajar Web3 & AI dalam satu platform.",
     start_url: "/",
     display: "standalone",

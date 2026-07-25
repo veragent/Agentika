@@ -1,4 +1,4 @@
-# Web3AI Hub — Implementation Plan per Phase & Sprint
+# AGENTIKA — Implementation Plan per Phase & Sprint
 
 Dokumen ini memecah seluruh roadmap menjadi sprint 2-mingguan yang siap dieksekusi per tugas.
 

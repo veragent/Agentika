@@ -5,8 +5,8 @@ import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 export const metadata = {
-  title: "Developer API | AI3 Web3AI Hub",
-  description: "Public REST API for AI3 — access posts, AI tools, and more. Rate limited, no auth required.",
+  title: "Developer API | AGENTIKA AGENTIKA",
+  description: "Public REST API for AGENTIKA — access posts, AI tools, and more. Rate limited, no auth required.",
 }
 
 const ENDPOINTS = [
@@ -20,7 +20,7 @@ const ENDPOINTS = [
       { name: "category", type: "string", desc: "Filter: web3-fundamentals | ai-tutorials | airdrop-guides | opinion-news" },
       { name: "lang", type: "string", desc: "Language filter: id | en" },
     ],
-    example: `curl "https://web3ai-hub.vercel.app/api/public/v1/posts?limit=5&lang=en"`,
+    example: `curl "https://AGENTIKA.vercel.app/api/public/v1/posts?limit=5&lang=en"`,
     response: `{
   "data": [
     {
@@ -57,7 +57,7 @@ const ENDPOINTS = [
       { name: "category", type: "string", desc: "Tool category (e.g. writing, coding, image, video)" },
       { name: "pricing", type: "string", desc: "Pricing filter: FREE | FREEMIUM | PAID | SUBSCRIPTION" },
     ],
-    example: `curl "https://web3ai-hub.vercel.app/api/public/v1/tools?category=writing&pricing=FREE"`,
+    example: `curl "https://AGENTIKA.vercel.app/api/public/v1/tools?category=writing&pricing=FREE"`,
     response: `{
   "data": [
     {
@@ -85,8 +85,8 @@ const ENDPOINTS = [
 const COMING_SOON = [
   { title: "API Key Management", desc: "Generate and manage API keys for higher rate limits and analytics tracking." },
   { title: "Webhooks", desc: "Subscribe to events: new post published, airdrop updated, tool added." },
-  { title: "JavaScript SDK", desc: "npm install @web3ai-hub/sdk — typed client for Node.js and browser." },
-  { title: "Python SDK", desc: "pip install web3ai-hub — native Python bindings with async support." },
+  { title: "JavaScript SDK", desc: "npm install @AGENTIKA/sdk — typed client for Node.js and browser." },
+  { title: "Python SDK", desc: "pip install AGENTIKA — native Python bindings with async support." },
   { title: "GraphQL API", desc: "Flexible query language for precise data fetching with nested relations." },
   { title: "Airdrop Endpoint", desc: "GET /api/public/v1/airdrops — active and upcoming airdrop campaigns." },
 ]
@@ -104,9 +104,9 @@ export default function DevelopersPage() {
       {/* Hero */}
       <div className="mb-10">
         <Badge variant="outline" className="mb-3">🛠️ Developer API</Badge>
-        <h1 className="text-4xl font-bold mb-4">AI3 Developer API</h1>
+        <h1 className="text-4xl font-bold mb-4">AGENTIKA Developer API</h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          Access AI3 content programmatically. Public REST endpoints for posts, AI tools,
+          Access AGENTIKA content programmatically. Public REST endpoints for posts, AI tools,
           and more — no API key required for standard usage.
         </p>
       </div>
@@ -116,13 +116,13 @@ export default function DevelopersPage() {
         <h2 className="font-semibold mb-3 text-lg">⚡ Quickstart</h2>
         <pre className="text-sm overflow-x-auto rounded-lg bg-background border p-4">
           <code>{`# Fetch the latest 10 English posts
-curl "https://web3ai-hub.vercel.app/api/public/v1/posts?lang=en&limit=10"
+curl "https://AGENTIKA.vercel.app/api/public/v1/posts?lang=en&limit=10"
 
 # Fetch free AI writing tools
-curl "https://web3ai-hub.vercel.app/api/public/v1/tools?category=writing&pricing=FREE"`}</code>
+curl "https://AGENTIKA.vercel.app/api/public/v1/tools?category=writing&pricing=FREE"`}</code>
         </pre>
         <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <span>📍 Base URL: <code className="bg-muted px-1 rounded">https://web3ai-hub.vercel.app</code></span>
+          <span>📍 Base URL: <code className="bg-muted px-1 rounded">https://AGENTIKA.vercel.app</code></span>
           <span>⚡ Rate limit: <strong>100 req/hour</strong> per IP</span>
           <span>🔓 Auth: <strong>None required</strong></span>
           <span>📄 Format: <strong>JSON</strong></span>
@@ -235,7 +235,7 @@ curl "https://web3ai-hub.vercel.app/api/public/v1/tools?category=writing&pricing
           Share what you build with the community or open an issue for new endpoints.
         </p>
         <div className="flex justify-center gap-4 flex-wrap">
-          <a href="https://github.com/abraham-yusuf/web3ai-hub/issues" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants())}>
+          <a href="https://github.com/abraham-yusuf/AGENTIKA/issues" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants())}>
             Request an Endpoint
           </a>
           <Link href="/contribute" className={cn(buttonVariants({ variant: "outline" }))}>

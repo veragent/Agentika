@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     const settings = await getAISettings();
 
     // PHASE 1: GENERATE OUTLINE
-    const outlinePrompt = `You are a Senior Curriculum Designer for AI3 (Web3 & AI Hub). Create a detailed lesson outline for:
+    const outlinePrompt = `You are a Senior Curriculum Designer for AGENTIKA (Web3 & AI Hub). Create a detailed lesson outline for:
 Topic: ${topic}
 Level: ${level}
 Target Audience: ${targetAudience || "General Web3/AI learners"}
@@ -109,7 +109,7 @@ Ensure the slugs are unique and descriptive.`;
     const generatedPages: Array<{ id: string; slug: string; title: string }> = [];
 
     for (const lesson of outline.lessons) {
-      const contentPrompt = `You are writing a professional educational lesson for AI3. 
+      const contentPrompt = `You are writing a professional educational lesson for AGENTIKA. 
       Topic: ${lesson.title}
       Objective: ${lesson.objective}
       Level: ${level}
@@ -117,7 +117,7 @@ Ensure the slugs are unique and descriptive.`;
       REQUIREMENTS:
       1. Use MDX format.
       2. Use rich formatting: bolding, lists, and tables.
-      3. Integrate "AI3 Components" where appropriate:
+      3. Integrate "AGENTIKA Components" where appropriate:
          - Use <Callout type="info"> or <Callout type="warning"> for key tips.
          - Use <Comparison> for comparing technologies.
          - Use code blocks for technical examples.

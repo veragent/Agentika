@@ -1,4 +1,4 @@
-# 🌐 Web3AI Hub — Platform Blog & Learning Web3 + AI
+# 🌐 AGENTIKA — Platform Blog & Learning Web3 + AI
 
 <div align="center">
 
@@ -19,7 +19,7 @@ Blog · Dokumentasi Interaktif · Airdrop Hub · AI Tools Directory
 
 ## ✨ Tentang Proyek
 
-**Web3AI Hub** adalah platform konten modern yang dibangun dengan Next.js, dirancang khusus untuk berbagi pengetahuan seputar Web3 dan Artificial Intelligence. Platform ini menggabungkan blog berbasis MDX, dokumentasi interaktif ala GitBook, manajemen airdrop/bounty, dan direktori AI tools — semuanya terintegrasi dengan AI untuk membantu pembuatan konten otomatis dan pengalaman belajar yang personal.
+**AGENTIKA** adalah platform konten modern yang dibangun dengan Next.js, dirancang khusus untuk berbagi pengetahuan seputar Web3 dan Artificial Intelligence. Platform ini menggabungkan blog berbasis MDX, dokumentasi interaktif ala GitBook, manajemen airdrop/bounty, dan direktori AI tools — semuanya terintegrasi dengan AI untuk membantu pembuatan konten otomatis dan pengalaman belajar yang personal.
 
 Platform ini juga dirancang untuk **menghasilkan pendapatan** melalui Google AdSense, affiliate links, dan sponsored content.
 
@@ -105,7 +105,7 @@ Platform ini juga dirancang untuk **menghasilkan pendapatan** melalui Google AdS
 ## 📁 Struktur Project
 
 ```
-web3ai-hub/
+AGENTIKA/
 ├── app/                          # Next.js App Router
 │   ├── (public)/                 # Route group publik
 │   │   ├── blog/                 # Blog listing & detail
@@ -176,8 +176,8 @@ web3ai-hub/
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/abraham-yusuf/web3ai-hub.git
-cd web3ai-hub
+git clone https://github.com/abraham-yusuf/AGENTIKA.git
+cd AGENTIKA
 
 # 2. Install dependencies
 npm install

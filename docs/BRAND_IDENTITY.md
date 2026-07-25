@@ -1,14 +1,14 @@
-# AI3 Brand Identity Guidelines
+# AGENTIKA Brand Identity Guidelines
 
 ## Brand Core
 
-- **Primary Name:** AI3
-- **Descriptor:** AI3 Hub
+- **Primary Name:** AGENTIKA
+- **Descriptor:** AGENTIKA Hub
 - **Voice:** Futuristic, practical, and educational for Web3 + AI audience in Indonesia.
 
 ## Logo System
 
-- **Primary Logo:** `AI3Logo` component (`src/components/branding/ai3-logo.tsx`)
+- **Primary Logo:** `AGENTIKALogo` component (`src/components/branding/agentika-logo.tsx`)
 - **Asset Favicon/Icons:** `public/icons/*`
 - **Usage rule:** Keep clear space at least setara tinggi huruf `A` di sekeliling logo.
 

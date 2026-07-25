@@ -16,7 +16,7 @@ const templateGuide: Record<AIWriterRequest["template"], string> = {
 
 export function createWriterPrompt(input: AIWriterRequest): string {
   return [
-    "Kamu adalah editor senior AI3.",
+    "Kamu adalah editor senior AGENTIKA.",
     `Tulis artikel dalam bahasa: ${input.language}.`,
     `Tone: ${input.tone}.`,
     `Panjang target: ${lengthGuide[input.length]}.`,
@@ -44,7 +44,7 @@ function buildContentContext(content: string): string {
 
 export function createSummaryPrompt(content: string, language?: string): string {
   return [
-    "Kamu adalah editor AI3 yang merangkum konten.",
+    "Kamu adalah editor AGENTIKA yang merangkum konten.",
     language ? `Tulis ringkasan dalam bahasa: ${language}.` : "Gunakan bahasa yang sama dengan konten.",
     "Buat ringkasan 3-5 kalimat, fokus pada poin utama.",
     buildContentContext(content),
@@ -53,7 +53,7 @@ export function createSummaryPrompt(content: string, language?: string): string 
 
 export function createSeoOptimizerPrompt(content: string, language?: string): string {
   return [
-    "Kamu adalah SEO editor AI3.",
+    "Kamu adalah SEO editor AGENTIKA.",
     language ? `Gunakan bahasa: ${language}.` : "Gunakan bahasa yang sama dengan konten.",
     "Berikan saran SEO dalam format bullet list Markdown.",
     "Sertakan: 1) keyword utama, 2) keyword pendukung, 3) saran heading, 4) internal linking.",
@@ -63,7 +63,7 @@ export function createSeoOptimizerPrompt(content: string, language?: string): st
 
 export function createTitlePrompt(content: string, language?: string): string {
   return [
-    "Kamu adalah editor AI3 untuk judul artikel.",
+    "Kamu adalah editor AGENTIKA untuk judul artikel.",
     language ? `Gunakan bahasa: ${language}.` : "Gunakan bahasa yang sama dengan konten.",
     "Berikan 5 opsi judul yang ringkas dan menarik.",
     "Jawab dengan daftar bernomor.",
@@ -73,7 +73,7 @@ export function createTitlePrompt(content: string, language?: string): string {
 
 export function createTagsPrompt(content: string, language?: string): string {
   return [
-    "Kamu adalah editor AI3 untuk tag artikel.",
+    "Kamu adalah editor AGENTIKA untuk tag artikel.",
     language ? `Gunakan bahasa: ${language}.` : "Gunakan bahasa yang sama dengan konten.",
     "Berikan 6-10 tag yang relevan.",
     "Jawab dengan format: tag1, tag2, tag3.",
@@ -83,7 +83,7 @@ export function createTagsPrompt(content: string, language?: string): string {
 
 export function createExcerptPrompt(content: string, language?: string): string {
   return [
-    "Kamu adalah editor AI3 untuk excerpt artikel.",
+    "Kamu adalah editor AGENTIKA untuk excerpt artikel.",
     language ? `Gunakan bahasa: ${language}.` : "Gunakan bahasa yang sama dengan konten.",
     "Tulis 1-2 kalimat ringkas sebagai meta description.",
     buildContentContext(content),
@@ -97,7 +97,7 @@ export function createSectionRewritePrompt(
   language?: string,
 ): string {
   return [
-    "Kamu adalah editor AI3 yang memperbaiki section artikel.",
+    "Kamu adalah editor AGENTIKA yang memperbaiki section artikel.",
     language ? `Gunakan bahasa: ${language}.` : "Gunakan bahasa yang sama dengan konten.",
     instruction ? `Instruksi tambahan: ${instruction}` : "Perbaiki agar lebih jelas, padat, dan mudah dipahami.",
     "Section yang perlu diperbaiki:",
@@ -119,7 +119,7 @@ export function createLessonGenerationPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah instruktur AI3 yang membuat materi belajar berkualitas.",
+    "Kamu adalah instruktur AGENTIKA yang membuat materi belajar berkualitas.",
     `Gunakan bahasa: ${language}.`,
     `Topik: ${topic}`,
     `Track: ${trackTitle}`,
@@ -146,7 +146,7 @@ export function createQuizGenerationPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah instruktur AI3 yang membuat kuis penilaian.",
+    "Kamu adalah instruktur AGENTIKA yang membuat kuis penilaian.",
     `Gunakan bahasa: ${language}.`,
     `Judul materi: ${pageTitle}`,
     "",
@@ -172,7 +172,7 @@ export function createFlashcardGenerationPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah instruktur AI3 yang membuat flashcard belajar.",
+    "Kamu adalah instruktur AGENTIKA yang membuat flashcard belajar.",
     `Gunakan bahasa: ${language}.`,
     `Judul materi: ${pageTitle}`,
     "",
@@ -197,7 +197,7 @@ export function createSimplifyContentPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah instruktur AI3 yang menyederhanakan materi belajar.",
+    "Kamu adalah instruktur AGENTIKA yang menyederhanakan materi belajar.",
     `Gunakan bahasa: ${language}.`,
     `Level penyederhanaan: ${level} (beginner/intermediate/advanced).`,
     "",
@@ -235,7 +235,7 @@ export function createExplainTextPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah tutor AI3.",
+    "Kamu adalah tutor AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Jelaskan teks berikut secara jelas dan mendalam:`,
@@ -259,7 +259,7 @@ export function createLearningAssistantPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah AI Learning Assistant untuk platform AI3.",
+    "Kamu adalah AI Learning Assistant untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Materi: ${pageTitle}`,
@@ -293,7 +293,7 @@ export function createCryptoResearchPrompt(
     deep: "Buat laporan mendalam 800-1200 kata dengan: executive-summary, background, analysis, opportunities, risks, conclusion.",
   }
   return [
-    "Kamu adalah crypto research analyst untuk platform AI3.",
+    "Kamu adalah crypto research analyst untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Topik riset: ${topic}`,
@@ -316,7 +316,7 @@ export function createTokenExplainerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah blockchain analyst untuk platform AI3.",
+    "Kamu adalah blockchain analyst untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Jelaskan token berikut secara komprehensif: ${token}`,
@@ -345,7 +345,7 @@ export function createSmartContractExplainerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah smart contract auditor untuk platform AI3.",
+    "Kamu adalah smart contract auditor untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Jelaskan smart contract berikut. Nama kontrak: ${contractName || "Unknown"}`,
@@ -378,7 +378,7 @@ export function createWalletAnalyzerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah DeFi analyst untuk platform AI3.",
+    "Kamu adalah DeFi analyst untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Analisis wallet address berikut di jaringan ${chain || "Ethereum/All Chains"}:`,
@@ -407,7 +407,7 @@ export function createProtocolSummarizerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah DeFi researcher untuk platform AI3.",
+    "Kamu adalah DeFi researcher untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Buat ringkasan komprehensif tentang protocol berikut: ${protocol}`,
@@ -437,7 +437,7 @@ export function createWhitepaperSummarizerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah research analyst untuk platform AI3.",
+    "Kamu adalah research analyst untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Rangkum whitepaper berikut: ${title || "Untitled"}`,
@@ -473,7 +473,7 @@ export function createGlossaryGeneratorPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah crypto educator untuk platform AI3.",
+    "Kamu adalah crypto educator untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Buat glossary crypto tentang: ${topic}`,
@@ -503,7 +503,7 @@ export function createTrendAnalyzerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah crypto market strategist untuk platform AI3.",
+    "Kamu adalah crypto market strategist untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Analisis trend dan narrative di sektor: ${sector}`,
@@ -532,7 +532,7 @@ export function createNewsSummarizerPrompt(
   language: string,
 ): string {
   return [
-    "Kamu adalah crypto news analyst untuk platform AI3.",
+    "Kamu adalah crypto news analyst untuk platform AGENTIKA.",
     `Gunakan bahasa: ${language}.`,
     "",
     `Judul berita: ${headline}`,
@@ -562,7 +562,7 @@ export function createNewsSummarizerPrompt(
 export function createFaqGeneratorPrompt(topic: string, count: number, language: string): string {
   const langLabel = language === "en" ? "English" : "Bahasa Indonesia"
   return [
-    `You are an expert content creator for AI3 platform (Web3 + AI education).`,
+    `You are an expert content creator for AGENTIKA platform (Web3 + AI education).`,
     `Generate ${count} FAQ items about: "${topic}".`,
     `Language: ${langLabel}.`,
     "",
@@ -587,7 +587,7 @@ export function createFaqGeneratorPrompt(topic: string, count: number, language:
 export function createGlossaryTermExtractPrompt(topic: string, count: number, language: string): string {
   const langLabel = language === "en" ? "English" : "Bahasa Indonesia"
   return [
-    `You are a Web3 and crypto expert educator for AI3 platform.`,
+    `You are a Web3 and crypto expert educator for AGENTIKA platform.`,
     `Generate ${count} glossary terms and definitions related to: "${topic}".`,
     `Language: ${langLabel}.`,
     "",
@@ -617,7 +617,7 @@ export function createAiTranslateContentPrompt(
   const targetLang = targetLocale === "en" ? "English" : "Bahasa Indonesia"
   const sourceNote = sourceLocale ? `Translate from ${sourceLocale === "en" ? "English" : "Bahasa Indonesia"}` : "Detect the language and translate"
   return [
-    `You are a professional translator for AI3 platform (Web3 + AI education).`,
+    `You are a professional translator for AGENTIKA platform (Web3 + AI education).`,
     `${sourceNote} to ${targetLang}.`,
     "",
     "Preserve ALL formatting:",
@@ -653,7 +653,7 @@ export function createBlogContentPrompt(
   customPrompt?: string,
 ): string {
   return [
-    "Kamu adalah content writer senior AI3 — platform Web3 & AI #1 di Indonesia.",
+    "Kamu adalah content writer senior AGENTIKA — platform Web3 & AI #1 di Indonesia.",
     `Bahasa: ${language === "en" ? "English" : "Bahasa Indonesia"}.`,
     `Kategori: ${category}.`,
     categoryGuide[category],
@@ -667,7 +667,7 @@ export function createBlogContentPrompt(
     '  "tags": ["tag1", "tag2", "tag3", "tag4", "tag5"],',
     '  "readingTime": 8,',
     '  "seo": {',
-    '    "titleTag": "Title tag untuk SEO (maks 60 karakter, | AI3)",',
+    '    "titleTag": "Title tag untuk SEO (maks 60 karakter, | AGENTIKA)",',
     '    "metaDescription": "Meta description (maks 160 karakter)"',
     "  },",
     '  "content": "Konten artikel dalam format Markdown"',

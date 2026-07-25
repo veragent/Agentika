@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   const { topic, category, count, language } = parsed.data
 
   const prompt = [
-    `Kamu adalah content editor untuk platform AI3 yang membuat FAQ.`,
+    `Kamu adalah content editor untuk platform AGENTIKA yang membuat FAQ.`,
     `Gunakan bahasa: ${language}.`,
     "",
     `Buat ${count} FAQ (Question & Answer) tentang topik: ${topic}`,

@@ -9,7 +9,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = generateSeo({
   title: "Achievements",
-  description: "Kumpulkan achievement dan badge dengan berkontribusi di Web3AI Hub.",
+  description: "Kumpulkan achievement dan badge dengan berkontribusi di AGENTIKA.",
   type: "website",
   canonical: "/achievements",
 })
@@ -110,7 +110,7 @@ export default async function AchievementsPage() {
           <h1 className="text-4xl font-extrabold tracking-tight">Achievements</h1>
         </div>
         <p className="text-lg text-muted-foreground">
-          Kumpulkan achievement dan badge dengan berkontribusi di Web3AI Hub.
+          Kumpulkan achievement dan badge dengan berkontribusi di AGENTIKA.
         </p>
       </div>
 

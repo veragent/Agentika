@@ -41,7 +41,7 @@ Generate a single blog post draft via AI Writer.
     "readingTime": 8,
     "wordCount": 1500,
     "seo": {
-      "titleTag": "Apa Itu Blockchain? Panduan Lengkap 2026 | AI3",
+      "titleTag": "Apa Itu Blockchain? Panduan Lengkap 2026 | AGENTIKA",
       "metaDescription": "Pelajari dasar-dasar blockchain...",
       "ogImage": "/api/og/blog/apa-itu-blockchain-panduan-pemula"
     }

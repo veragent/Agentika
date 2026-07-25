@@ -1,5 +1,5 @@
 # PRD — Product Requirements Document
-## Web3AI Hub: Platform Blog & Learning Web3 + AI
+## AGENTIKA: Platform Blog & Learning Web3 + AI
 
 | | |
 |---|---|
@@ -13,7 +13,7 @@
 
 ## 1. Executive Summary
 
-Web3AI Hub adalah platform konten berbasis Next.js yang menyajikan empat pilar utama: blog edukasi, dokumentasi interaktif, direktori airdrop/bounty, dan katalog AI tools. Platform ini ditargetkan untuk pemula hingga intermediate yang ingin belajar Web3 dan AI, sekaligus dirancang untuk menghasilkan pendapatan pasif melalui Google AdSense dan affiliate marketing.
+AGENTIKA adalah platform konten berbasis Next.js yang menyajikan empat pilar utama: blog edukasi, dokumentasi interaktif, direktori airdrop/bounty, dan katalog AI tools. Platform ini ditargetkan untuk pemula hingga intermediate yang ingin belajar Web3 dan AI, sekaligus dirancang untuk menghasilkan pendapatan pasif melalui Google AdSense dan affiliate marketing.
 
 **Problem Statement:**
 Konten Web3 dan AI tersebar di banyak tempat, tidak terstruktur, sering tidak terupdate, dan jarang tersedia dalam Bahasa Indonesia. Tidak ada platform tunggal yang menyatukan blog, tutorial, airdrop tracker, dan AI tools dalam satu ekosistem yang kohesif.
@@ -294,7 +294,7 @@ Platform all-in-one yang dibangun untuk kreator konten solo maupun tim kecil, de
 ## 6. Design System
 
 ### Brand Identity
-- **Nama:** Web3AI Hub
+- **Nama:** AGENTIKA
 - **Tagline:** "Belajar Web3 & AI, Satu Platform."
 - **Tone:** Friendly, technical tapi approachable, bilingual (ID/EN)
 

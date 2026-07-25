@@ -8,15 +8,15 @@
 - Node.js 20+ installed
 - PostgreSQL database (Neon) configured
 - `.env` file with all required variables (see `.env.example`)
-- Admin account available (admin@web3aihub.com)
+- Admin account available (admin@AGENTIKA.com)
 - At least 1 AI provider API key configured (OpenAI, Anthropic, Google, or Groq)
 
 ## Setup
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/abraham-yusuf/web3ai-hub.git
-cd web3ai-hub
+git clone https://github.com/abraham-yusuf/AGENTIKA.git
+cd AGENTIKA
 npm install
 
 # 2. Database setup

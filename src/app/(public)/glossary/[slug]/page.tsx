@@ -70,7 +70,7 @@ export default async function GlossaryTermPage({ params }: Props) {
       })
     : []
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id"
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
   const termJsonLd = buildGlossaryTermJsonLd(entry)
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(
     [

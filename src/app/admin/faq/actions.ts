@@ -176,7 +176,7 @@ export async function importFaqFromTopicAction(topic: string, category: string, 
   const langLabel = language === "en" ? "English" : "Indonesian"
 
   const prompt = [
-    `Kamu adalah content editor untuk platform AI3 yang membuat FAQ.`,
+    `Kamu adalah content editor untuk platform AGENTIKA yang membuat FAQ.`,
     `Gunakan bahasa: ${langLabel}.`,
     "",
     `Buat ${count} FAQ (Question & Answer) tentang topik: ${topic}`,

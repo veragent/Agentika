@@ -22,7 +22,7 @@
 
 ### User Story 1 - Web3 Fundamentals Blog Posts (Priority: P1)
 
-Seorang pemula Web3 Indonesia mengunjungi AI3 untuk belajar dasar-dasar blockchain. Dia menemukan 5 artikel berkualitas tinggi tentang blockchain basics, DeFi intro, NFT guide, wallet setup, dan gas fees — semuanya dalam Bahasa Indonesia dengan penjelasan yang mudah dipahami dan relevan dengan konteks lokal.
+Seorang pemula Web3 Indonesia mengunjungi AGENTIKA untuk belajar dasar-dasar blockchain. Dia menemukan 5 artikel berkualitas tinggi tentang blockchain basics, DeFi intro, NFT guide, wallet setup, dan gas fees — semuanya dalam Bahasa Indonesia dengan penjelasan yang mudah dipahami dan relevan dengan konteks lokal.
 
 **Why this priority**: Web3 fundamentals adalah entry point terbesar untuk traffic organik. Pencarian "apa itu blockchain", "cara pakai crypto wallet", dan "DeFi itu apa" volume pencariannya tinggi di Indonesia. Tanpa konten ini, platform kehilangan potensi visitor yang paling besar.
 
@@ -40,7 +40,7 @@ Seorang pemula Web3 Indonesia mengunjungi AI3 untuk belajar dasar-dasar blockcha
 
 Seorang developer Indonesia ingin belajar AI tools dan teknik. Dia menemukan 5 tutorial praktis tentang prompt engineering, perbandingan LLM, review AI tools, tips ChatGPT, dan AI image generation — dengan contoh kode dan use case nyata.
 
-**Why this priority**: AI tutorials menarik audience developer dan tech enthusiast yang merupakan core user base AI3. Konten ini juga mendukung promosi silang ke AI Tools Directory yang sudah ada.
+**Why this priority**: AI tutorials menarik audience developer dan tech enthusiast yang merupakan core user base AGENTIKA. Konten ini juga mendukung promosi silang ke AI Tools Directory yang sudah ada.
 
 **Independent Test**: Dapat diuji dengan mengakses 5 artikel AI tutorials, memverifikasi konten teknis akurat, ada code examples, dan link ke AI Tools Directory yang relevan.
 
@@ -70,7 +70,7 @@ Seorang crypto enthusiast mencari panduan airdrop terbaru. Dia menemukan 5 guide
 
 ### User Story 4 - Opinion/News Blog Posts (Priority: P2)
 
-Seorang pembaca rutin AI3 ingin update tren Web3 dan AI. Dia menemukan 5 artikel opinion/news tentang tren Web3, regulasi AI, dan analisis pasar — dengan perspektif lokal Indonesia.
+Seorang pembaca rutin AGENTIKA ingin update tren Web3 dan AI. Dia menemukan 5 artikel opinion/news tentang tren Web3, regulasi AI, dan analisis pasar — dengan perspektif lokal Indonesia.
 
 **Why this priority**: Opinion/news content membangun authority dan credibility platform. Juga mendukung SEO untuk keyword berita yang trending. P2 karena konten ini memerlukan riset lebih dalam dan relevansi waktu.
 
@@ -106,7 +106,7 @@ Seorang learner yang sudah menyelesaikan dasar-dasar Web3 ingin mendalami Solidi
 
 Seorang developer AI ingin belajar LLM integration, fine-tuning, dan RAG. Dia menemukan 20+ halaman baru di Learn AI track dengan interactive examples dan flashcards.
 
-**Why this priority**: Sama dengan Web3 track — Learn AI track adalah retention driver. Konten AI juga lebih unik dibanding Web3 (kurang kompetitor di Indonesia) dan mendukung positioning AI3 sebagai platform AI education.
+**Why this priority**: Sama dengan Web3 track — Learn AI track adalah retention driver. Konten AI juga lebih unik dibanding Web3 (kurang kompetitor di Indonesia) dan mendukung positioning AGENTIKA sebagai platform AI education.
 
 **Independent Test**: Dapat diuji dengan mengakses Learn AI track, memverifikasi minimal 20 halaman, flashcards berfungsi, dan interactive examples dapat dijalankan.
 

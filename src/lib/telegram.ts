@@ -196,7 +196,7 @@ export async function getTelegramWebhookInfo(): Promise<unknown> {
 
 export async function sendTelegramMainMenu(chatId: string | number): Promise<boolean> {
   const message = `
-👋 <b>Welcome to Web3AI Hub Bot!</b>
+👋 <b>Welcome to AGENTIKA Bot!</b>
 
 Here's what you can do:
 

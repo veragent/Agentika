@@ -88,7 +88,7 @@ function generateFallbackKeywords(seed: string, _type: string, count: number) {
 
   return baseKeywords.slice(0, count).map((k) => ({
     ...k,
-    keyword: `${k.keyword} AI3`,
+    keyword: `${k.keyword} AGENTIKA`,
   }))
 }
 

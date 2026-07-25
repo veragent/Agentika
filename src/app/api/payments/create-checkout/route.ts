@@ -8,6 +8,6 @@ export async function POST(request: Request) {
   return Response.json({
     success: true,
     paymentUrl: `https://payment.example.com/checkout?plan=${plan}&user=${userId}`,
-    message: "Payment integration coming soon. Contact admin@ai3.web.id to upgrade manually."
+    message: "Payment integration coming soon. Contact admin@agentika.web.id to upgrade manually."
   })
 }

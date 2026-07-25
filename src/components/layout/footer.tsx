@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { AI3Logo } from "@/components/branding/ai3-logo"
+import { AGENTIKALogo } from "@/components/branding/agentika-logo"
 
 export function Footer() {
   return (
@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2">
             <Link href="/" className="inline-flex">
-              <AI3Logo />
+              <AGENTIKALogo />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
               Platform all-in-one untuk belajar Web3 dan AI. Temukan tutorial, airdrop, dan tools AI terbaru.
@@ -33,7 +33,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} AI3. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} AGENTIKA. All rights reserved.</p>
         </div>
       </div>
     </footer>

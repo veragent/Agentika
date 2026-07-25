@@ -206,7 +206,7 @@ export default async function MonitoringPage() {
               Health check endpoint for uptime monitors (UptimeRobot, Pingdom, Sentry Crons):
             </p>
             <code className="mt-2 block rounded bg-muted px-3 py-2 text-sm">
-              GET {process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.web.id"}/api/health
+              GET {process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.web.id"}/api/health
             </code>
             <p className="mt-2 text-xs text-muted-foreground">
               Returns 200 (healthy) or 503 (degraded) with DB latency. Safe to poll every 60s.

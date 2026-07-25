@@ -70,7 +70,7 @@ export async function POST(request: Request) {
             {
               role: "system",
               content:
-                "Kamu tutor AI3 yang helpful. Jawab dalam format Markdown yang rapi.",
+                "Kamu tutor AGENTIKA yang helpful. Jawab dalam format Markdown yang rapi.",
             },
             { role: "user", content: prompt },
           ],

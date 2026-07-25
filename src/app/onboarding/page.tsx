@@ -83,7 +83,7 @@ export default function OnboardingPage() {
             <div className="flex flex-col gap-6">
               <div>
                 <span className="text-4xl">👋</span>
-                <h1 className="mt-3 text-2xl font-bold">Selamat datang di AI3 Hub!</h1>
+                <h1 className="mt-3 text-2xl font-bold">Selamat datang di AGENTIKA Hub!</h1>
                 <p className="mt-2 text-muted-foreground">Platform belajar AI & Web3 terlengkap. Yuk mulai dengan memperkenalkan dirimu.</p>
               </div>
               <div className="flex flex-col gap-2">

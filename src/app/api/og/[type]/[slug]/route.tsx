@@ -2,7 +2,7 @@ import { BRAND } from "@/lib/brand"
 
 const SITE_NAME = BRAND.name
 const TAGLINE = BRAND.tagline
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXTAUTH_URL ?? "https://ai3.my.id"
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXTAUTH_URL ?? "https://agentika.my.id"
 
 // SVG OG image template — returns branded card for any content type
 function buildOgSvg(opts: {

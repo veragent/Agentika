@@ -9,7 +9,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = generateSeo({
   title: "Leaderboard",
-  description: "Ranking pengguna terbaik berdasarkan XP dan kontribusi di Web3AI Hub.",
+  description: "Ranking pengguna terbaik berdasarkan XP dan kontribusi di AGENTIKA.",
   type: "website",
   canonical: "/leaderboard",
 })
@@ -87,7 +87,7 @@ export default async function LeaderboardPage() {
           <h1 className="text-4xl font-extrabold tracking-tight">Leaderboard</h1>
         </div>
         <p className="text-lg text-muted-foreground">
-          Ranking pengguna terbaik berdasarkan XP dan kontribusi di Web3AI Hub.
+          Ranking pengguna terbaik berdasarkan XP dan kontribusi di AGENTIKA.
         </p>
       </div>
 

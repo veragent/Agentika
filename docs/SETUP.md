@@ -1,4 +1,4 @@
-# 🛠️ Setup Guide — Web3AI Hub (AI3)
+# 🛠️ Setup Guide — AGENTIKA (AGENTIKA)
 
 > **Panduan lengkap** untuk setup environment, dependencies, dan semua third-party services yang dibutuhkan project ini.
 
@@ -41,8 +41,8 @@ Pastikan sudah terinstall:
 
 ```bash
 # 1. Clone repo
-git clone https://github.com/abraham-yusuf/web3ai-hub.git
-cd web3ai-hub
+git clone https://github.com/abraham-yusuf/AGENTIKA.git
+cd AGENTIKA
 
 # 2. Install dependencies
 npm install
@@ -128,7 +128,7 @@ NEXTAUTH_URL="http://localhost:3000"  # Ganti ke domain production saat deploy
 > Hanya untuk login pertama kali. Setelah membuat admin user via DB, hapus atau ganti credentials ini.
 
 ```env
-ADMIN_EMAIL="admin@ai3.web.id"
+ADMIN_EMAIL="admin@agentika.web.id"
 ADMIN_PASSWORD="ganti-sekarang-juga"
 ```
 
@@ -149,7 +149,7 @@ npm run db:create-admin
 
 1. Buka **https://platform.openai.com**
 2. Klik avatar → **API Keys** → **Create new secret key**
-3. Beri nama: `web3ai-hub`
+3. Beri nama: `AGENTIKA`
 4. Salin key (hanya tampil sekali!)
 
 ```env
@@ -207,7 +207,7 @@ AI_SETTINGS_ENCRYPTION_KEY="base64-encoded-32-byte-key-here="
 
 1. Daftar/login di **https://dash.cloudflare.com**
 2. Sidebar → **R2 Object Storage** → **Create bucket**
-   - Nama bucket: `web3ai-hub-media` (atau sesuai keinginan)
+   - Nama bucket: `AGENTIKA-media` (atau sesuai keinginan)
    - Region: Automatic
 3. Buka **R2 Overview** → **Manage R2 API Tokens** → **Create API Token**
    - Permissions: **Object Read & Write**
@@ -219,7 +219,7 @@ AI_SETTINGS_ENCRYPTION_KEY="base64-encoded-32-byte-key-here="
 R2_ACCOUNT_ID="abcdef1234567890abcdef1234567890"
 R2_ACCESS_KEY_ID="abc123def456ghi789"
 R2_SECRET_ACCESS_KEY="AbCdEfGhIjKlMnOpQrStUvWxYz1234567890AbCdEf"
-R2_BUCKET_NAME="web3ai-hub-media"
+R2_BUCKET_NAME="AGENTIKA-media"
 ```
 
 > **Tip:** Aktifkan juga **Public Access** di bucket settings jika ingin gambar bisa diakses langsung via URL public. Atau gunakan Cloudflare Workers untuk custom domain.
@@ -234,9 +234,9 @@ R2_BUCKET_NAME="web3ai-hub-media"
 
 1. Daftar di **https://resend.com** (free tier: 3.000 email/bulan)
 2. Dashboard → **API Keys** → **Create API Key**
-   - Name: `web3ai-hub`
+   - Name: `AGENTIKA`
    - Permission: **Full access** (atau Sending access)
-3. **Add Domain** → masukkan domain kamu (`ai3.web.id`)
+3. **Add Domain** → masukkan domain kamu (`agentika.web.id`)
    - Ikuti petunjuk untuk menambahkan DNS records (MX, SPF, DKIM) di Cloudflare/registrar
    - Verifikasi domain (proses 5-10 menit)
 
@@ -244,7 +244,7 @@ R2_BUCKET_NAME="web3ai-hub-media"
 RESEND_API_KEY="re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
-> **From address** default: `noreply@ai3.web.id`. Pastikan domain sudah terverifikasi sebelum mengirim email.
+> **From address** default: `noreply@agentika.web.id`. Pastikan domain sudah terverifikasi sebelum mengirim email.
 
 ---
 
@@ -312,7 +312,7 @@ NEXT_PUBLIC_ADSENSE_CLIENT="ca-pub-1234567890123456"
 ### Setup Inngest
 
 1. Daftar di **https://www.inngest.com** (free tier tersedia)
-2. **Create new app** → nama: `web3ai-hub`
+2. **Create new app** → nama: `AGENTIKA`
 3. **Event Keys** → **Create Event Key**
    - Salin `INNGEST_EVENT_KEY`
 4. **Signing Keys** → Salin `INNGEST_SIGNING_KEY` (auto-generated)
@@ -327,7 +327,7 @@ INNGEST_SIGNING_KEY="signkey-prod-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 Setelah deploy ke Vercel, daftarkan endpoint Inngest:
 
 1. Inngest Dashboard → **Apps** → **Sync new app**
-2. Masukkan URL: `https://ai3.web.id/api/inngest`
+2. Masukkan URL: `https://agentika.web.id/api/inngest`
 3. Klik **Sync**
 
 Inngest akan secara otomatis menemukan 3 background functions:
@@ -345,7 +345,7 @@ Inngest akan secara otomatis menemukan 3 background functions:
 
 1. Daftar di **https://upstash.com** (free tier: 10.000 request/hari)
 2. **Redis** → **Create Database**
-   - Name: `web3ai-hub-cache`
+   - Name: `AGENTIKA-cache`
    - Region: `ap-southeast-1` (Singapore — terdekat)
    - Type: **Regional** (untuk produksi); **Global** jika mau multi-region
 3. Setelah database dibuat, buka tab **REST API**
@@ -368,7 +368,7 @@ UPSTASH_REDIS_REST_TOKEN="AXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx"
 
 1. Daftar di **https://sentry.io** (free tier: 5.000 error/bulan)
 2. **Create Project** → pilih **Next.js**
-   - Project name: `web3ai-hub`
+   - Project name: `AGENTIKA`
    - Team: pilih atau buat tim
 3. Setelah project dibuat, salin **DSN** dari halaman Getting Started
    - Format: `https://xxxxx@xxx.ingest.sentry.io/xxxxxxx`
@@ -408,16 +408,16 @@ CRON_SECRET="b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a1"
 
 **WEBHOOK_SECRET** — Diverifikasi di endpoint `/api/webhooks/post-published`:
 ```bash
-curl -X POST https://ai3.web.id/api/webhooks/post-published \
+curl -X POST https://agentika.web.id/api/webhooks/post-published \
   -H "x-webhook-secret: your-secret-here" \
   -H "Content-Type: application/json" \
-  -d '{"postSlug":"my-post","postTitle":"My Post","postUrl":"https://ai3.web.id/blog/my-post"}'
+  -d '{"postSlug":"my-post","postTitle":"My Post","postUrl":"https://agentika.web.id/blog/my-post"}'
 ```
 
 **CRON_SECRET** — Diverifikasi di endpoint `/api/posts/scheduled-publish` (jika tidak pakai Inngest):
 ```bash
 # Panggil dari Vercel Cron atau service eksternal seperti cron-job.org
-curl -X POST https://ai3.web.id/api/posts/scheduled-publish \
+curl -X POST https://agentika.web.id/api/posts/scheduled-publish \
   -H "Authorization: Bearer your-cron-secret-here"
 ```
 
@@ -460,7 +460,7 @@ vercel env add NEXTAUTH_SECRET production
 ### 4. Konfigurasi Domain Custom
 
 1. **Settings** → **Domains** → **Add domain**
-2. Masukkan `ai3.web.id`
+2. Masukkan `agentika.web.id`
 3. Tambahkan DNS record yang diberikan Vercel di Cloudflare:
    - Type: `CNAME`, Name: `@`, Value: `cname.vercel-dns.com`
 
@@ -468,7 +468,7 @@ vercel env add NEXTAUTH_SECRET production
 
 Setelah production URL aktif:
 ```bash
-npx inngest-cli@latest sync --url https://ai3.web.id/api/inngest
+npx inngest-cli@latest sync --url https://agentika.web.id/api/inngest
 ```
 
 ---
@@ -483,11 +483,11 @@ Gunakan tabel ini untuk memastikan semua variabel sudah terisi sebelum deploy.
 | `DATABASE_URL` | ✅ | PostgreSQL connection string | Neon Dashboard → Connection Details |
 | `DIRECT_URL` | ✅ | Direct DB URL (untuk migrations) | Sama dengan DATABASE_URL (atau Neon unpooled) |
 | `NEXTAUTH_SECRET` | ✅ | JWT signing secret | `openssl rand -base64 32` |
-| `NEXTAUTH_URL` | ✅ | App URL untuk auth callbacks | `https://ai3.web.id` di production |
+| `NEXTAUTH_URL` | ✅ | App URL untuk auth callbacks | `https://agentika.web.id` di production |
 | `ADMIN_EMAIL` | ✅ | Bootstrap admin email | Email admin kamu |
 | `ADMIN_PASSWORD` | ✅ | Bootstrap admin password | Password kuat, ganti setelah setup |
 | `AI_SETTINGS_ENCRYPTION_KEY` | ✅ | Encryption key untuk AI keys | `openssl rand -base64 32` |
-| `NEXT_PUBLIC_APP_URL` | ✅ | Public app URL | `https://ai3.web.id` |
+| `NEXT_PUBLIC_APP_URL` | ✅ | Public app URL | `https://agentika.web.id` |
 | `OPENAI_API_KEY` | ⚡ (min 1) | OpenAI GPT access | platform.openai.com → API Keys |
 | `ANTHROPIC_API_KEY` | ⚡ (min 1) | Claude access | console.anthropic.com → API Keys |
 | `GOOGLE_AI_API_KEY` | ⚡ (min 1) | Gemini access | aistudio.google.com → Get API key |
@@ -554,5 +554,5 @@ Gunakan tabel ini untuk memastikan semua variabel sudah terisi sebelum deploy.
 ## Mendapatkan Bantuan
 
 - 📖 **Docs project:** `docs/` folder di repo ini
-- 🐛 **Issue tracker:** https://github.com/abraham-yusuf/web3ai-hub/issues
-- 📧 **Contact:** admin@ai3.web.id
+- 🐛 **Issue tracker:** https://github.com/abraham-yusuf/AGENTIKA/issues
+- 📧 **Contact:** admin@agentika.web.id

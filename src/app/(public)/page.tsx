@@ -33,7 +33,7 @@ export default async function HomePage() {
           dalam Satu Platform
         </h1>
         <p className="text-body-lg max-w-[720px] text-muted-foreground">
-          AI3 adalah platform konten all-in-one untuk komunitas Web3 &amp; AI Indonesia.
+          AGENTIKA adalah platform konten all-in-one untuk komunitas Web3 &amp; AI Indonesia.
           Temukan tutorial mendalam, info airdrop terbaru, dan direktori tools AI tercanggih.
         </p>
         <div className="flex flex-wrap justify-center gap-3">

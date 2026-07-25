@@ -6,7 +6,7 @@ import { NotificationsPage } from "./notifications-client"
 const DEMO_USER_ID = "demo-user-123"
 
 export const metadata: Metadata = {
-  title: "Notifications — AI3",
+  title: "Notifications — AGENTIKA",
   description: "View your airdrop notifications and updates",
 }
 

@@ -1,4 +1,4 @@
-# Web3AI Hub Launch Checklist
+# AGENTIKA Launch Checklist
 
 Use this checklist before promoting a build from staging to production.
 

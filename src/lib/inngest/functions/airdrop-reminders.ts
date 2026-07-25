@@ -31,7 +31,7 @@ export const airdropReminders = inngest.createFunction(
 
     await step.run("send-discord-reminders", async () => {
       const { sendDiscordAirdropDeadlineReminder } = await import("@/lib/discord")
-      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://web3aihub.com"
+      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://AGENTIKA.com"
 
       for (const airdrop of result.urgentAirdrops) {
         const hoursRemaining = airdrop.deadline
@@ -49,7 +49,7 @@ export const airdropReminders = inngest.createFunction(
 
     await step.run("send-telegram-reminders", async () => {
       const { sendTelegramAirdropDeadlineReminder } = await import("@/lib/telegram")
-      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://web3aihub.com"
+      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://AGENTIKA.com"
 
       for (const airdrop of result.urgentAirdrops) {
         const hoursRemaining = airdrop.deadline
@@ -76,7 +76,7 @@ export const newAirdropNotification = inngest.createFunction(
 
     await step.run("send-discord-notification", async () => {
       const { sendDiscordAirdropAlert } = await import("@/lib/discord")
-      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://web3aihub.com"
+      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://AGENTIKA.com"
 
       await sendDiscordAirdropAlert({
         airdropName: airdrop.name,
@@ -92,7 +92,7 @@ export const newAirdropNotification = inngest.createFunction(
 
     await step.run("send-telegram-notification", async () => {
       const { sendTelegramAirdropAlert } = await import("@/lib/telegram")
-      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://web3aihub.com"
+      const appUrl = env.NEXT_PUBLIC_APP_URL || "https://AGENTIKA.com"
 
       await sendTelegramAirdropAlert({
         airdropName: airdrop.name,

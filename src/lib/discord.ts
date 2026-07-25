@@ -92,7 +92,7 @@ export async function sendDiscordAirdropAlert(params: {
       { name: "⏰ Deadline", value: params.deadline, inline: true },
       { name: "📋 Status", value: "Active", inline: true },
     ],
-    footer: { text: "Web3AI Hub • Airdrop Alert" },
+    footer: { text: "AGENTIKA • Airdrop Alert" },
     timestamp: new Date().toISOString(),
   }
 
@@ -141,7 +141,7 @@ export async function sendDiscordNewPost(params: {
     url: params.url,
     color,
     author: { name: params.authorName, icon_url: `${env.NEXT_PUBLIC_APP_URL}/favicon.ico` },
-    footer: { text: `Web3AI Hub • ${params.category.replace("-", " ")}` },
+    footer: { text: `AGENTIKA • ${params.category.replace("-", " ")}` },
     timestamp: new Date().toISOString(),
   }
 
@@ -180,7 +180,7 @@ export async function sendDiscordAirdropDeadlineReminder(params: {
     description: `Only **${params.hoursRemaining} hours** left to complete tasks for **${params.network}** airdrop!`,
     url: params.url,
     color: 0xef4444,
-    footer: { text: "Web3AI Hub • Don't miss your airdrop!" },
+    footer: { text: "AGENTIKA • Don't miss your airdrop!" },
     timestamp: new Date().toISOString(),
   }
 
@@ -224,7 +224,7 @@ export async function sendDiscordCommunityUpdate(params: {
     title: `${config.emoji} ${params.title}`,
     description: params.message,
     color: config.color,
-    footer: { text: "Web3AI Hub" },
+    footer: { text: "AGENTIKA" },
     timestamp: new Date().toISOString(),
   }
 

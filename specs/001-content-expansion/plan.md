@@ -6,7 +6,7 @@
 
 ## Summary
 
-Expand AI3 platform content library with 20+ blog posts across 4 categories (Web3 Fundamentals, AI Tutorials, Airdrop Guides, Opinion/News) and 40+ Learn track pages (20 Web3 + 20 AI). Content generated one-by-one via existing AI Writer with admin review before each publish. Opinion/news articles auto-archive after 90 days. Similarity detection blocks duplicate publish with admin override.
+Expand AGENTIKA platform content library with 20+ blog posts across 4 categories (Web3 Fundamentals, AI Tutorials, Airdrop Guides, Opinion/News) and 40+ Learn track pages (20 Web3 + 20 AI). Content generated one-by-one via existing AI Writer with admin review before each publish. Opinion/news articles auto-archive after 90 days. Similarity detection blocks duplicate publish with admin override.
 
 ## Technical Context
 

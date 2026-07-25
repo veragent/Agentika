@@ -37,16 +37,16 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "AI3 Hub <noreply@ai3.web.id>",
+        from: "AGENTIKA Hub <noreply@agentika.web.id>",
         to: email,
-        subject: "Selamat datang di AI3 Hub! 🚀",
+        subject: "Selamat datang di AGENTIKA Hub! 🚀",
         html: `
           <!DOCTYPE html>
           <html lang="id">
-          <head><meta charset="UTF-8"><title>Selamat datang di AI3 Hub</title></head>
+          <head><meta charset="UTF-8"><title>Selamat datang di AGENTIKA Hub</title></head>
           <body style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;">
-            <h1 style="color:#7c3aed;">🚀 Selamat datang di AI3 Hub!</h1>
-            <p>Hei, terima kasih telah subscribe ke newsletter AI3 Hub.</p>
+            <h1 style="color:#7c3aed;">🚀 Selamat datang di AGENTIKA Hub!</h1>
+            <p>Hei, terima kasih telah subscribe ke newsletter AGENTIKA Hub.</p>
             <p>Kamu akan mendapat update terbaru tentang:</p>
             <ul>
               <li>🤖 AI Tools & Tutorial terbaru</li>
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
             </ul>
             <p>Selamat menjelajahi dunia AI & Web3 bersama kami!</p>
             <hr style="border:1px solid #e5e7eb;margin:24px 0;">
-            <p style="color:#6b7280;font-size:14px;">AI3 Hub — Your AI-native Web3 Learning Platform</p>
+            <p style="color:#6b7280;font-size:14px;">AGENTIKA Hub — Your AI-native Web3 Learning Platform</p>
             <p style="color:#6b7280;font-size:12px;">Jika kamu tidak merasa subscribe, abaikan email ini.</p>
           </body>
           </html>

@@ -77,7 +77,7 @@ export async function POST(request: Request) {
             {
               role: "system",
               content:
-                "Kamu instruktur AI3. Selalu jawab dengan JSON yang valid sesuai format yang diminta. Jangan tambah teks di luar JSON.",
+                "Kamu instruktur AGENTIKA. Selalu jawab dengan JSON yang valid sesuai format yang diminta. Jangan tambah teks di luar JSON.",
             },
             { role: "user", content: prompt },
           ],

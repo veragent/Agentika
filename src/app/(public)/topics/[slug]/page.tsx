@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return generateSeo({
     title: `${cluster.topic} — Topic Hub`,
-    description: cluster.description ?? `Kumpulan konten lengkap tentang ${cluster.topic} di AI3. Blog, learn, dan airdrop.`,
+    description: cluster.description ?? `Kumpulan konten lengkap tentang ${cluster.topic} di AGENTIKA. Blog, learn, dan airdrop.`,
     type: "website",
     canonical: `/topics/${slug}`,
     keywords: cluster.keywords,
@@ -65,8 +65,8 @@ export default async function TopicClusterPage({ params }: Props) {
   )
 
   const websiteJsonLd = buildWebsiteJsonLd(
-    process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id",
-    "AI3"
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id",
+    "AGENTIKA"
   )
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(
     [
@@ -74,7 +74,7 @@ export default async function TopicClusterPage({ params }: Props) {
       { label: "Topics", href: "/topics" },
       { label: cluster.topic, href: `/topics/${slug}` },
     ],
-    process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id"
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
   )
 
   return (

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { BRAND } from "@/lib/brand"
 import { env } from "@/lib/env"
 
-const APP_URL = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://ai3.my.id"
+const APP_URL = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://agentika.my.id"
 const SITE_NAME = BRAND.name
 const DEFAULT_DESCRIPTION = "Belajar Web3 & AI dalam satu platform. Blog, dokumentasi, airdrop hub, dan AI tools directory."
 
@@ -245,8 +245,8 @@ export function buildIndonesianOrganizationJsonLd(): string {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${APP_URL}/#organization`,
-    name: "AI3 Hub",
-    alternateName: "Web3AI Hub",
+    name: "AGENTIKA Hub",
+    alternateName: "AGENTIKA",
     description: "Platform belajar Web3 & AI dalam Bahasa Indonesia. Blog, dokumentasi, airdrop hub, dan direktori AI tools.",
     url: APP_URL,
     logo: {
@@ -292,7 +292,7 @@ export function buildLocalBusinessJsonLd(): string {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${APP_URL}/#local-business`,
-    name: "AI3 Hub",
+    name: "AGENTIKA Hub",
     description: "Platform edukasi Web3 dan AI untuk komunitas Indonesia",
     url: APP_URL,
     telephone: "+62-xxx-xxxx-xxxx",
@@ -363,7 +363,7 @@ function buildExtraMeta(
           priceCurrency: "USD",
           availability: "https://schema.org/InStock",
         },
-        brand: { "@type": "Brand", name: "AI3" },
+        brand: { "@type": "Brand", name: "AGENTIKA" },
       }),
     }
   }

@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isEn = loc === "en"
 
   return {
-    title: isEn ? "FAQ — AI3" : "FAQ — AI3",
+    title: isEn ? "FAQ — AGENTIKA" : "FAQ — AGENTIKA",
     description: isEn
-      ? "Frequently asked questions about Web3, AI tools, airdrops, and the AI3 platform."
-      : "Pertanyaan yang sering ditanyakan tentang Web3, alat AI, airdrop, dan platform AI3.",
+      ? "Frequently asked questions about Web3, AI tools, airdrops, and the AGENTIKA platform."
+      : "Pertanyaan yang sering ditanyakan tentang Web3, alat AI, airdrop, dan platform AGENTIKA.",
     alternates: {
       canonical: `/${loc}/faq`,
     },
@@ -63,8 +63,8 @@ export default async function FaqPage({ params }: PageProps) {
         </div>
         <p className="text-lg text-muted-foreground">
           {isEn
-            ? "Everything you need to know about AI3, Web3, and crypto."
-            : "Segala yang perlu kamu ketahui tentang AI3, Web3, dan kripto."}
+            ? "Everything you need to know about AGENTIKA, Web3, and crypto."
+            : "Segala yang perlu kamu ketahui tentang AGENTIKA, Web3, dan kripto."}
         </p>
       </div>
 

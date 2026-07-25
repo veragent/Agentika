@@ -126,7 +126,7 @@ export function addLocaleToPath(path: string, locale: Locale): string {
  */
 export function getAlternateUrls(
   path: string,
-  baseUrl: string = process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id"
+  baseUrl: string = process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
 ): Record<string, string> {
   const strippedPath = stripLocaleFromPath(path)
   return {

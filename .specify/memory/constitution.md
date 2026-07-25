@@ -1,4 +1,4 @@
-# Web3AI Hub (AI3) Constitution
+# AGENTIKA (AGENTIKA) Constitution
 
 > Platform Web3 & AI #1 di Indonesia — Blog MDX, Learn (GitBook-style), Airdrop Hub, AI Tools Directory.
 > Solo creator platform dengan AI-powered content generation, bilingual (ID/EN).
@@ -176,7 +176,7 @@ Admin Input → API Route (validated with Zod)
 
 ## Governance
 
-This constitution is the source of truth for all development decisions in Web3AI Hub. Every feature spec, implementation plan, and task must comply with these principles.
+This constitution is the source of truth for all development decisions in AGENTIKA. Every feature spec, implementation plan, and task must comply with these principles.
 
 **Amendment Process**: Changes require documentation in CHANGELOG.md, updated constitution version, and migration plan if breaking existing patterns.
 

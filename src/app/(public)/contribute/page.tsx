@@ -5,8 +5,8 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 export const metadata = {
-  title: "Contribute | AI3 Web3AI Hub",
-  description: "Share your knowledge with the AI3 community. Submit tutorials, guides, and articles on Web3, AI, and airdrops.",
+  title: "Contribute | AGENTIKA AGENTIKA",
+  description: "Share your knowledge with the AGENTIKA community. Submit tutorials, guides, and articles on Web3, AI, and airdrops.",
 }
 
 const CONTENT_TYPES = [
@@ -59,7 +59,7 @@ export default function ContributePage() {
       <div className="text-center mb-12">
         <Badge variant="outline" className="mb-4">🌐 Community Contributions</Badge>
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-          Contribute to AI3
+          Contribute to AGENTIKA
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Share your Web3, AI, and airdrop knowledge with thousands of readers. 
@@ -69,7 +69,7 @@ export default function ContributePage() {
           <Link href="/contribute/submit" className={cn(buttonVariants({ size: "lg" }))}>
             Submit a Tutorial
           </Link>
-          <a href="https://github.com/abraham-yusuf/web3ai-hub" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+          <a href="https://github.com/abraham-yusuf/AGENTIKA" target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
             View on GitHub
           </a>
         </div>

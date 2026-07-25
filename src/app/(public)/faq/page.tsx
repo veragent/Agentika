@@ -7,7 +7,7 @@ import Link from "next/link"
 export const metadata: Metadata = generateSeo({
   title: "FAQ",
   description:
-    "Pertanyaan yang sering diajukan tentang Web3, AI, dan platform AI3. Temukan jawaban untuk topik billing, teknis, dan lainnya.",
+    "Pertanyaan yang sering diajukan tentang Web3, AI, dan platform AGENTIKA. Temukan jawaban untuk topik billing, teknis, dan lainnya.",
   type: "website",
   canonical: "/faq",
 })
@@ -71,7 +71,7 @@ export default async function FaqIndexPage({
       <div className="space-y-3">
         <h1 className="text-4xl font-extrabold tracking-tight">FAQ</h1>
         <p className="text-lg text-muted-foreground">
-          Pertanyaan yang sering diajukan tentang Web3, AI, dan platform AI3.
+          Pertanyaan yang sering diajukan tentang Web3, AI, dan platform AGENTIKA.
           Temukan jawaban untuk topik billing, teknis, dan lainnya.
         </p>
       </div>

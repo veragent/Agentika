@@ -1074,7 +1074,7 @@ async function seedAirdrops() {
 }
 
 async function main() {
-  console.log("=== Web3AI Hub Seed ===")
+  console.log("=== AGENTIKA Seed ===")
   await seedAITools()
   await seedAirdrops()
   await seedLearnFromMdx()

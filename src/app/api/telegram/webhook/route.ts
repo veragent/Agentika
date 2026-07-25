@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
 
       if (text?.startsWith("/help")) {
         const helpMsg = `
-<b>Web3AI Hub Bot Commands</b>
+<b>AGENTIKA Bot Commands</b>
 
 /start - Show main menu
 /menu - Show main menu

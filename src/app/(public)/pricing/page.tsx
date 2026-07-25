@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Check, X, Zap } from "lucide-react"
 
 export const metadata = {
-  title: "Pricing — AI3 Web3 Hub",
+  title: "Pricing — AGENTIKA Web3 Hub",
   description: "Pilih paket yang sesuai kebutuhan Anda. Gratis, Pro, atau Enterprise.",
 }
 
@@ -63,7 +63,7 @@ const tiers = [
     period: "/bulan",
     description: "Untuk tim, perusahaan, dan institusi pendidikan.",
     cta: "Hubungi Kami",
-    ctaHref: "mailto:admin@ai3.web.id?subject=Enterprise%20Plan%20Inquiry",
+    ctaHref: "mailto:admin@agentika.web.id?subject=Enterprise%20Plan%20Inquiry",
     ctaVariant: "outline" as const,
     popular: false,
     features: [
@@ -199,8 +199,8 @@ export default function PricingPage() {
         <h2 className="text-xl font-bold mb-2">Ada pertanyaan?</h2>
         <p className="text-muted-foreground text-sm">
           Hubungi kami di{" "}
-          <a href="mailto:admin@ai3.web.id" className="text-primary underline underline-offset-2">
-            admin@ai3.web.id
+          <a href="mailto:admin@agentika.web.id" className="text-primary underline underline-offset-2">
+            admin@agentika.web.id
           </a>{" "}
           atau upgrade secara manual sebelum integrasi pembayaran selesai.
         </p>

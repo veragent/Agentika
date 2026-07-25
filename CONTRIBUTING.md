@@ -1,4 +1,4 @@
-# 🤝 Contributing to AI3 / Web3AI Hub
+# 🤝 Contributing to AGENTIKA / AGENTIKA
 
 Terima kasih atas minat Anda untuk berkontribusi! Platform ini dibangun untuk komunitas Web3 & AI di Indonesia dan Asia Tenggara.
 
@@ -30,7 +30,7 @@ Terima kasih atas minat Anda untuk berkontribusi! Platform ini dibangun untuk ko
 
 ### 🐛 Bug Report
 
-1. Buka [Issues](https://github.com/abraham-yusuf/web3ai-hub/issues)
+1. Buka [Issues](https://github.com/abraham-yusuf/AGENTIKA/issues)
 2. Cek apakah bug sudah dilaporkan
 3. Buat issue baru dengan template:
    - **Judul**: Deskripsi singkat bug
@@ -65,8 +65,8 @@ Konten (blog post, tutorial, dokumentasi) sangat berharga! Lihat [Menambah Konte
 
 ```bash
 # 1. Fork & clone
-git clone https://github.com/<your-username>/web3ai-hub.git
-cd web3ai-hub
+git clone https://github.com/<your-username>/AGENTIKA.git
+cd AGENTIKA
 
 # 2. Install dependencies
 npm install
@@ -91,7 +91,7 @@ Buka http://localhost:3000
 ### Login Admin
 
 Default credentials (hanya untuk development):
-- Email: `admin@web3aihub.com`
+- Email: `admin@AGENTIKA.com`
 - Password: `admin12345`
 
 > ⚠️ **Jangan gunakan default password di production!**
@@ -101,7 +101,7 @@ Default credentials (hanya untuk development):
 ## Struktur Proyek
 
 ```
-web3ai-hub/
+AGENTIKA/
 ├── src/
 │   ├── app/                  # Next.js App Router
 │   │   ├── (public)/         # Route group halaman publik
@@ -320,9 +320,9 @@ Konten lesson di sini...
 
 ## 📞 Kontak & Resources
 
-- **Issues**: [github.com/abraham-yusuf/web3ai-hub/issues](https://github.com/abraham-yusuf/web3ai-hub/issues)
-- **Discussions**: [github.com/abraham-yusuf/web3ai-hub/discussions](https://github.com/abraham-yusuf/web3ai-hub/discussions)
-- **Website**: [ai3.web.id](https://ai3.web.id)
+- **Issues**: [github.com/abraham-yusuf/AGENTIKA/issues](https://github.com/abraham-yusuf/AGENTIKA/issues)
+- **Discussions**: [github.com/abraham-yusuf/AGENTIKA/discussions](https://github.com/abraham-yusuf/AGENTIKA/discussions)
+- **Website**: [agentika.web.id](https://agentika.web.id)
 
 ---
 

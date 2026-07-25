@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { BRAND } from "@/lib/brand";
 import { Providers } from "@/components/providers";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id";
 
 export const metadata: Metadata = {
   title: `${BRAND.name} — Platform Blog & Learning Web3 + AI`,

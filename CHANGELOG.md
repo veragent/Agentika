@@ -488,6 +488,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 > Commit: `6330a22`
 
-- Project initialized: Web3AI Hub
+- Project initialized: AGENTIKA
 - Next.js 15, App Router, TypeScript, Tailwind CSS, Prisma
 - Basic project structure and documentation

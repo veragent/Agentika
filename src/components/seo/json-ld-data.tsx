@@ -82,7 +82,7 @@ export function buildArticleJsonLd(opts: {
     },
     publisher: {
       "@type": "Organization",
-      name: "AI3",
+      name: "AGENTIKA",
       url: opts.url.replace(/\/[^/]+\/?$/, ""),
     },
     image: opts.image,
@@ -145,7 +145,7 @@ export function buildGlossaryPageJsonLd(
   return {
     "@context": "https://schema.org",
     "@type": "GlossaryPage",
-    name: "Web3 & AI Glossary — AI3",
+    name: "Web3 & AI Glossary — AGENTIKA",
     description:
       "Daftar istilah Web3 & AI lengkap dalam Bahasa Indonesia dan English. Jelajahi definisi, contoh, dan kategori untuk menguasai kosakata blockchain, DeFi, AI, dan lainnya.",
     numberOfItems: entries.length,

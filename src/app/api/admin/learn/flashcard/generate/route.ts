@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
             {
               role: "system",
               content:
-                "Kamu instruktur AI3. Selalu jawab dengan JSON array yang valid. Jangan tambah teks di luar JSON.",
+                "Kamu instruktur AGENTIKA. Selalu jawab dengan JSON array yang valid. Jangan tambah teks di luar JSON.",
             },
             { role: "user", content: prompt },
           ],

@@ -1,12 +1,12 @@
 # CLAUDE.md — Panduan untuk AI Development Assistant
 
-> File ini adalah konteks utama untuk AI coding assistant (Claude, Cursor, Copilot, dll) yang membantu mengembangkan **Web3AI Hub**. Baca file ini sebelum melakukan perubahan apapun pada codebase.
+> File ini adalah konteks utama untuk AI coding assistant (Claude, Cursor, Copilot, dll) yang membantu mengembangkan **AGENTIKA**. Baca file ini sebelum melakukan perubahan apapun pada codebase.
 
 ---
 
 ## 🎯 Tentang Proyek Ini
 
-**Web3AI Hub** adalah platform konten Next.js dengan fitur: blog MDX, dokumentasi interaktif, airdrop hub, dan AI tools directory. Dibangun untuk kreator konten solo di bidang Web3 & AI, dengan monetisasi via Google AdSense dan affiliate links.
+**AGENTIKA** adalah platform konten Next.js dengan fitur: blog MDX, dokumentasi interaktif, airdrop hub, dan AI tools directory. Dibangun untuk kreator konten solo di bidang Web3 & AI, dengan monetisasi via Google AdSense dan affiliate links.
 
 **Bahasa**: Indonesia (konten) + English (kode dan komentar teknikal)  
 **Stack utama**: Next.js App Router · TypeScript · Tailwind CSS · Prisma · Vercel AI SDK

@@ -5,7 +5,7 @@ import Link from "next/link"
 
 async function getReferralData(userId: string) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ai3.web.id"
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://agentika.web.id"
     const res = await fetch(`${baseUrl}/api/gamification/referral`, {
       headers: { Cookie: `` }, // session propagated via auth()
       cache: "no-store",
@@ -25,7 +25,7 @@ export default async function ReferralPage() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
         <div className="w-full max-w-md bg-card rounded-2xl border shadow-sm p-8 text-center">
           <span className="text-5xl">🎁</span>
-          <h1 className="mt-4 text-2xl font-bold">Program Referral AI3 Hub</h1>
+          <h1 className="mt-4 text-2xl font-bold">Program Referral AGENTIKA Hub</h1>
           <p className="mt-2 text-muted-foreground">
             Login untuk mendapatkan kode referral unikmu dan mulai mengundang teman!
           </p>
@@ -40,7 +40,7 @@ export default async function ReferralPage() {
     )
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ai3.web.id"
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://agentika.web.id"
   const userId = session.user.id
 
   // Construct referral code from userId (first 8 chars)
@@ -55,7 +55,7 @@ export default async function ReferralPage() {
           <span className="text-5xl">🎁</span>
           <h1 className="mt-4 text-3xl font-bold">Program Referral</h1>
           <p className="mt-2 text-muted-foreground">
-            Undang teman ke AI3 Hub. Kalian berdua dapat <strong>50 XP</strong> gratis!
+            Undang teman ke AGENTIKA Hub. Kalian berdua dapat <strong>50 XP</strong> gratis!
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export default async function ReferralPage() {
           <div className="flex flex-col gap-4">
             {[
               { icon: "🔗", step: "1", title: "Salin link undanganmu", desc: "Copy link di atas dan share ke teman-temanmu" },
-              { icon: "👥", step: "2", title: "Temanmu daftar", desc: "Teman kamu buka link dan buat akun di AI3 Hub" },
+              { icon: "👥", step: "2", title: "Temanmu daftar", desc: "Teman kamu buka link dan buat akun di AGENTIKA Hub" },
               { icon: "⭐", step: "3", title: "Kalian berdua dapat XP!", desc: "Kamu +50 XP, temanmu juga +50 XP langsung" },
             ].map((item) => (
               <div key={item.step} className="flex items-start gap-4">

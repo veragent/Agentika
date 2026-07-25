@@ -26,8 +26,8 @@ export default async function SubscriptionsPage() {
       <div className="rounded-xl border bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 p-4 text-sm text-amber-800 dark:text-amber-200">
         <strong>⚠️ Integration Pending:</strong> Stripe/Midtrans integration is not yet configured.
         Premium accounts are managed manually for now. Contact{" "}
-        <a href="mailto:admin@ai3.web.id" className="underline underline-offset-2">
-          admin@ai3.web.id
+        <a href="mailto:admin@agentika.web.id" className="underline underline-offset-2">
+          admin@agentika.web.id
         </a>{" "}
         to upgrade a user account.
       </div>

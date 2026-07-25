@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 
   return {
-    title: "Airdrop Calendar — AI3",
+    title: "Airdrop Calendar — AGENTIKA",
     description: `Track upcoming crypto airdrops with deadlines. ${upcomingCount} airdrops with upcoming deadlines in the next 90 days.`,
     keywords: ["airdrop calendar", "crypto airdrops", "airdrop deadlines", "airdrop tracker"],
   }

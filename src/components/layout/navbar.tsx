@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { AI3Logo } from "@/components/branding/ai3-logo"
+import { AGENTIKALogo } from "@/components/branding/agentika-logo"
 import { navItems } from "@/components/layout/nav-items"
 import { useMobileNav } from "@/components/layout/mobile-nav-context"
 import {
@@ -76,7 +76,7 @@ export function Navbar() {
         <div className="container flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-6 md:gap-10">
             <Link href="/" className="flex items-center space-x-2">
-              <AI3Logo />
+              <AGENTIKALogo />
             </Link>
             <NavigationMenu className="hidden md:flex">
               <NavigationMenuList>

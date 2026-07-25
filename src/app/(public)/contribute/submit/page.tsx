@@ -110,7 +110,7 @@ export default function SubmitPage() {
       <div className="mb-8">
         <Link href="/contribute" className="text-sm text-muted-foreground hover:text-foreground">&#8592; Back to Contribute</Link>
         <h1 className="text-3xl font-bold mt-4 mb-2">Submit Your Tutorial</h1>
-        <p className="text-muted-foreground">Share your knowledge with the AI3 community. Submissions are reviewed within 48 hours.</p>
+        <p className="text-muted-foreground">Share your knowledge with the AGENTIKA community. Submissions are reviewed within 48 hours.</p>
       </div>
 
       <Card className="p-6">

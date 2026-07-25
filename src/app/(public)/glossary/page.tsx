@@ -49,7 +49,7 @@ export default async function GlossaryIndexPage({ searchParams }: Props) {
     },
   })
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://ai3.my.id"
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
   const glossaryJsonLd = buildGlossaryPageJsonLd(entries, baseUrl)
 
   // Group entries: by category if categories exist, otherwise by first letter

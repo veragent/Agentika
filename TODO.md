@@ -1,4 +1,4 @@
-# 🚀 AI3 / Web3AI Hub — Active TODO
+# 🚀 AGENTIKA / AGENTIKA — Active TODO
 
 > Hanya item yang **belum selesai**. Untuk riwayat sprint 1–10, lihat [CHANGELOG.md](./CHANGELOG.md).
 > Terakhir diupdate: 2026-06-18 | **Audit: tandai 5 item yang sudah selesai (author profiles + testing)**

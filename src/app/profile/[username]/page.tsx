@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return generateSeo({
     title: `${user.name ?? user.username} (@${user.username})`,
-    description: user.bio ?? `Profil ${user.name ?? user.username} di Web3AI Hub.`,
+    description: user.bio ?? `Profil ${user.name ?? user.username} di AGENTIKA.`,
     type: "profile",
     canonical: `/profile/${username}`,
   })

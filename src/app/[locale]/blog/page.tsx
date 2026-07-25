@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isEn = loc === "en"
 
   return {
-    title: isEn ? "Blog — AI3" : "Blog — AI3",
+    title: isEn ? "Blog — AGENTIKA" : "Blog — AGENTIKA",
     description: isEn
       ? "Latest articles about Web3, AI tools, airdrops, and the future of technology."
       : "Artikel terbaru seputar Web3, alat AI, airdrop, dan teknologi masa depan.",

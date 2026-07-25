@@ -91,7 +91,7 @@
 ## 📂 Struktur Project
 
 ```
-web3ai-hub/
+AGENTIKA/
 ├── src/
 │   ├── app/           # Next.js App Router
 │   ├── components/    # React components

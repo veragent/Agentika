@@ -1,4 +1,4 @@
-# 🗺️ ROADMAP — Web3AI Hub
+# 🗺️ ROADMAP — AGENTIKA
 
 > Roadmap ini mengikuti pendekatan iteratif: setiap fase menghasilkan versi yang *shippable* dan dapat menghasilkan traffic/revenue.
 

@@ -1,6 +1,6 @@
 # Discord & Telegram Integration Setup
 
-Panduan setup Discord dan Telegram bot untuk Web3AI Hub notifications.
+Panduan setup Discord dan Telegram bot untuk AGENTIKA notifications.
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/your-webhook-id/your-token
 Jika butuh command interaktif (slash commands), perlu bot:
 
 1. Buka [Discord Developer Portal](https://discord.com/developers/applications)
-2. Create New Application > Buat nama (e.g., "Web3AI Hub Bot")
+2. Create New Application > Buat nama (e.g., "AGENTIKA Bot")
 3. Buka Bot section > Reset Token > Copy token
 
 ```bash
@@ -153,7 +153,7 @@ TELEGRAM_ANNOUNCEMENTS_CHANNEL_ID=
     "airdropName": "Example Airdrop",
     "network": "Ethereum",
     "deadline": "2 days",
-    "url": "https://ai3.web.id/airdrop/example",
+    "url": "https://agentika.web.id/airdrop/example",
     "difficulty": "MEDIUM",
     "estimatedReward": "$100-$500"
   }
@@ -204,7 +204,7 @@ await triggerDiscordNotification('airdrop', {
   airdropName: 'Example Airdrop',
   network: 'Solana',
   deadline: 'in 3 days',
-  url: 'https://ai3.web.id/airdrop/example',
+  url: 'https://agentika.web.id/airdrop/example',
   difficulty: 'EASY',
 })
 ```
@@ -220,7 +220,7 @@ await triggerTelegramNotification('airdrop', {
   airdropName: 'Example Airdrop',
   network: 'Solana',
   deadline: 'in 3 days',
-  url: 'https://ai3.web.id/airdrop/example',
+  url: 'https://agentika.web.id/airdrop/example',
   difficulty: 'EASY',
 })
 ```
@@ -262,7 +262,7 @@ curl -X POST https://your-domain.com/api/discord/webhook \
     "type": "announcement",
     "data": {
       "title": "Test Announcement",
-      "message": "This is a test message from Web3AI Hub"
+      "message": "This is a test message from AGENTIKA"
     }
   }'
 ```
@@ -285,7 +285,7 @@ curl -X POST https://your-domain.com/api/telegram/send \
       "airdropName": "Test Airdrop",
       "network": "Ethereum",
       "deadline": "2024-12-31",
-      "url": "https://ai3.web.id/airdrop/test",
+      "url": "https://agentika.web.id/airdrop/test",
       "difficulty": "EASY"
     }
   }'
@@ -324,7 +324,7 @@ curl -X POST https://your-domain.com/api/telegram/send \
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    Web3AI Hub                           │
+│                    AGENTIKA                           │
 ├─────────────────────────────────────────────────────────┤
 │  Admin Actions                                          │
 │  ┌──────────────┐  ┌──────────────┐                    │

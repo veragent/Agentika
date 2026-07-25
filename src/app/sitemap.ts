@@ -4,7 +4,7 @@ import { getPublicBlogPosts } from "@/lib/posts"
 import { prisma } from "@/lib/prisma"
 import { env } from "@/lib/env"
 
-const baseUrl = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://ai3.my.id"
+const baseUrl = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://agentika.my.id"
 
 // Define alternate URLs for hreflang
 interface AlternateUrl {

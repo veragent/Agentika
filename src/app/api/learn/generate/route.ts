@@ -60,7 +60,7 @@ User Profile:
 - Time Commitment: ${timeCommitment || "Standard"}${topicContext}
 
 Context:
-The platform "AI3 / Web3AI Hub" provides educational content. Below is the list of existing content pages available in our database:
+The platform "AGENTIKA / AGENTIKA" provides educational content. Below is the list of existing content pages available in our database:
 [${pagesContext}]
 
 Your roadmap should be structured as a sequence of logical steps.

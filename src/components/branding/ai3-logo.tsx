@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils"
 
-type AI3LogoProps = {
+type AGENTIKALogoProps = {
   className?: string
   showWordmark?: boolean
 }
 
-export function AI3Logo({ className, showWordmark = true }: AI3LogoProps) {
+export function AGENTIKALogo({ className, showWordmark = true }: AGENTIKALogoProps) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <svg
@@ -27,7 +27,7 @@ export function AI3Logo({ className, showWordmark = true }: AI3LogoProps) {
       </svg>
       {showWordmark ? (
         <span className="bg-clip-text text-xl font-bold tracking-tight text-transparent" style={{ backgroundImage: "var(--brand-gradient)" }}>
-          AI3
+          AGENTIKA
         </span>
       ) : null}
     </span>

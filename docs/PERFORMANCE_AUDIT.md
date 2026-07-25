@@ -1,6 +1,6 @@
-# ⚡ Performance Audit — Web3AI Hub
+# ⚡ Performance Audit — AGENTIKA
 
-> Baseline audit on **production** (`https://ai3.web.id`), measured 2026-06-18.
+> Baseline audit on **production** (`https://agentika.web.id`), measured 2026-06-18.
 > Target: Lighthouse 90+ on all metrics; Core Web Vitals in "Good" range
 > (LCP < 2.5s, CLS < 0.1, INP < 200ms).
 
@@ -148,9 +148,9 @@ layout-shift debugging on the live grid; tracked as a P0 follow-up. The 2 raw
 
 **Option A — Lighthouse (canonical, needs Node):**
 ```bash
-npm run build && npm run start            # or test against https://ai3.web.id
-npx lighthouse https://ai3.web.id --preset=desktop --view
-npx lighthouse https://ai3.web.id --view  # mobile (default)
+npm run build && npm run start            # or test against https://agentika.web.id
+npx lighthouse https://agentika.web.id --preset=desktop --view
+npx lighthouse https://agentika.web.id --view  # mobile (default)
 ```
 
 **Option B — Bundle analysis:**

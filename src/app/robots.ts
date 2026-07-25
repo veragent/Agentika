@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { env } from "@/lib/env"
 
-const baseUrl = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://ai3.my.id"
+const baseUrl = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://agentika.my.id"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type _Robots = MetadataRoute.Robots
 
