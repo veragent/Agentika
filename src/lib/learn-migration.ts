@@ -154,7 +154,7 @@ function extractOrder(data: FrontMatter, fallback: number) {
   return fallback
 }
 
-export async function migrateLearnFromMdx(prisma: PrismaClient): Promise<MigrationSummary> {
+export async function migrateLearnFromMdx(prisma: any): Promise<MigrationSummary> {
   const learnRoot = path.join(process.cwd(), "content", "learn")
 
   if (!fs.existsSync(learnRoot)) {

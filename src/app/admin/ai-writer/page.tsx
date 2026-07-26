@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react"
+import Link from "next/link"
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
 import { serialize } from "next-mdx-remote/serialize"
 import { components as mdxComponents } from "@/components/mdx"
@@ -822,9 +823,9 @@ export default function AdminAIWriterPage() {
           <h1 className="text-3xl font-bold">AI Writer</h1>
           <p className="text-muted-foreground">AI-first workspace untuk generate, edit, dan optimasi artikel.</p>
         </div>
-        <a href="/admin/settings" className="inline-flex h-9 items-center rounded-md border px-4 text-sm font-medium">
+        <Link href="/admin/settings" className="inline-flex h-9 items-center rounded-md border px-4 text-sm font-medium">
           AI Settings
-        </a>
+        </Link>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[360px_1fr]">

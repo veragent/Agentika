@@ -371,7 +371,7 @@ export default async function AdminAnalyticsPage({
         </div>
         <div className="rounded-xl border p-6 text-center text-muted-foreground text-sm">
           Connect Midtrans or Stripe to unlock MRR, churn, and LTV metrics.{" "}
-          <a href="/admin/subscriptions" className="text-primary underline underline-offset-2">Manage subscriptions →</a>
+          <Link href="/admin/subscriptions" className="text-primary underline underline-offset-2">Manage subscriptions →</Link>
         </div>
       </div>
     </div>

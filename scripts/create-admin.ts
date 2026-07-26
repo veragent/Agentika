@@ -1,8 +1,10 @@
 import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
+import pg from "pg";
 import { hashPassword } from "../src/lib/auth-utils";
 
-const prisma = new PrismaClient();
+function createId() {
+  return "c" + Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
+}
 
 async function main() {
   const email = process.env.ADMIN_EMAIL;
@@ -13,32 +15,34 @@ async function main() {
     process.exit(1);
   }
 
+  const databaseUrl = process.env.DIRECT_URL || process.env.DATABASE_URL;
+  const pool = new pg.Pool({
+    connectionString: databaseUrl,
+    ssl: { rejectUnauthorized: false },
+  });
+
   try {
     console.log(`⏳ Creating/updating admin user: ${email}...`);
 
     const hashedPassword = await hashPassword(password);
 
-    const user = await prisma.user.upsert({
-      where: { email },
-      update: {
-        password: hashedPassword,
-        role: "ADMIN",
-      },
-      create: {
-        email,
-        password: hashedPassword,
-        role: "ADMIN",
-        name: "Administrator",
-        username: "admin",
-      },
-    });
+    const query = `
+      INSERT INTO "User" ("id", "email", "password", "role", "name", "username", "createdAt", "updatedAt")
+      VALUES ($1, $2, $3, 'ADMIN'::"Role", 'Administrator', 'admin', NOW(), NOW())
+      ON CONFLICT ("email") DO UPDATE SET
+        "password" = EXCLUDED."password",
+        "role" = 'ADMIN'::"Role",
+        "updatedAt" = NOW()
+      RETURNING "email";
+    `;
 
-    console.log(`✅ Admin user successfully created/updated: ${user.email}`);
+    const res = await pool.query(query, [createId(), email, hashedPassword]);
+    console.log(`✅ Admin user successfully created/updated: ${res.rows[0].email}`);
   } catch (error) {
     console.error("❌ Error creating admin user:", error);
     process.exit(1);
   } finally {
-    await prisma.$disconnect();
+    await pool.end();
   }
 }
 

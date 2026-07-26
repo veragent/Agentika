@@ -1,4 +1,5 @@
 import { ConfirmDeleteButtonPlain } from "@/components/admin/confirm-delete-button"
+import Link from "next/link"
 import { prisma } from "@/lib/prisma"
 import type { Metadata } from "next"
 import { generateSeo } from "@/lib/seo"
@@ -121,9 +122,9 @@ export default async function TopicClustersPage({ searchParams }: Props) {
               {editTopic ? "Update" : "Create"} Cluster
             </button>
             {editTopic && (
-              <a href="/admin/seo/topics" className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-muted">
+              <Link href="/admin/seo/topics" className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-muted">
                 Cancel
-              </a>
+              </Link>
             )}
           </div>
         </form>

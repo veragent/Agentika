@@ -1,14 +1,191 @@
 import "dotenv/config"
-import { PrismaClient } from "@prisma/client"
+import pg from "pg"
 import { migrateLearnFromMdx } from "../src/lib/learn-migration"
 
-const databaseUrl = process.env.DATABASE_URL
+const databaseUrl = process.env.DIRECT_URL || process.env.DATABASE_URL
 
 if (!databaseUrl) {
   throw new Error("DATABASE_URL is required to run the seed script.")
 }
 
-const prisma = new PrismaClient()
+function createId() {
+  return "c" + Date.now().toString(36) + Math.random().toString(36).substring(2, 9)
+}
+
+const pool = new pg.Pool({
+  connectionString: databaseUrl,
+  ssl: { rejectUnauthorized: false },
+})
+
+const prisma = {
+  aITool: {
+    async upsert({ create }: any) {
+      const item = create
+      const pricingType = item.pricing === "Free" ? "FREE" : item.pricing === "Freemium" ? "FREEMIUM" : "PAID"
+      const query = `
+        INSERT INTO "AITool" (
+          "id", "name", "slug", "tagline", "category", "pricing", "pricingType",
+          "description", "featured", "rating", "affiliateLink", "features",
+          "integrations", "languages", "platforms", "hasFreeTrial", "hasApiAccess",
+          "hasMobileApp", "viewCount", "ratingCount", "sponsored", "createdAt", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7::"PricingType",
+          $8, $9, $10, $11, $12,
+          $13, $14, $15, $16, $17,
+          $18, $19, $20, $21, NOW(), NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "name" = EXCLUDED."name",
+          "tagline" = EXCLUDED."tagline",
+          "category" = EXCLUDED."category",
+          "pricing" = EXCLUDED."pricing",
+          "pricingType" = EXCLUDED."pricingType",
+          "description" = EXCLUDED."description",
+          "featured" = EXCLUDED."featured",
+          "rating" = EXCLUDED."rating",
+          "affiliateLink" = EXCLUDED."affiliateLink",
+          "updatedAt" = NOW();
+      `
+      const values = [
+        createId(),
+        item.name,
+        item.slug,
+        item.tagline || null,
+        item.category,
+        item.pricing,
+        pricingType,
+        item.description,
+        item.featured || false,
+        item.rating || 0,
+        item.affiliateLink || null,
+        [], [], [], [], false, false, false, 0, 0, false,
+      ]
+      await pool.query(query, values)
+    },
+  },
+  airdrop: {
+    async upsert({ create }: any) {
+      const item = create
+      const query = `
+        INSERT INTO "Airdrop" (
+          "id", "name", "slug", "network", "status", "estimatedReward",
+          "difficulty", "content", "requirements", "links", "featured", "sponsored", "createdAt", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5::"AirdropStatus", $6,
+          $7::"Difficulty", $8, $9, $10::jsonb, $11, $12, NOW(), NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "name" = EXCLUDED."name",
+          "network" = EXCLUDED."network",
+          "status" = EXCLUDED."status",
+          "estimatedReward" = EXCLUDED."estimatedReward",
+          "difficulty" = EXCLUDED."difficulty",
+          "content" = EXCLUDED."content",
+          "requirements" = EXCLUDED."requirements",
+          "links" = EXCLUDED."links",
+          "updatedAt" = NOW();
+      `
+      const values = [
+        createId(),
+        item.name,
+        item.slug,
+        item.network,
+        item.status || "ACTIVE",
+        item.estimatedReward || null,
+        item.difficulty || "MEDIUM",
+        item.content,
+        item.requirements || [],
+        JSON.stringify(item.links || {}),
+        false,
+        false,
+      ]
+      await pool.query(query, values)
+    },
+  },
+  learnTrack: {
+    async upsert({ create }: any) {
+      const item = create
+      const query = `
+        INSERT INTO "LearnTrack" (
+          "id", "title", "slug", "description", "type", "order", "createdAt", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5::"TrackType", $6, NOW(), NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "title" = EXCLUDED."title",
+          "description" = EXCLUDED."description",
+          "type" = EXCLUDED."type",
+          "order" = EXCLUDED."order",
+          "updatedAt" = NOW()
+        RETURNING "id", "slug";
+      `
+      const values = [
+        createId(),
+        item.title,
+        item.slug,
+        item.description || null,
+        item.type || "WEB3",
+        item.order || 0,
+      ]
+      const res = await pool.query(query, values)
+      return res.rows[0]
+    },
+  },
+  learnSection: {
+    async upsert({ where, create }: any) {
+      const item = create
+      const query = `
+        INSERT INTO "LearnSection" (
+          "id", "title", "order", "trackId", "createdAt", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, NOW(), NOW()
+        )
+        ON CONFLICT ("id") DO UPDATE SET
+          "title" = EXCLUDED."title",
+          "order" = EXCLUDED."order",
+          "updatedAt" = NOW()
+        RETURNING "id";
+      `
+      const values = [
+        where.id || createId(),
+        item.title,
+        item.order || 0,
+        item.trackId,
+      ]
+      const res = await pool.query(query, values)
+      return res.rows[0]
+    },
+  },
+  learnPage: {
+    async upsert({ where, create }: any) {
+      const item = create
+      const query = `
+        INSERT INTO "LearnPage" (
+          "id", "title", "slug", "content", "order", "sectionId", "createdAt", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, NOW(), NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "title" = EXCLUDED."title",
+          "content" = EXCLUDED."content",
+          "order" = EXCLUDED."order",
+          "sectionId" = EXCLUDED."sectionId",
+          "updatedAt" = NOW()
+        RETURNING "id", "slug";
+      `
+      const values = [
+        createId(),
+        item.title,
+        where.slug || item.slug,
+        item.content,
+        item.order || 0,
+        item.sectionId,
+      ]
+      const res = await pool.query(query, values)
+      return res.rows[0]
+    },
+  },
+}
 
 type AIToolSeed = {
   name: string
@@ -1083,4 +1260,6 @@ async function main() {
 
 main()
   .catch((e) => { console.error("Seed failed:", e); process.exit(1) })
-  .finally(async () => { await prisma.$disconnect() })
+  .finally(async () => {
+    await pool.end()
+  })

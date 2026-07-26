@@ -1,4 +1,4 @@
-// @ts-ignore — Sentry v10 types resolution workaround for Vercel Turbopack
+// @ts-expect-error — Sentry v10 types resolution workaround for Vercel Turbopack
 import * as Sentry from "@sentry/nextjs"
 
 Sentry.init({
