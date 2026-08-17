@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Analytics } from "@vercel/analytics/next"
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
 import { BRAND } from "@/lib/brand"
 import { Providers } from "@/components/providers"
 
@@ -55,7 +55,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <Analytics />
+            <GoogleAnalytics />
           </ThemeProvider>
         </Providers>
       </body>
