@@ -6,10 +6,10 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Search, Filter } from "lucide-react"
-import type { BlogPostData } from "@/lib/posts"
+import type { PostMetadata } from "@/lib/mdx"
 
 interface BlogListingClientProps {
-  posts: BlogPostData[]
+  posts: PostMetadata[]
   initialLocale: "en" | "id"
   otherLocale: "en" | "id"
 }
@@ -104,7 +104,7 @@ export function BlogListingClient({ posts, initialLocale, otherLocale }: BlogLis
                   <div className="mb-2 text-xs font-medium text-primary">{post.category ?? "General"}</div>
                   <CardTitle className="line-clamp-2">{post.title}</CardTitle>
                   <CardDescription>
-                    {(post.publishedAt ?? post.createdAt ?? "").split("T")[0]}
+                    {(post.date ?? "").split("T")[0]}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

@@ -1,4 +1,4 @@
-import { getAllFilesMetadata } from "@/lib/mdx"
+import { getFileBySlug, getAllFilesMetadata } from "@/lib/mdx"
 import type { PostMetadata } from "@/lib/mdx"
 
 export interface TocItem {
@@ -89,6 +89,19 @@ export function getPublishedBlogPosts(): PostMetadata[] {
       const bTime = b.date ? new Date(b.date).getTime() : 0
       return bTime - aTime
     })
+}
+
+export function getPublicBlogPostBySlug(slug: string): (PostMetadata & { content: string }) | null {
+  const file = getFileBySlug("blog", slug)
+  if (!file) return null
+
+  const post = file.frontMatter
+  if (post.published === false) return null
+
+  return {
+    ...post,
+    content: file.content,
+  }
 }
 
 function getScore(currentPost: PostMetadata, candidate: PostMetadata): number {

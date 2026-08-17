@@ -1,4 +1,5 @@
-import { prisma } from "@/lib/prisma"
+import fs from "fs"
+import path from "path"
 import { env } from "@/lib/env"
 
 export const AD_SECTIONS = [
@@ -46,15 +47,25 @@ const defaultSettings: AdSettings = {
   },
 }
 
-export async function getAdSettings(): Promise<AdSettings> {
-  const record = await prisma.siteSettings.upsert({
-    where: { id: "default" },
-    create: { id: "default" },
-    update: {},
-    select: { adSenseConfig: true },
-  })
+function getConfigPath(): string {
+  return path.join(process.cwd(), "content", "config", "adsense.json")
+}
 
-  const raw = (record.adSenseConfig ?? {}) as PartialAdSettings
+function readConfigFile(): PartialAdSettings {
+  const configPath = getConfigPath()
+  if (!fs.existsSync(configPath)) {
+    return {}
+  }
+  try {
+    const content = fs.readFileSync(configPath, "utf8")
+    return JSON.parse(content) as PartialAdSettings
+  } catch {
+    return {}
+  }
+}
+
+export function getAdSettings(): AdSettings {
+  const raw = readConfigFile()
 
   const sections = AD_SECTIONS.reduce((acc, section) => {
     const sectionRaw = raw.sections?.[section]
@@ -62,7 +73,6 @@ export async function getAdSettings(): Promise<AdSettings> {
       enabled: sectionRaw?.enabled ?? defaultSettings.sections[section].enabled,
       slotId: sectionRaw?.slotId ?? defaultSettings.sections[section].slotId,
     }
-
     return acc
   }, {} as Record<AdSection, AdSectionConfig>)
 

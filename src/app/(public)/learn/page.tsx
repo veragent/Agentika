@@ -1,21 +1,9 @@
-import { auth } from "@/auth"
-
 import { InternalLinksBlock } from "@/components/layout/internal-links"
-import { ActiveRoadmapsBanner } from "@/components/learn/active-roadmaps-banner"
-import nextDynamic from "next/dynamic"
-
-const LearnRetentionDashboard = nextDynamic(
-  () => import("@/components/learn/learn-retention-dashboard").then((m) => ({ default: m.LearnRetentionDashboard })),
-  { loading: () => <div className="animate-pulse h-48 rounded-lg bg-muted/50" /> },
-)
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getLearnNavigation } from "@/lib/learn"
-import { prisma } from "@/lib/prisma"
 import { ArrowRight, Book } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
-
-export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Learn",
@@ -25,16 +13,6 @@ export const metadata: Metadata = {
 
 export default async function LearnIndexPage() {
   const structure = await getLearnNavigation()
-  const session = await auth()
-  const completedProgress = session?.user?.id
-    ? await prisma.learnProgress.findMany({
-        where: {
-          userId: session.user.id,
-          completed: true,
-        },
-        select: { pageSlug: true },
-      })
-    : []
 
   return (
     <div className="space-y-8">
@@ -44,10 +22,6 @@ export default async function LearnIndexPage() {
           Pilih jalur pembelajaran untuk mulai menguasai teknologi Web3 dan AI.
         </p>
       </div>
-
-      <ActiveRoadmapsBanner />
-
-      <LearnRetentionDashboard tracks={structure} initialCompletedSlugs={completedProgress.map((item: { pageSlug: string }) => item.pageSlug)} />
 
       <div className="grid gap-6">
         {structure.map((track) => (

@@ -1,23 +1,11 @@
 import { AdSlot } from "@/components/ads/ad-slot"
-import nextDynamic from "next/dynamic"
-import { LessonActions } from "@/components/learn/lesson-actions"
-
-const LearnChatSidebar = nextDynamic(
-  () => import("@/components/learn/learn-chat-sidebar").then((m) => ({ default: m.LearnChatSidebar })),
-  { loading: () => <div className="animate-pulse h-96 rounded-lg bg-muted/50" /> },
-)
-import { ProgressTracker } from "@/components/learn/progress-tracker"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { components } from "@/components/mdx"
 import { getLearnPageBySlug, getLearnPagination } from "@/lib/learn"
-import { auth } from "@/auth"
-import { prisma } from "@/lib/prisma"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { notFound } from "next/navigation"
-
-export const dynamic = "force-dynamic"
 
 interface LearnPageProps {
   params: Promise<{
@@ -52,31 +40,16 @@ export default async function LearnPage({ params }: LearnPageProps) {
 
   const { prev, next } = await getLearnPagination(slugPath)
 
-  const session = await auth()
-  const progress = session?.user?.id
-    ? await prisma.learnProgress.findUnique({
-        where: {
-          userId_pageSlug: {
-            userId: session.user.id,
-            pageSlug: slugPath,
-          },
-        },
-        select: { completed: true },
-      })
-    : null
-
   return (
     <article className="space-y-8 py-6">
       <nav className="text-sm text-muted-foreground">
-        <Link href="/learn" className="hover:text-primary">Learn</Link>
+        <Link href="/learn" className="hover:text-primary">
+          Learn
+        </Link>
         {page.trackTitle && <span> / {page.trackTitle}</span>}
         {page.sectionTitle && <span> / {page.sectionTitle}</span>}
         <span> / {page.title}</span>
       </nav>
-
-      <ProgressTracker pageSlug={slugPath} initialCompleted={progress?.completed ?? false} />
-
-      <LessonActions title={page.title} content={page.content} />
 
       <div className="prose prose-zinc max-w-none dark:prose-invert">
         <MDXRemote source={page.content} components={components} />
@@ -85,7 +58,7 @@ export default async function LearnPage({ params }: LearnPageProps) {
       <div className="grid gap-3 border-t pt-6 md:grid-cols-2">
         {prev ? (
           <Link href={`/learn/${prev.slug}`} className="rounded-lg border p-4 transition-colors hover:border-primary">
-            <p className="text-xs text-muted-foreground">← Previous Lesson</p>
+            <p className="text-xs text-muted-foreground">&larr; Previous Lesson</p>
             <p className="mt-1 font-medium">{prev.title}</p>
           </Link>
         ) : (
@@ -94,7 +67,7 @@ export default async function LearnPage({ params }: LearnPageProps) {
 
         {next ? (
           <Link href={`/learn/${next.slug}`} className="rounded-lg border p-4 text-right transition-colors hover:border-primary">
-            <p className="text-xs text-muted-foreground">Next Lesson →</p>
+            <p className="text-xs text-muted-foreground">Next Lesson &rarr;</p>
             <p className="mt-1 font-medium">{next.title}</p>
           </Link>
         ) : (
@@ -104,7 +77,6 @@ export default async function LearnPage({ params }: LearnPageProps) {
 
       <AdSlot section="learn_detail" className="rounded-xl border p-4" />
       <InternalLinksBlock />
-      <LearnChatSidebar title={page.title} content={page.content} pageSlug={slugPath} />
     </article>
   )
 }

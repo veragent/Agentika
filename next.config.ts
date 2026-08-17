@@ -39,14 +39,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
-  // Inngest uses Node.js-specific exports that Turbopack can't resolve
-  // Route is stubbed — see src/app/api/inngest/route.ts for re-enable instructions
-  serverExternalPackages: ["inngest"],
-  // Add compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
   },
-  // Add image optimization defaults
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days

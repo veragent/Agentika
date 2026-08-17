@@ -1,9 +1,7 @@
 import type { MetadataRoute } from "next"
 import { env } from "@/lib/env"
 
-const baseUrl = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://agentika.my.id"
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type _Robots = MetadataRoute.Robots
+const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -15,7 +13,6 @@ export default function robots(): MetadataRoute.Robots {
           "/admin",
           "/api/",
           "/_next",
-          "/trpc",
           "/auth",
         ],
       },
@@ -30,7 +27,6 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       `${baseUrl}/sitemap.xml`,
-      `${baseUrl}/en/sitemap.xml`,
     ],
     host: baseUrl,
   }

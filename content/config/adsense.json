@@ -1,0 +1,14 @@
+{
+  "globallyEnabled": false,
+  "clientId": "",
+  "sections": {
+    "homepage": { "enabled": true, "slotId": "" },
+    "blog_list": { "enabled": true, "slotId": "" },
+    "blog_detail_inline": { "enabled": true, "slotId": "" },
+    "blog_detail_sidebar": { "enabled": true, "slotId": "" },
+    "learn_list": { "enabled": true, "slotId": "" },
+    "learn_detail": { "enabled": true, "slotId": "" },
+    "tools_list": { "enabled": true, "slotId": "" },
+    "tools_detail": { "enabled": true, "slotId": "" }
+  }
+}

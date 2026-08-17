@@ -2,28 +2,31 @@ import { AdSlot } from "@/components/ads/ad-slot"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { slugifyHeading } from "@/lib/blog"
-import { getPublicBlogPosts, getBlogTaxonomies } from "@/lib/posts"
+import { getPublishedBlogPosts, slugifyHeading } from "@/lib/blog"
 import type { Metadata } from "next"
 import Link from "next/link"
+import { NewsletterForm } from "@/components/newsletter/newsletter-form"
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Artikel terbaru seputar Web3, AI, dan teknologi masa depan.",
+  description: "Artikel terbaru seputar AI, otomatisasi, dan side hustle untuk UMKM Indonesia.",
   alternates: { canonical: "/blog" },
 }
 
 export default async function BlogPage() {
-  const posts = await getPublicBlogPosts()
-  const { categories, tags } = await getBlogTaxonomies()
+  const posts = getPublishedBlogPosts()
+
+  // Extract unique categories and tags
+  const categories = Array.from(new Set(posts.map((p) => p.category).filter((c): c is string => Boolean(c))))
+  const tags = Array.from(new Set(posts.flatMap((p) => p.tags ?? [])))
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold tracking-tight">Blog</h1>
-        <p className="mt-2 text-lg text-muted-foreground">Artikel terbaru seputar Web3, AI, dan teknologi masa depan.</p>
+        <p className="mt-2 text-lg text-muted-foreground">Artikel terbaru seputar AI, otomatisasi, dan side hustle untuk UMKM Indonesia.</p>
       </div>
 
       <AdSlot section="blog_list" className="rounded-xl border p-4" />
@@ -52,7 +55,7 @@ export default async function BlogPage() {
               <CardHeader>
                 <div className="mb-2 text-xs font-medium text-primary">{post.category}</div>
                 <CardTitle>{post.title}</CardTitle>
-                <CardDescription>{(post.publishedAt ?? post.createdAt ?? "").split("T")[0]}</CardDescription>
+                <CardDescription>{(post.date ?? "").split("T")[0]}</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="line-clamp-3 text-sm text-muted-foreground">{post.excerpt}</p>
@@ -63,6 +66,14 @@ export default async function BlogPage() {
       </div>
 
       <InternalLinksBlock />
+
+      {/* Newsletter */}
+      <section className="container px-4 py-10">
+        <NewsletterForm
+          title="Jangan Lewatkan Artikel Terbaru"
+          description="Dapatkan kurasi artikel AI, otomatisasi, & side hustle mingguan langsung ke inbox."
+        />
+      </section>
     </div>
   )
 }

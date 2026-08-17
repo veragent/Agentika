@@ -1,4 +1,5 @@
-import { prisma } from "@/lib/prisma"
+import fs from "fs"
+import path from "path"
 import { generateSeo } from "@/lib/seo"
 import { JsonLdScript, buildFaqJsonLd } from "@/components/seo/json-ld-data"
 import type { Metadata } from "next"
@@ -7,7 +8,7 @@ import Link from "next/link"
 export const metadata: Metadata = generateSeo({
   title: "FAQ",
   description:
-    "Pertanyaan yang sering diajukan tentang Web3, AI, dan platform AGENTIKA. Temukan jawaban untuk topik billing, teknis, dan lainnya.",
+    "Pertanyaan yang sering diajukan tentang AI, otomatisasi, dan platform AGENTIKA. Temukan jawaban untuk topik teknis, monetisasi, dan lainnya.",
   type: "website",
   canonical: "/faq",
 })
@@ -20,6 +21,19 @@ type FaqItem = {
   language: string
 }
 
+function getFaqs(): FaqItem[] {
+  const configPath = path.join(process.cwd(), "content", "config", "faq.json")
+  if (!fs.existsSync(configPath)) {
+    return []
+  }
+  try {
+    const content = fs.readFileSync(configPath, "utf8")
+    return JSON.parse(content) as FaqItem[]
+  } catch {
+    return []
+  }
+}
+
 export default async function FaqIndexPage({
   searchParams,
 }: {
@@ -28,22 +42,8 @@ export default async function FaqIndexPage({
   const params = await searchParams
   const lang = params.lang ?? "all"
 
-  const where = {
-    isPublished: true,
-    ...(lang !== "all" ? { language: lang } : {}),
-  }
-
-  const faqs = await prisma.faq.findMany({
-    where,
-    orderBy: [{ category: "asc" }, { order: "asc" }],
-    select: {
-      id: true,
-      question: true,
-      answer: true,
-      category: true,
-      language: true,
-    },
-  })
+  const allFaqs = getFaqs()
+  const faqs = allFaqs.filter((f) => f.language === lang || lang === "all")
 
   const faqJsonLd = buildFaqJsonLd(faqs)
 
@@ -71,8 +71,8 @@ export default async function FaqIndexPage({
       <div className="space-y-3">
         <h1 className="text-4xl font-extrabold tracking-tight">FAQ</h1>
         <p className="text-lg text-muted-foreground">
-          Pertanyaan yang sering diajukan tentang Web3, AI, dan platform AGENTIKA.
-          Temukan jawaban untuk topik billing, teknis, dan lainnya.
+          Pertanyaan yang sering diajukan tentang AI, otomatisasi, dan platform AGENTIKA.
+          Temukan jawaban untuk topik teknis, monetisasi, dan lainnya.
         </p>
       </div>
 

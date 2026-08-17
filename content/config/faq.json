@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "question": "Apa itu AGENTIKA?",
+    "answer": "AGENTIKA adalah platform konten all-in-one untuk UMKM dan pebisnis online Indonesia yang ingin memanfaatkan AI untuk otomatisasi kerja dan side hustle.",
+    "category": "Umum",
+    "language": "id"
+  },
+  {
+    "id": "2",
+    "question": "Apakah konten di AGENTIKA gratis?",
+    "answer": "Ya, semua artikel, tutorial, dan materi pembelajaran di AGENTIKA sepenuhnya gratis diakses.",
+    "category": "Umum",
+    "language": "id"
+  },
+  {
+    "id": "3",
+    "question": "Bagaimana cara memulai belajar AI di AGENTIKA?",
+    "answer": "Kunjungi halaman /learn dan pilih track yang sesuai dengan kebutuhan Anda: Prompt Engineering, AI Automation, atau No-Code Tools.",
+    "category": "Pembelajaran",
+    "language": "id"
+  },
+  {
+    "id": "4",
+    "question": "Apakah butuh coding untuk mengikuti tutorial di sini?",
+    "answer": "Tidak. Banyak tutorial yang menggunakan tools no-code dan low-code. Ada juga track untuk yang ingin belajar coding dengan AI.",
+    "category": "Teknis",
+    "language": "id"
+  },
+  {
+    "id": "5",
+    "question": "Bagaimana cara monetisasi dengan AI untuk UMKM?",
+    "answer": "Baca artikel di kategori 'Monetisasi' di blog kami. Kami membahas affiliate marketing, digital products, content creation, dan jasa AI.",
+    "category": "Monetisasi",
+    "language": "id"
+  }
+]

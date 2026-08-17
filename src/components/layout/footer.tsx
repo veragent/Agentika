@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { AGENTIKALogo } from "@/components/branding/agentika-logo"
 
 export function Footer() {
   return (
@@ -8,10 +7,10 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2">
             <Link href="/" className="inline-flex">
-              <AGENTIKALogo />
+              <span className="text-2xl font-bold gradient-text">AGENTIKA</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              Platform all-in-one untuk belajar Web3 dan AI. Temukan tutorial, airdrop, dan tools AI terbaru.
+              Platform AI untuk UMKM Indonesia. Tools AI, tutorial otomatisasi, dan strategi side hustle.
             </p>
           </div>
           <div>
@@ -19,16 +18,14 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/blog" className="hover:text-primary">Blog</Link></li>
               <li><Link href="/learn" className="hover:text-primary">Learn</Link></li>
-              <li><Link href="/airdrop" className="hover:text-primary">Airdrops</Link></li>
-              <li><Link href="/ai-tools" className="hover:text-primary">AI Tools</Link></li>
+              <li><Link href="/faq" className="hover:text-primary">FAQ</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-sm font-semibold mb-4">Community</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="#" className="hover:text-primary">Twitter / X</Link></li>
-              <li><Link href="#" className="hover:text-primary">Telegram</Link></li>
-              <li><Link href="#" className="hover:text-primary">Discord</Link></li>
+              <li><Link href="https://twitter.com/ai3myid" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Twitter / X</Link></li>
+              <li><Link href="https://github.com/veragent/Agentika" target="_blank" rel="noopener noreferrer" className="hover:text-primary">GitHub</Link></li>
             </ul>
           </div>
         </div>

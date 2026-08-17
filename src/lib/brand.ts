@@ -1,5 +1,5 @@
 export const BRAND = {
   name: "AGENTIKA",
-  descriptor: "AGENTIKA Hub",
-  tagline: "Belajar Web3 & AI, satu platform.",
+  descriptor: "AGENTIKA",
+  tagline: "Platform AI untuk UMKM Indonesia. Tools, Tutorial, Side Hustle.",
 } as const

@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import { BRAND } from "@/lib/brand"
 import { env } from "@/lib/env"
 
-const APP_URL = env.NEXT_PUBLIC_APP_URL ?? env.NEXTAUTH_URL ?? "https://agentika.my.id"
+const APP_URL = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
 const SITE_NAME = BRAND.name
-const DEFAULT_DESCRIPTION = "Belajar Web3 & AI dalam satu platform. Blog, dokumentasi, airdrop hub, dan AI tools directory."
+const DEFAULT_DESCRIPTION = "Platform AI untuk UMKM Indonesia. Tools AI, tutorial otomatisasi, dan strategi side hustle untuk bisnis online."
 
 export type SeoType =
   | "website"
@@ -12,37 +12,21 @@ export type SeoType =
   | "blog_list"
   | "learn"
   | "learn_page"
-  | "airdrop"
-  | "airdrop_list"
-  | "ai_tools"
-  | "ai_tool_detail"
-  | "research"
-  | "roadmap"
-  | "search"
-  | "profile"
+  | "faq"
 
 interface GenerateSeoOptions {
   title?: string
   description?: string
   canonical?: string
   type?: SeoType
-  /** For blog/ai-tool/airdrop posts */
   slug?: string
-  /** For OG image generation */
-  imageType?: "blog" | "tool" | "airdrop" | "learn" | "default"
-  /** Extra keywords */
+  imageType?: "blog" | "learn" | "default"
   keywords?: string[]
-  /** Published date for blog posts */
   publishedAt?: string
-  /** Author for blog posts */
   author?: string
-  /** Breadcrumb items for JSON-LD */
   breadcrumbs?: Array<{ label: string; href: string }>
-  /** No-index/no-follow robots */
   noIndex?: boolean
-  /** OG image override */
   ogImage?: string
-  /** JSON-LD extra data */
   extra?: Record<string, unknown>
 }
 
@@ -71,7 +55,6 @@ export function generateSeo(opts: GenerateSeoOptions = {}): Metadata {
   const resolvedUrl = canonical ?? resolveUrl(type, slug)
   const resolvedOgImage = ogImage ?? `${APP_URL}/api/og/${opts.imageType ?? "default"}/${slug ? encodeURIComponent(slug) : "default"}`
 
-  // Build base metadata
   const meta: Metadata = {
     title: pageTitle,
     description,
@@ -102,7 +85,6 @@ export function generateSeo(opts: GenerateSeoOptions = {}): Metadata {
     other: buildExtraMeta(type, extra),
   }
 
-  // Generate JSON-LD strings for pages that need them
   if (breadcrumbs.length > 0) {
     meta.other = {
       ...meta.other,
@@ -127,14 +109,7 @@ function resolveUrl(type: SeoType, slug?: string): string {
     blog_list: "/blog",
     learn: "/learn",
     learn_page: slug ? `/learn/${slug}` : "/learn",
-    airdrop: slug ? `/airdrop/${slug}` : "/airdrop",
-    airdrop_list: "/airdrop",
-    ai_tools: "/ai-tools",
-    ai_tool_detail: slug ? `/ai-tools/${slug}` : "/ai-tools",
-    research: "/research",
-    roadmap: slug ? `/learn/roadmap/${slug}` : "/learn",
-    search: "/search",
-    profile: "/profile",
+    faq: "/faq",
   }
   return `${APP_URL}${paths[type] ?? "/"}`
 }
@@ -229,25 +204,20 @@ function buildWebSiteJsonLd(): Record<string, string> {
     inLanguage: "id-ID",
     audience: {
       "@type": "Audience",
-      name: "Indonesian Web3 & AI community",
+      name: "Indonesian AI & UMKM community",
     },
   }
 
   return { "website-json-ld": JSON.stringify(jsonLd) }
 }
 
-/**
- * Build Indonesian Organization structured data
- * Used for local SEO targeting Indonesian audience
- */
 export function buildIndonesianOrganizationJsonLd(): string {
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${APP_URL}/#organization`,
-    name: "AGENTIKA Hub",
-    alternateName: "AGENTIKA",
-    description: "Platform belajar Web3 & AI dalam Bahasa Indonesia. Blog, dokumentasi, airdrop hub, dan direktori AI tools.",
+    name: "AGENTIKA",
+    description: "Platform AI untuk UMKM Indonesia. Tools AI, tutorial otomatisasi, dan strategi side hustle.",
     url: APP_URL,
     logo: {
       "@type": "ImageObject",
@@ -267,7 +237,7 @@ export function buildIndonesianOrganizationJsonLd(): string {
     },
     audience: {
       "@type": "Audience",
-      name: "Pengembang Web3 & AI Indonesia",
+      name: "UMKM & PeBisnis Online Indonesia",
       geographicArea: {
         "@type": "Country",
         name: "Indonesia",
@@ -283,111 +253,10 @@ export function buildIndonesianOrganizationJsonLd(): string {
   return JSON.stringify(orgJsonLd)
 }
 
-/**
- * Build LocalBusiness structured data for Indonesian audience
- * Optional: Used for businesses targeting local Indonesian market
- */
-export function buildLocalBusinessJsonLd(): string {
-  const localBusinessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${APP_URL}/#local-business`,
-    name: "AGENTIKA Hub",
-    description: "Platform edukasi Web3 dan AI untuk komunitas Indonesia",
-    url: APP_URL,
-    telephone: "+62-xxx-xxxx-xxxx",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "ID",
-      addressRegion: "Indonesia",
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
-    },
-    sameAs: [
-      "https://twitter.com/ai3myid",
-    ],
-    priceRange: "Free",
-    inLanguage: "id-ID",
-  }
-
-  return JSON.stringify(localBusinessJsonLd)
-}
-
-/**
- * Build Review aggregate for products/services
- * Shows aggregate rating for the platform
- */
-export function buildAggregateReviewJsonLd(reviewCount: number, ratingValue: number): string {
-  const reviewJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    itemReviewed: {
-      "@type": "WebSite",
-      name: SITE_NAME,
-      url: APP_URL,
-    },
-    ratingCount: reviewCount,
-    ratingValue: ratingValue,
-    bestRating: 5,
-    worstRating: 1,
-  }
-
-  return JSON.stringify(reviewJsonLd)
-}
-
 function buildExtraMeta(
   type: SeoType,
   extra: Record<string, unknown>
 ): Record<string, string> {
-  if (type === "ai_tool_detail" && extra.tool) {
-    const tool = extra.tool as {
-      name: string
-      tagline?: string | null
-      category: string
-      pricing: string
-    }
-    return {
-      "product-json-ld": JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: tool.name,
-        description: tool.tagline ?? undefined,
-        category: tool.category,
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
-        },
-        brand: { "@type": "Brand", name: "AGENTIKA" },
-      }),
-    }
-  }
-
-  if (type === "airdrop" && extra.airdrop) {
-    const airdrop = extra.airdrop as {
-      name: string
-      network: string
-      status: string
-      estimatedReward?: string | null
-    }
-    return {
-      "airdrop-json-ld": JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Event",
-        name: `${airdrop.name} Airdrop`,
-        description: `${airdrop.name} airdrop on ${airdrop.network}. Estimated reward: ${airdrop.estimatedReward ?? "TBD"}.`,
-        eventStatus: airdrop.status === "ACTIVE" ? "https://schema.org/EventScheduled" : "https://schema.org/EventPostponed",
-        eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
-        location: { "@type": "VirtualLocation", url: `${APP_URL}/airdrop/${airdrop.name.toLowerCase().replace(/\s+/g, "-")}` },
-      }),
-    }
-  }
-
   return {}
 }
 

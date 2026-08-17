@@ -1,5 +1,4 @@
 import Script from "next/script"
-import { auth } from "@/auth"
 import { getAdSettings, type AdSection } from "@/lib/ads"
 import { ClientAdSlot } from "@/components/ads/client-ad-slot"
 
@@ -10,12 +9,6 @@ type AdSlotProps = {
 }
 
 export async function AdSlot({ section, label = "Sponsored", className }: AdSlotProps) {
-  const session = await auth()
-
-  if (session?.user?.role === "ADMIN" || session?.user?.role === "EDITOR") {
-    return null
-  }
-
   const settings = await getAdSettings()
   const sectionConfig = settings.sections[section]
 

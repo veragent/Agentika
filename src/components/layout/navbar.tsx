@@ -18,17 +18,6 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Moon, Sun, Menu, X, Search } from "lucide-react"
 import { useTheme } from "next-themes"
-import { LanguageSwitcher } from "@/components/layout/language-switcher"
-import { getLocaleFromPath } from "@/lib/i18n"
-import dynamic from "next/dynamic"
-
-const NotificationBell = dynamic(
-  () => import("@/components/airdrop/notification-bell").then((m) => ({ default: m.NotificationBell })),
-  { ssr: false },
-)
-
-// Demo user ID - in production, this would come from auth session
-const DEMO_USER_ID = "demo-user-123"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -106,10 +95,6 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <LanguageSwitcher />
-
-            <NotificationBell userId={DEMO_USER_ID} />
-
             <Button
               variant="ghost"
               size="icon-lg"
@@ -177,7 +162,7 @@ export function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span>{item.title}</span>
-                  <span className="text-muted-foreground">-&gt;</span>
+                  <span className="text-muted-foreground">&rarr;</span>
                 </Link>
               ))}
             </nav>
