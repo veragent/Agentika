@@ -39,9 +39,14 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  
+  // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
   },
+  
+  // Image optimization - Netlify Image CDN handles optimization automatically
+  // We keep our config for remote patterns and formats
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
@@ -55,11 +60,23 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
+  
+  // Security headers via next.config (also in netlify.toml for edge)
   async headers() {
     return [
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+    ]
+  },
+  
+  // Ensure proper handling of API routes
+  async rewrites() {
+    return [
+      {
+        source: "/api/newsletter/subscribe",
+        destination: "/api/newsletter/subscribe",
       },
     ]
   },
