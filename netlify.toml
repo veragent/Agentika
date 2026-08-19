@@ -2,16 +2,12 @@
 # https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/
 
 [build]
-  command = "npm run build"
-  publish = ".next/server/app"
-  functions = ".next/server/functions"
+  command = "npm install && npm run build"
+  publish = ".next"
 
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["sharp", "pg", "pg-native"]
-
-[edge_functions]
-  enabled = true
 
 [[headers]]
   for = "/*"
