@@ -5,6 +5,11 @@
   command = "npm install && npm run build"
   publish = ".next"
 
+[build.environment]
+  # NEWSLETTER_PROVIDER holds a provider name (e.g. "convertkit"), not a credential.
+  # It's legitimately used in server output, so exclude it from secrets scanning.
+  SECRETS_SCAN_OMIT_KEYS = "NEWSLETTER_PROVIDER"
+
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["sharp", "pg", "pg-native"]
