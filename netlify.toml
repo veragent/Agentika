@@ -3,12 +3,12 @@
 
 [build]
   command = "npm install && npm run build"
-  publish = ".next"
+  publish = ".next/server/app"
 
 [build.environment]
   # NEWSLETTER_PROVIDER holds a provider name (e.g. "convertkit"), not a credential.
   # It's legitimately used in server output, so exclude it from secrets scanning.
-  SECRETS_SCAN_OMIT_KEYS = "NEWSLETTER_PROVIDER"
+  SECRETS_SCAN_OMIT_KEYS = "NEWSLETTER_PROVIDER,NEXT_PUBLIC_GSC_VERIFICATION,NEXT_PUBLIC_APP_URL"
 
 [functions]
   node_bundler = "esbuild"
@@ -40,20 +40,8 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-[[redirects]]
-  from = "/blog/"
-  to = "/blog"
-  status = 301
-
-[[redirects]]
-  from = "/learn/"
-  to = "/learn"
-  status = 301
-
-[[redirects]]
-  from = "/faq/"
-  to = "/faq"
-  status = 301
+# Removed problematic redirects that cause ERR_TOO_MANY_REDIRECTS
+# Next.js handles trailing slashes via next.config.ts
 
 # Enable skew protection (requires Netlify Pro+)
 # [build.environment]
