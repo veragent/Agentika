@@ -3,14 +3,10 @@ import Link from "next/link"
 const modules = [
   {
     title: "Belajar Terstruktur",
-    description: "Ikuti kurikulum Web3 & AI step-by-step di modul Learn.",
+    description: "Ikuti kurikulum AI step-by-step di modul Learn.",
     href: "/learn",
   },
-  {
-    title: "Airdrop Hub",
-    description: "Cari peluang airdrop aktif beserta checklist task.",
-    href: "/airdrop",
-  },
+
   {
     title: "AI Tools Directory",
     description: "Bandingkan tools AI untuk kebutuhan konten dan produktivitas.",

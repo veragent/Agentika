@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Learn",
-  description: "Pilih jalur pembelajaran Web3 dan AI yang terstruktur.",
+  description: "Pilih jalur pembelajaran AI yang terstruktur.",
   alternates: { canonical: "/learn" },
 }
 
