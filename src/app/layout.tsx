@@ -1,11 +1,18 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import { BRAND } from "@/lib/brand"
 import { Providers } from "@/components/providers"
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.agentika.web.id"
+
+// GA4 Measurement ID — public client-side ID (bukan secret).
+// Fallback hardcode supaya analytics tetap jalan walau env belum ke-set di platform.
+const GA_ID =
+  process.env.NEXT_PUBLIC_GA_ID ??
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ??
+  "G-CF8K7Z0DVD"
 
 export const metadata: Metadata = {
   title: `${BRAND.name} — Platform AI untuk UMKM Indonesia`,
@@ -55,10 +62,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <GoogleAnalytics />
           </ThemeProvider>
         </Providers>
       </body>
+      <GoogleAnalytics gaId={GA_ID} />
     </html>
   )
 }
