@@ -60,7 +60,7 @@ export default async function HomePage() {
           {
             icon: <LearnIcon className="mb-3 h-10 w-10 text-secondary" />,
             title: "Learning Tracks",
-            description: "Kurikulum terstruktur: Prompt Engineering, AI Automation, No-Code Tools.",
+            description: "Kurikulum terstruktur: AI Basics — Prompt Engineering, LLM, RAG, hingga AI Agents.",
             href: "/learn",
             label: "Eksplor Materi",
             delay: "animation-delay-200",

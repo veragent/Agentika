@@ -5,7 +5,7 @@ import { ToolsFilter } from '@/components/ai-tools/ToolsFilter'
 
 export const metadata: Metadata = {
   title: 'AI Tools Directory',
-  description: 'Daftar tools AI untuk konten, produktivitas, dan bisnis. 90+ tools dalam kategori Writing, Coding, Image, Video, Audio, dan Web3.',
+  description: 'Direktori 90 AI tools untuk konten, produktivitas, dan bisnis dalam 5 kategori: Writing, Coding, Image, Video, dan Audio.',
   alternates: { canonical: '/ai-tools' },
 }
 

@@ -19,7 +19,7 @@ export default async function LearnIndexPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Materi Pembelajaran</h1>
         <p className="mt-2 text-base text-muted-foreground sm:text-lg">
-          Pilih jalur pembelajaran untuk mulai menguasai teknologi Web3 dan AI.
+          Pilih jalur pembelajaran untuk mulai menguasai teknologi AI.
         </p>
       </div>
 
