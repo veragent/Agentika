@@ -37,7 +37,7 @@ export default function AiToolsPage() {
 
       {/* Category filter tabs */}
       <div className="mb-6 overflow-x-auto">
-        <nav className="flex gap-2 flex-nowrap pb-2" role="tablist" aria-label="Kategori tools">
+        <nav id="category-tabs" className="flex gap-2 flex-nowrap pb-2" role="tablist" aria-label="Kategori tools">
           <button
             data-category="all"
             className="px-4 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground whitespace-nowrap transition-colors"
