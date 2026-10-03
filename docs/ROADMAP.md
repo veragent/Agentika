@@ -1,6 +1,10 @@
 # 🗺️ ROADMAP — AGENTIKA
 
-> Roadmap ini mengikuti pendekatan iteratif: setiap fase menghasilkan versi yang *shippable* dan dapat menghasilkan traffic/revenue.
+> **Platform AI untuk UMKM Indonesia: otomatisasi kerja & side hustle dengan AI.**
+> Roadmap ini ditulis ulang pada Oktober 2026 setelah repositioning dari web3ai-hub.
+> Setiap fase menghasilkan versi yang *shippable* dan dapat menghasilkan traffic/revenue.
+>
+> Live: [agentika.web.id](https://www.agentika.web.id) · Stack: Next.js 16 + React 19 + TypeScript + Tailwind v4, konten MDX, deploy Netlify.
 
 ---
 
@@ -9,374 +13,164 @@
 | Status | Simbol |
 |--------|--------|
 | Selesai | ✅ |
-| Sedang berjalan | 🔄 |
+| Sebagian / sedang berjalan | 🔄 |
 | Direncanakan | 📋 |
 | Ide / Backlog | 💡 |
-| Ditunda | ⏸️ |
+| Dibuang saat pivot | 🗑️ |
 
 ---
 
-## Phase 0 — Foundation (Minggu 1–2)
-> **Goal:** Project siap development, semua alat dan struktur terpasang.
+## 📍 Posisi Saat Ini (Oktober 2026)
 
-### Setup & Scaffolding
-- 📋 Init Next.js project (App Router + TypeScript + Tailwind)
-- 📋 Setup shadcn/ui component library
-- 📋 Konfigurasi ESLint, Prettier, Husky pre-commit hooks
-- 📋 Setup Prisma + Neon PostgreSQL (schema awal)
-- 📋 Setup NextAuth.js (email/password untuk admin)
-- 📋 Struktur folder sesuai arsitektur di README
-- 📋 Environment variables template (`.env.example`)
-- 📋 Deploy ke Vercel (preview environment)
-- 📋 Setup Cloudflare DNS dan domain custom
+Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya adalah
+**konten, monetisasi, dan fitur AI** — bukan pembangunan ulang platform.
 
-### Design System
-- 📋 Definisi color tokens di `tailwind.config.ts`
-- 📋 Typography scale
-- 📋 Dark/light mode toggle dengan `next-themes`
-- 📋 Base layout components: Navbar, Footer, Sidebar
-- 📋 Komponen UI dasar: Button, Badge, Card, Input, Modal
+| Area | Status |
+|------|--------|
+| Blog (14 artikel ID, MDX, kategori/tag, SEO) | ✅ |
+| Learn — track AI Basics (34 materi) | ✅ |
+| AI Tools Directory (90 tools, 5 kategori, filter) | ✅ |
+| FAQ, newsletter, mobile nav, dark mode | ✅ |
+| AdSense (konfigurasi ada, aktivasi belum penuh) | 🔄 |
+| AI features (SDK terinstal, API belum dibangun) | 📋 |
 
 ---
 
-## Phase 1 — Blog Core (Minggu 3–5)
-> **Goal:** Platform blog fungsional dengan MDX dan bisa dipublish ke Vercel.
+## Phase 0 — Foundation ✅ SELESAI
 
-### Blog Reader Experience
-- 📋 MDX parsing pipeline (`next-mdx-remote` + `gray-matter`)
-- 📋 Halaman listing blog dengan grid card
-- 📋 Halaman detail post (MDX render)
-- 📋 Syntax highlighting dengan Shiki
-- 📋 Custom MDX components: Callout, CodeBlock, ImageCaption
-- 📋 Table of contents (floating sidebar)
-- 📋 Reading time estimator
-- 📋 Related posts section
-- 📋 Social share buttons (Twitter/X, Telegram, Copy Link)
-- 📋 OG image generation dinamis (`@vercel/og`)
-- 📋 JSON-LD structured data (Article schema)
-- 📋 Sitemap.xml dinamis
-- 📋 robots.txt
-
-### Blog Admin
-- 📋 Admin layout dengan protected routes (NextAuth middleware)
-- 📋 Admin: list semua posts (title, status, date, views)
-- 📋 Admin: create/edit post dengan form + MDX preview
-- 📋 Admin: delete post dengan konfirmasi
-- 📋 Admin: toggle draft/published status
-- 📋 Admin: schedule publish
-
-### Categories & Tags
-- 📋 Database: Category dan Tag models
-- 📋 Filter listing blog by category
-- 📋 Filter listing blog by tag
-- 📋 Halaman `/blog/category/[slug]`
-- 📋 Halaman `/blog/tag/[slug]`
-
-**Deliverable Phase 1:** Blog berfungsi penuh, bisa publish artikel MDX, admin bisa kelola post. 🎉
+- ✅ Next.js 16 (App Router) + React 19 + TypeScript + Tailwind v4 + shadcn/ui
+- ✅ Deploy Netlify + domain agentika.web.id
+- ✅ Security headers (CSP, HSTS, X-Frame-Options, dll)
+- ✅ SEO dasar: sitemap dinamis, robots.txt, OG image generator, canonical URL
+- ✅ Google Analytics 4
+- ✅ Dark/light mode, hamburger menu, mobile bottom nav, footer
+- ✅ Konten 100% berbahasa Indonesia, fokus UMKM (duplikat EN di-unpublish, kategori Web3 dihapus)
 
 ---
 
-## Phase 2 — AI Writer (Minggu 6–7)
-> **Goal:** Admin bisa generate draft artikel otomatis dengan berbagai AI provider.
+## Phase 1 — Content Engine 🔄 (Q4 2026)
 
-### AI Provider Abstraction
-- 📋 Setup Vercel AI SDK
-- 📋 Provider abstraction layer (`lib/ai/providers.ts`)
-- 📋 Support: OpenAI (GPT-4o, GPT-3.5), Anthropic (Claude), Google (Gemini), Groq
-- 📋 Fallback otomatis jika provider gagal
+> **Goal:** Jadi rujukan konten AI praktis untuk UMKM Indonesia. Konten adalah SEO.
 
-### AI Writer UI
-- 📋 Form AI Writer di admin (topic, tone, length, language, provider, model)
-- 📋 Streaming output dengan real-time display
-- 📋 Template prompts: Tutorial, Opinion, News Summary, Tool Review, Airdrop Guide
-- 📋 Tombol: Copy, Insert ke Editor, Regenerate
-- 📋 Token usage estimator
+### Blog
+- ✅ MDX pipeline, listing, detail, kategori/tag
+- ✅ Syntax highlighting (Shiki), reading time, newsletter CTA
+- 📋 Tambah hingga **30+ artikel ID** (sekarang 14): fokus tutorial langkah-demi-langkah
+  - Otomatisasi order (WhatsApp → spreadsheet, dst.)
+  - Prompt template siap pakai per jenis usaha (kuliner, fashion, jasa)
+  - Studi kasus UMKM (format seperti "Bu Siti naik 3x omzet")
+- 📋 Konsistensi editorial: 2 artikel/minggu
 
-### AI Settings Admin
-- 📋 Halaman `/admin/settings` — konfigurasi AI
-- 📋 Input API key per provider (encrypted storage)
-- 📋 Pilih model per provider
-- 📋 Temperature slider
-- 📋 Custom system prompt per use case
-- 📋 Default provider setting per fitur
-- 📋 Test connection button
+### Learn Tracks
+- ✅ Struktur GitBook-style: sidebar, prev/next navigation
+- ✅ Track **AI Basics** (34 materi: AI intro, prompt engineering, LLM & API, RAG, fine-tuning, AI agents, etika)
+- 📋 Track **Prompt Engineering untuk UMKM** — template copy-paste per kebutuhan bisnis
+- 📋 Track **AI Automation** — Make/Zapier/n8n untuk operasional UMKM
+- 📋 Track **No-Code Tools** — bangun landing page, chatbot, katalog tanpa coding
+- 📋 Progress tracker sederhana (localStorage)
 
-**Deliverable Phase 2:** AI writer terintegrasi, admin bisa generate artikel dengan satu klik. 🤖
+**Deliverable:** 30+ artikel, 3 track learn lengkap. 🎉
 
 ---
 
-## Phase 3 — AdSense & Monetisasi (Minggu 8)
-> **Goal:** Platform mulai menghasilkan revenue dari hari pertama traffic masuk.
+## Phase 2 — AI Tools Directory+ 🔄 (Q4 2026 – Q1 2027)
 
-### Google AdSense Integration
-- 📋 Komponen `AdSlot.tsx` yang reusable
-- 📋 Auto-ads script di `_document` atau layout
-- 📋 Manual ad placement:
-  - Blog: setelah paragraf ke-3, dan sebelum related posts
-  - Blog sidebar: sticky ad
-  - Footer: responsive ad
-- 📋 Admin: konfigurasi Publisher ID dan slot IDs
-- 📋 Admin: toggle on/off ads per section
-- 📋 Conditional: tidak tampilkan ads untuk admin logged in
+> **Goal:** Direktori AI tools terlengkap untuk UMKM Indonesia.
 
-### SEO Optimization
-- 📋 Audit dan fix semua meta tags
-- 📋 Canonical URLs
-- 📋 Image alt texts
-- 📋 Internal linking strategy
-- 📋 Core Web Vitals audit dan fix
+- ✅ 90 tools, 5 kategori, filter client-side, featured tools, pricing badge
+- 📋 Halaman detail per tool: fitur utama, pro/kontra, alternatif, link affiliate
+- 📋 Fitur **Compare Tools** (maksimal 3 tool side-by-side, URL shareable)
+- 📋 Tambah koleksi hingga **150+ tools**, prioritaskan tools yang relevan untuk UMKM
+- 📋 Badge "Baru minggu ini" dan kurasi "Pilihan untuk UMKM"
 
-**Deliverable Phase 3:** AdSense aktif, revenue stream pertama berjalan. 💰
+**Deliverable:** Direktori 150+ tools dengan halaman detail & compare. 🛠️
 
 ---
 
-## Phase 4 — Learn Module (Minggu 9–11)
-> **Goal:** Dokumentasi interaktif ala GitBook dengan AI chat sidebar.
+## Phase 3 — Monetisasi 📋 (Q1 2027)
 
-### Dokumentasi Structure
-- 📋 Database: LearningTrack, LearningSection, LearningPage models
-- 📋 Sidebar navigasi bertingkat dengan accordion
-- 📋 MDX render untuk halaman dokumentasi
-- 📋 Breadcrumb navigation
-- 📋 Previous / Next page navigation
-- 📋 Mini table of contents per halaman
+> **Goal:** Revenue stream pertama berjalan.
 
-### Konten Awal
-- 📋 Track Web3: 5 sections, 20+ halaman
-  - Blockchain Basics (5 halaman)
-  - Ethereum & Smart Contracts (5 halaman)
-  - DeFi Fundamentals (5 halaman)
-  - NFT & Digital Ownership (3 halaman)
-  - DAO & Governance (3 halaman)
-- 📋 Track AI: 5 sections, 20+ halaman
-  - AI Fundamentals (4 halaman)
-  - Prompt Engineering (5 halaman)
-  - LLM APIs & Integration (5 halaman)
-  - AI Agents (4 halaman)
-  - Fine-tuning Basics (3 halaman)
+- 🔄 Google AdSense: komponen `AdSlot` + konfigurasi per section sudah ada
+- 📋 **Perbaiki konflik CSP vs AdSense** (domain googleads/googlesyndication belum diizinkan) — prasyarat aktivasi
+- 📋 Aktivasi Publisher ID + slot ID production
+- 📋 Program affiliate terstruktur: tracking klik, laporan konversi
+- 📋 Sponsored listing untuk AI tools (paid featured)
+- 📋 Media kit / rate card sederhana
 
-### AI Chat Sidebar
-- 📋 Sliding panel (collapsible)
-- 📋 Context injection: konten halaman aktif sebagai system context
-- 📋 Chat interface dengan streaming response
-- 📋 Suggested questions auto-generated dari konten halaman
-- 📋 Session history di localStorage
-
-### Progress Tracker
-- 📋 Mark page as complete (guest: localStorage, user: database)
-- 📋 Progress bar per section dan per track
-- 📋 User profile: dashboard progress semua track
-- 📋 "Continue learning" CTA di homepage
-
-### Learn Admin
-- 📋 CRUD tracks, sections, pages
-- 📋 Drag-and-drop reorder sections dan pages
-- 📋 MDX editor dengan preview
-
-**Deliverable Phase 4:** Platform dokumentasi interaktif dengan AI chat. 📚
+**Deliverable:** AdSense aktif + affiliate berjalan. 💰
 
 ---
 
-## Phase 5 — Airdrop Hub (Minggu 12–14)
-> **Goal:** Direktori airdrop terlengkap dengan step tracker interaktif.
+## Phase 4 — AI Features 📋 (Q1–Q2 2027)
 
-### Airdrop Listing
-- 📋 Database: Airdrop, AirdropStep, AirdropRequirement models
-- 📋 Listing page dengan grid cards
-- 📋 Filter: status (Active/Upcoming/Ended), network, difficulty, reward range
-- 📋 Sort: reward, deadline, newest
-- 📋 Search by nama project
-- 📋 Status badge dengan warna: Active (hijau), Upcoming (kuning), Ended (abu)
+> **Goal:** Manfaatkan SDK AI yang sudah terinstal untuk pengalaman personal.
 
-### Detail Airdrop
-- 📋 Hero section: logo, nama, deskripsi, network badge, estimated reward
-- 📋 MDX tutorial steps render
-- 📋 **Interactive Step Tracker:**
-  - Checkbox per langkah
-  - Progress bar keseluruhan
-  - State tersimpan di localStorage (guest) / database (user)
-  - Tombol "Reset Progress"
-- 📋 Requirements list (wallet, tools, minimum balance)
-- 📋 Social links
-- 📋 "Report Issue" button
-- 📋 Related airdrops
+SDK sudah tersedia: OpenAI, Anthropic, Google, Vercel AI SDK (multi-provider).
+API key dikonfigurasi via environment variables.
 
-### Airdrop Admin
-- 📋 CRUD airdrop listings
-- 📋 AI Generate Tutorial dari nama project
-- 📋 Status management (Active/Upcoming/Ended)
-- 📋 Bulk update status
+- 📋 **AI Chat Sidebar di Learn** — tanya jawab dengan konteks halaman yang sedang dibaca (streaming)
+- 📋 **AI Writer** — generate draft artikel dari topik (mendukung PRD konten Phase 1)
+- 📋 **Template Prompt Generator** — user isi kebutuhan usaha → dapat prompt siap pakai
+- 📋 Rate limiting & guardrail biaya per fitur
 
-### Bounty Board (P2)
-- 📋 Listing bounty dengan filter skill
-- 📋 Link ke bounty program resmi
-
-**Deliverable Phase 5:** Airdrop Hub lengkap, siap jadi referensi utama airdrop Indonesia. 🪂
+**Deliverable:** 3 fitur AI live dengan kontrol biaya. 🤖
 
 ---
 
-## Phase 6 — AI Tools Directory (Minggu 15–17)
-> **Goal:** Direktori AI tools terkurasi dengan fitur compare.
+## Phase 5 — Growth & Engagement 📋 (Q2 2027+)
 
-### Tools Listing
-- 📋 Database: AiTool, ToolCategory, ToolReview models
-- 📋 Grid listing dengan filter dan search
-- 📋 Kategori: Writing, Coding, Image, Video, Audio, Research, Web3, Productivity
-- 📋 Pricing filter: Free, Freemium, Paid
-- 📋 Featured tools section (configurable dari admin)
-- 📋 "New this week" badge
+> **Goal:** Tumbuhkan traffic organik dan retensi.
 
-### Detail Tool
-- 📋 Header: logo, nama, tagline, website link (affiliate), pricing, rating
-- 📋 MDX description
-- 📋 Key features list
-- 📋 Pros & cons
-- 📋 Alternatives grid
-- 📋 Screenshots / video embed
-- 📋 Affiliate link tracking
+- 📋 Global search (blog + learn + tools, Fuse.js — tanpa biaya)
+- 📋 Newsletter automation: welcome series + weekly digest (Resend)
+- 📋 Komentar artikel (Giscus — berbasis GitHub Discussions)
+- 📋 SEO scale: internal linking otomatis, schema markup lanjutan, Core Web Vitals audit
+- 📋 Komunitas: channel Telegram/Discord untuk UMKM
+- 📋 Kuis "AI readiness" untuk UMKM → rekomendasi track belajar personal
 
-### Compare Feature
-- 📋 "Add to compare" button di setiap tool card
-- 📋 Floating compare bar (persistent, max 3 tools)
-- 📋 Halaman compare: tabel fitur side-by-side
-- 📋 Shareable compare URL
-
-### Tools Admin
-- 📋 CRUD tool listings
-- 📋 Upload logo dan screenshots (Cloudflare R2)
-- 📋 Set affiliate URL
-- 📋 Toggle featured
-- 📋 AI Generate description dari nama tool + website
-
-### Data Seeding Awal
-- 📋 100 AI tools di semua kategori
-- 📋 Data: nama, deskripsi, link, pricing, kategori, logo
-
-**Deliverable Phase 6:** AI Tools directory lengkap dengan 100+ tools. 🛠️
+**Deliverable:** Search + newsletter automation + komunitas aktif. 📈
 
 ---
 
-## Phase 7 — Polish & Launch (Minggu 18–20)
-> **Goal:** Platform siap untuk publik, semua edge case tertangani.
+## 🗑️ Dibuang Saat Pivot (tidak dikerjakan)
 
-### Performance
-- 📋 Bundle size audit dan optimization
-- 📋 Image optimization audit
-- 📋 Cache strategy review (ISR revalidation times)
-- 📋 Database query optimization (N+1 check)
-- 📋 Lighthouse audit: target ≥ 90 semua metrik
+Item-item dari roadmap web3ai-hub lama yang **sengaja tidak dibawa**:
 
-### Search
-- 📋 Global search (blog + learn + airdrop + tools)
-- 📋 Fuse.js untuk local search (tanpa biaya)
-- 📋 Search results page dengan filter per konten type
+- Airdrop Hub + step tracker + bounty board
+- Track Web3 (Blockchain Basics, DeFi, NFT, DAO)
+- Admin dashboard + NextAuth + Prisma/Neon database
+- Deploy Vercel, Cloudflare R2, Umami analytics
+- Wallet connect, live crypto price
 
-### User Experience
-- 📋 Loading states dan skeleton screens di semua halaman
-- 📋 Error boundaries dan 404/500 pages yang baik
-- 📋 Onboarding toast untuk visitor pertama
-- 📋 Newsletter CTA (Resend integration)
-- 📋 Cookie consent banner (GDPR)
-
-### Analytics
-- 📋 Umami self-hosted setup
-- 📋 Custom events: AI writer usage, tool clicks, airdrop step completion
-- 📋 Admin analytics dashboard
-
-### Testing
-- 📋 Unit tests untuk utility functions
-- 📋 Integration tests untuk API routes
-- 📋 E2E test untuk user journeys kritis (Playwright)
-- 📋 Manual QA di mobile dan desktop
-
-### Launch Preparation
-- 📋 Content: minimal 20 blog posts, 15 airdrop guides, 100 AI tools
-- 📋 Submit ke Google Search Console
-- 📋 Setup Google Analytics 4
-- 📋 Social media accounts (Twitter/X, Telegram channel)
-- 📋 Launch announcement post
-
-**Deliverable Phase 7:** 🚀 PLATFORM LAUNCH!
-
----
-
-## Phase 8+ — Post-Launch (Bulan 2–3)
-> **Goal:** Tumbuhkan traffic dan revenue berdasarkan data.
-
-### Community Features (v2.0)
-- 💡 Sistem komentar (Giscus — GitHub Discussions based)
-- 💡 User accounts (bukan hanya admin)
-- 💡 Bookmark post / airdrop / tools
-- 💡 Community submit: airdrop listing + moderation queue
-- 💡 Leaderboard progress belajar
-
-### Monetisasi Lanjutan
-- 💡 Premium subscription (akses konten eksklusif, no-ads)
-- 💡 Sponsored airdrop listings (paid featured)
-- 💡 Kursus berbayar (video + MDX)
-- 💡 Newsletter premium (Resend)
-
-### Content Automation
-- 💡 Auto-detect trending AI tools dari Twitter/X dan Product Hunt
-- 💡 Scheduled AI content generation (weekly roundup otomatis)
-- 💡 Airdrop deadline reminder via email/Telegram bot
-- 💡 Auto-update airdrop status via API (DeBank, etc.)
-
-### Platform Expansion
-- 💡 API publik untuk data airdrop dan AI tools
-- 💡 Telegram bot: notifikasi airdrop baru
-- 💡 Multi-author support
-- 💡 Widget embed untuk airdrop tracker
-
----
-
-## Timeline Overview
-
-```
-Minggu  1-2  │ Phase 0 │ Foundation & Setup
-Minggu  3-5  │ Phase 1 │ Blog Core
-Minggu  6-7  │ Phase 2 │ AI Writer
-Minggu    8  │ Phase 3 │ AdSense & SEO
-Minggu 9-11  │ Phase 4 │ Learn Module
-Minggu 12-14 │ Phase 5 │ Airdrop Hub
-Minggu 15-17 │ Phase 6 │ AI Tools Directory
-Minggu 18-20 │ Phase 7 │ Polish & Launch
-Bulan  2-3+  │ Phase 8 │ Post-Launch Growth
-```
+*Jika suatu saat dibutuhkan kembali, akan dievaluasi sebagai proyek terpisah.*
 
 ---
 
 ## Prioritas Fitur (MoSCoW)
 
-### Must Have (v1.0)
-- Blog dengan MDX
-- AI Writer (multi-provider)
-- Google AdSense
-- Airdrop Hub dengan Step Tracker
-- AI Tools Directory
-- Admin Dashboard
-- SEO & Performance
+### Must Have (3 bulan ke depan)
+- Konten: 30+ artikel ID, 3 learn track lengkap
+- AI Tools: halaman detail + 150 tools
+- Monetisasi: AdSense aktif (setelah fix CSP)
 
-### Should Have (v1.0)
-- Learn/Docs module dengan AI chat
-- Progress tracker
+### Should Have
+- AI chat sidebar di Learn
 - Global search
-- Dark mode
-- Compare tools
+- Progress tracker learn
 
-### Could Have (v1.1)
+### Could Have
+- AI Writer untuk tim konten
 - Komentar (Giscus)
-- User registration
-- Bookmark
-- Newsletter integration
-- Analytics dashboard
+- Newsletter automation
 
-### Won't Have (v1.0)
+### Won't Have
+- Airdrop Hub / fitur crypto
+- Mobile app native
 - Forum diskusi
-- Mobile app
-- Wallet connect
-- Live crypto price
+- User accounts & login (konten tetap publik tanpa auth)
 
 ---
 
-*Roadmap ini adalah dokumen hidup. Prioritas dapat berubah berdasarkan feedback pengguna dan kondisi pasar.*
+*Roadmap ini adalah dokumen hidup. Prioritas dapat berubah berdasarkan feedback pengguna dan data traffic.*
+*Ditulis ulang Oktober 2026 — menggantikan roadmap web3ai-hub versi sebelumnya.*
