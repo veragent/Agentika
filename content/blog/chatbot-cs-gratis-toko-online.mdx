@@ -1,0 +1,193 @@
+---
+title: 'Bikin Chatbot CS Toko Online Gratis Tanpa Coding'
+slug: 'chatbot-cs-gratis-toko-online'
+category: 'ai-automation'
+tags: ['umkm', 'ai-automation', 'chatbot', 'toko-online', 'whatsapp']
+date: '2026-10-08'
+published: true
+readingTime: 7
+wordCount: 1327
+language: 'id'
+difficulty: 'intermediate'
+description: 'Pasang asisten CS otomatis untuk toko online-mu — jawab pertanyaan pelanggan 24 jam tanpa coding dan tanpa biaya bulanan.'
+---
+
+# Bikin Chatbot CS Toko Online Gratis Tanpa Coding
+
+Jam 11 malam. Kamu sudah tidur. Di saat yang sama, calon pembeli membuka tokomu, tertarik dengan sebuah produk, lalu bertanya: "Kak, ini ready warna hitam?"
+
+Tidak ada jawaban. Besok paginya kamu balas, tapi dia sudah beli di toko sebelah.
+
+Skenario ini terjadi setiap hari di ribuan toko online Indonesia. Solusinya bukan begadang — melainkan **chatbot CS otomatis** yang menjawab pertanyaan umum 24 jam, bahkan saat kamu tidur. Dan kabar baiknya: sekarang bisa dibuat gratis, tanpa coding, dalam waktu satu sore.
+
+## Chatbot Itu Bukan Robot Kaku (Kalau Dibuat dengan Benar)
+
+Bayangan banyak orang tentang chatbot: robot kaku yang menjawab "Maaf, saya tidak mengerti" terus-menerus. Itu chatbot zaman dulu.
+
+Chatbot modern — apalagi yang dibantu AI — bisa memahami bahasa santai ("kak, ongkir ke medan berapa?"), menjawab dengan gaya natural, dan tahu kapan harus menyerahkan ke manusia ("untuk komplain, saya hubungkan ke admin ya kak").
+
+Aturan mainnya: **chatbot menangani 80% pertanyaan berulang, manusia menangani 20% yang kompleks.** Bukan menggantikanmu, tapi menjadi garda depan.
+
+## Pilihan Tools Gratis (Pilih Satu Saja)
+
+Jangan bingung, cukup pilih satu sesuai kanal jualan utamamu:
+
+| Kanal | Tools Gratis | Cocok Untuk |
+|-------|--------------|-------------|
+| WhatsApp | Balasan cepat WA Business + AI | Toko yang jualan via WA/chat |
+| Instagram/FB | Manychat (paket gratis) | Toko yang ramai di DM Instagram |
+| Website | Tidio (paket gratis 50 chat/bulan) | Toko yang punya website/katalog online |
+
+Artikel ini memakai contoh **WhatsApp Business + Manychat** karena mayoritas UMKM Indonesia jualan lewat WA dan Instagram. Prinsipnya sama untuk tools lain.
+
+## Langkah 1: Petakan 10 Pertanyaan Paling Sering (30 Menit)
+
+Buka riwayat chat tokomu seminggu terakhir. Catat pertanyaan yang muncul berulang. Hampir semua toko online punya daftar yang mirip:
+
+1. Apakah barang ready / kapan restock?
+2. Ongkir ke [kota] berapa?
+3. Bagaimana cara order?
+4. Apakah bisa COD?
+5. Berapa lama pengiriman?
+6. Apakah ada garansi/retur?
+7. Minta katalog / foto asli produk
+8. Apakah ada diskon?
+9. Jam operasional toko?
+10. Bagaimana cara bayar?
+
+Tulis jawaban baku untuk masing-masing — singkat, ramah, maksimal 3 kalimat per jawaban. Ini akan jadi "otak" chatbotmu.
+
+## Langkah 2: Susun Alur Percakapan (20 Menit)
+
+Chatbot yang baik seperti resepsionis ramah: menyapa, menawarkan bantuan, mengarahkan. Gambar alurnya di kertas dulu:
+
+```
+Pelanggan chat pertama kali
+  → Bot: "Halo kak! Selamat datang di [nama toko] 🙏
+          Mau tanya-tanya dulu atau langsung order?
+          Ketik: 1=Katalog, 2=Ongkir, 3=Cara Order, 4=Chat Admin"
+    → Pelanggan ketik 1 → kirim link katalog
+    → Pelanggan ketik 2 → "Ongkir ke kota mana kak?"
+    → Pelanggan ketik 3 → kirim panduan order
+    → Pelanggan ketik 4 → "Siap! Admin akan segera membantu 🙏"
+    → Tidak cocok semua → serahkan ke admin manusia
+```
+
+Kunci yang sering dilupakan: **selalu sediakan jalan keluar ke manusia**. Pelanggan yang terjebak di labirin bot tanpa bisa menghubungi admin akan pergi dan tidak kembali.
+
+## Langkah 3: Rakit di Manychat / WA Business (45 Menit)
+
+**Untuk Instagram DM (Manychat gratis):**
+
+1. Daftar di manychat.com, hubungkan akun Instagram bisnismu.
+2. Buat "Flow" baru → pilih template "FAQ" atau mulai dari kosong.
+3. Masukkan sapaan pembuka dari Langkah 2.
+4. Tambahkan "Keyword trigger": misalnya kata "ongkir", "harga", "ready" otomatis memicu jawaban yang sesuai.
+5. Aktifkan AI (Manychat punya fitur AI texting di paket gratis terbatas) atau pakai jawaban baku yang sudah kamu tulis.
+6. Uji dengan akun Instagram lain sebelum diaktifkan.
+
+**Untuk WhatsApp (WA Business, 100% gratis):**
+
+1. Install WhatsApp Business, lengkapi profil toko (alamat, jam, katalog).
+2. Masuk ke Pengaturan → Pesan di luar jam kerja: tulis sapaan + info kapan dibalas.
+3. Buat **Balasan Cepat** (quick replies): simpan 10 jawaban baku dari Langkah 1 dengan shortcut (misal `/ongkir`, `/order`, `/ready`).
+4. Upgrade dengan AI: hubungkan WA ke ChatGPT via tools seperti Wati/Respond.io (ada masa trial gratis) — atau cukup pakai balasan cepat dulu, itu sudah menghemat 70% waktu.
+
+## Template Prompt: Latih "Kepribadian" Bot AI
+
+Kalau tools-mu mendukung AI (atau kamu pakai AI untuk menyusun jawaban baku), pakai prompt ini untuk menentukan gaya bicara bot:
+
+```
+Kamu adalah CS online shop bernama [nama toko] yang menjual [produk].
+Kepribadianmu: ramah, santai, seperti kakak yang helpful.
+Bahasa: Indonesia santai, panggil pelanggan "kak".
+Aturan:
+- Jawab maksimal 3 kalimat, langsung ke inti
+- Jika tidak tahu jawabannya, katakan:
+  "Wah, untuk itu saya hubungkan ke admin ya kak 🙏"
+- Jangan pernah mengarang info stok, harga, atau ongkir
+- Akhiri jawaban dengan 1 pertanyaan lanjutan yang relevan
+  (contoh: "Mau saya bantu cek ongkir ke kota kakak?")
+
+Daftar info resmi toko (JANGAN keluar dari daftar ini):
+- Harga: [daftar harga]
+- Ongkir: [info ongkir]
+- Jam operasional: [jam]
+- Kebijakan retur: [kebijakan]
+```
+
+Prompt kedua — untuk mengubah jawaban kaku jadi natural:
+
+```
+Ubah jawaban CS berikut menjadi gaya chat WhatsApp yang ramah
+dan natural, maksimal 3 kalimat:
+
+[JAWABAN KAKU]
+
+Aturan: pakai "kak", 1 emoji maksimal, tanpa bahasa formal
+seperti "dengan hormat" atau "terima kasih atas perhatiannya".
+```
+
+## Langkah 4: Uji Sebelum Live (15 Menit)
+
+Jangan langsung aktifkan. Minta 2–3 teman untuk "menyerang" bot dengan pertanyaan nyeleneh:
+
+- "kak ini ori gak?" (pertanyaan di luar daftar)
+- "ONGKIR KE PAPUA BERAPA???" (caps lock)
+- "p" (chat satu huruf)
+- Pertanyaan jam 2 pagi (uji pesan di luar jam kerja)
+
+Catat semua yang gagal dijawab, perbaiki, ulangi. Bot yang lolos "serangan teman" biasanya siap menghadapi pelanggan asli.
+
+## Contoh Nyata: Toko Hijab "Nura Collection" di Solo
+
+Nura menjual hijab via Instagram dan WhatsApp, rata-rata 40 chat masuk per hari. Sebelumnya, ia membalas sendiri 2–3 jam per hari.
+
+Setelah pasang Manychat (gratis):
+- Sapaan otomatis + menu 1-2-3-4 menangani 70% chat tanpa campur tangan
+- Pertanyaan ongkir & cara order terjawab dalam 5 detik, kapan pun
+- Waktu balas manual turun dari 3 jam jadi 45 menit per hari — hanya untuk chat kompleks dan closing
+
+Biaya: Rp0. Hasil: tidak ada lagi calon pembeli yang kabur karena chat tidak dibalas.
+
+## Contoh Script Sapaan per Jenis Usaha
+
+Sapaan pertama menentukan segalanya. Ini tiga contoh yang bisa langsung dipakai:
+
+**Toko fashion:**
+> Halo kak! Selamat datang di [nama toko] 🙏
+> Ketik: 1=Lihat Katalog, 2=Cek Ongkir, 3=Cara Order, 4=Chat Admin
+
+**Warung makan (pesan antar):**
+> Halo kak! Mau pesan makan? 😊
+> Ketik: 1=Lihat Menu, 2=Order Sekarang, 3=Jam Buka & Lokasi, 4=Chat Admin
+
+**Jasa (laundry/salon):**
+> Halo kak! Ada yang bisa kami bantu? ✨
+> Ketik: 1=Daftar Harga, 2=Booking Jadwal, 3=Lokasi, 4=Chat Admin
+
+Perhatikan polanya: sapa → tawarkan 3-4 pilihan bernomor → selalu ada jalan ke admin. Jangan lebih dari 4 pilihan — pelanggan malas membaca.
+
+## Cara Mengukur Apakah Botmu Bekerja
+
+Setelah 2 minggu berjalan, cek tiga angka ini:
+
+1. **Persentase chat terjawab otomatis** — target 60-80%. Terlalu rendah? Tambah keyword trigger. Terlalu tinggi (95%+)? Mungkin bot terlalu agresif dan pelanggan sulit mencapai admin.
+2. **Waktu respons rata-rata** — harus di bawah 1 menit untuk pesan otomatis.
+3. **Chat yang berakhir dengan pembelian** — bandingkan sebelum dan sesudah bot. Kenaikan 10-20% sudah bagus.
+
+Minta AI membantumu membaca data: paste ringkasan chat mingguan dan tanyakan pola pertanyaan apa yang belum terjawab bot — lalu tambahkan ke daftar jawaban.
+
+## Yang Tidak Boleh Dilakukan Chatbot
+
+1. **Jangan pura-pura jadi manusia.** Kalau pelanggan tanya "ini robot ya?", jawab jujur: "Iya kak, saya asisten otomatis Nura Collection 🤖 — kalau butuh bantuan lebih lanjut saya hubungkan ke admin."
+2. **Jangan mengarang.** Bot yang mengarang info stok ("ready kak!" padahal kosong) lebih merusak daripada bot yang diam.
+3. **Jangan tanpa tombol darurat.** Selalu ada opsi "Chat Admin" di setiap tahap.
+
+## Kesimpulan
+
+Chatbot CS bukan teknologi masa depan — ini kebutuhan hari ini untuk toko online yang ingin terlihat profesional tanpa merekrut admin. Mulai dari yang gratis: petakan 10 pertanyaan, susun alur, rakit dalam satu sore, uji dengan teman.
+
+Pelangganmu tidak peduli siapa yang menjawab jam 11 malam — yang penting mereka **dijawab**.
+
+Mau memahami dasar-dasar otomatisasi lebih dalam sebelum pasang tools lanjutan? Pelajari step-by-step di [Learn](/learn). Untuk melihat tools chatbot dan AI lain yang cocok untuk tokomu, cek [AI Tools](/ai-tools).
