@@ -27,10 +27,11 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 
 | Area | Status |
 |------|--------|
-| Blog (14 artikel ID, MDX, kategori/tag, SEO) | ✅ |
-| Learn — track AI Basics (34 materi) | ✅ |
+| Blog (17 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
+| Learn — 2 track: AI Basics (34 materi) + Prompt Engineering untuk UMKM (5 lesson) | ✅ |
 | AI Tools Directory (90 tools, 5 kategori, filter) | ✅ |
 | FAQ, newsletter, mobile nav, dark mode | ✅ |
+| Search hashtag (/search) — via menu hamburger | ✅ |
 | AdSense (konfigurasi ada, aktivasi belum penuh) | 🔄 |
 | AI features (SDK terinstal, API belum dibangun) | 📋 |
 
@@ -53,9 +54,12 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 > **Goal:** Jadi rujukan konten AI praktis untuk UMKM Indonesia. Konten adalah SEO.
 
 ### Blog
-- ✅ MDX pipeline, listing, detail, kategori/tag
+- ✅ MDX pipeline, listing, detail, hashtag/tag
+- ✅ URL blog flat (`/blog/<slug>`) + redirect 301 dari URL kategori lama
+- ✅ Tampilan kategori dihapus (badge & filter); navigasi artikel via hashtag
+- ✅ Halaman `/search` dengan pencarian hashtag (#tag) & kata kunci
 - ✅ Syntax highlighting (Shiki), reading time, newsletter CTA
-- 📋 Tambah hingga **30+ artikel ID** (sekarang 14): fokus tutorial langkah-demi-langkah
+- 📋 Tambah hingga **30+ artikel ID** (sekarang 17 terbit): fokus tutorial langkah-demi-langkah
   - Otomatisasi order (WhatsApp → spreadsheet, dst.)
   - Prompt template siap pakai per jenis usaha (kuliner, fashion, jasa)
   - Studi kasus UMKM (format seperti "Bu Siti naik 3x omzet")
@@ -64,7 +68,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 ### Learn Tracks
 - ✅ Struktur GitBook-style: sidebar, prev/next navigation
 - ✅ Track **AI Basics** (34 materi: AI intro, prompt engineering, LLM & API, RAG, fine-tuning, AI agents, etika)
-- 📋 Track **Prompt Engineering untuk UMKM** — template copy-paste per kebutuhan bisnis
+- ✅ Track **Prompt Engineering untuk UMKM** (5 lesson: dasar prompt, formula 5 elemen, template kuliner/fashion/jasa)
 - 📋 Track **AI Automation** — Make/Zapier/n8n untuk operasional UMKM
 - 📋 Track **No-Code Tools** — bangun landing page, chatbot, katalog tanpa coding
 - 📋 Progress tracker sederhana (localStorage)
@@ -122,7 +126,7 @@ API key dikonfigurasi via environment variables.
 
 > **Goal:** Tumbuhkan traffic organik dan retensi.
 
-- 📋 Global search (blog + learn + tools, Fuse.js — tanpa biaya)
+- 🔄 Global search: pencarian hashtag blog (`/search`) ✅; cakupan learn + tools (Fuse.js) belum 📋
 - 📋 Newsletter automation: welcome series + weekly digest (Resend)
 - 📋 Komentar artikel (Giscus — berbasis GitHub Discussions)
 - 📋 SEO scale: internal linking otomatis, schema markup lanjutan, Core Web Vitals audit
