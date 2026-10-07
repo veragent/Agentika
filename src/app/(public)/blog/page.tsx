@@ -18,8 +18,7 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const posts = getPublishedBlogPosts()
 
-  // Extract unique categories and tags
-  const categories = Array.from(new Set(posts.map((p) => p.category).filter((c): c is string => Boolean(c))))
+  // Extract unique tags
   const tags = Array.from(new Set(posts.flatMap((p) => p.tags ?? [])))
 
   return (
@@ -32,13 +31,6 @@ export default async function BlogPage() {
       <AdSlot section="blog_list" className="rounded-xl border p-4" />
 
       <div className="space-y-3">
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Link key={category} href={`/blog/category/${slugifyHeading(category)}`}>
-              <Badge variant="outline">{category}</Badge>
-            </Link>
-          ))}
-        </div>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <Link key={tag} href={`/blog/tag/${slugifyHeading(tag)}`}>
@@ -53,7 +45,6 @@ export default async function BlogPage() {
           <Link key={post.slug} href={`/blog/${post.slug}`}>
             <Card className="h-full transition-colors hover:border-primary">
               <CardHeader>
-                <div className="mb-2 text-xs font-medium text-primary">{post.category}</div>
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{(post.date ?? "").split("T")[0]}</CardDescription>
               </CardHeader>

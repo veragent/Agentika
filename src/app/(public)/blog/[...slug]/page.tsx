@@ -93,11 +93,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <div className="mb-8 space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            {post.category && (
-              <Link href={`/blog/category/${slugifyHeading(post.category)}`}>
-                <Badge variant="outline">{post.category}</Badge>
-              </Link>
-            )}
             {(post.tags ?? []).map((tag) => (
               <Link key={tag} href={`/blog/tag/${slugifyHeading(tag)}`}>
                 <Badge variant="secondary">#{tag}</Badge>
