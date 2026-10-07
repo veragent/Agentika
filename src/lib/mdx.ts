@@ -4,6 +4,25 @@ import matter from "gray-matter"
 
 const CONTENT_PATH = path.join(process.cwd(), "content")
 
+/**
+ * Recursively find a file by its basename under `dir`.
+ * Used so blog posts can be organized in category subdirectories
+ * on disk while keeping flat public URLs (/blog/<slug>).
+ */
+function findFileByBasename(dir: string, fileName: string): string | null {
+  const entries = fs.readdirSync(dir, { withFileTypes: true })
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      const nested = findFileByBasename(fullPath, fileName)
+      if (nested) return nested
+    } else if (entry.name === fileName) {
+      return fullPath
+    }
+  }
+  return null
+}
+
 export type ContentType = "blog" | "learn" | "airdrop"
 
 export interface PostMetadata {
@@ -34,8 +53,14 @@ interface LearnTrack {
 }
 
 export function getFileBySlug(type: ContentType, slug: string) {
-  const filePath = path.join(CONTENT_PATH, type, `${slug}.mdx`)
-  if (!fs.existsSync(filePath)) return null
+  let filePath = path.join(CONTENT_PATH, type, `${slug}.mdx`)
+  if (!fs.existsSync(filePath)) {
+    // Fallback: blog posts may live in category subdirectories on disk.
+    // Resolve by basename so public URLs stay flat (/blog/<slug>).
+    const found = findFileByBasename(path.join(CONTENT_PATH, type), `${slug}.mdx`)
+    if (!found) return null
+    filePath = found
+  }
 
   const source = fs.readFileSync(filePath, "utf8")
   const { data, content } = matter(source)
@@ -63,10 +88,17 @@ export function getAllFilesMetadata(type: ContentType): PostMetadata[] {
       const source = fs.readFileSync(path.join(dirPath, file), "utf8")
       const { data } = matter(source)
 
+      // Blog URLs stay flat (/blog/<slug>); the category subdirectory
+      // on disk is only for organization. Learn/airdrop keep full paths.
+      const slug =
+        type === "blog"
+          ? (relativePath.split("/").pop() ?? relativePath).replace(/\.mdx$/, "")
+          : relativePath.replace(/\.mdx$/, "")
+
       return [
         {
           ...data,
-          slug: relativePath.replace(".mdx", ""),
+          slug,
         } as PostMetadata,
         ...allPosts,
       ]
