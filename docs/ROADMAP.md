@@ -27,7 +27,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 
 | Area | Status |
 |------|--------|
-| Blog (24 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
+| Blog (30 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
 | Learn — 4 track: AI Basics (34) + Prompt Engineering UMKM (5) + AI Automation (5) + No-Code Tools (5) | ✅ |
 | AI Tools Directory (90 tools, 5 kategori, filter) | ✅ |
 | FAQ, newsletter, mobile nav, dark mode | ✅ |
@@ -49,7 +49,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 
 ---
 
-## Phase 1 — Content Engine 🔄 (Q4 2026)
+## Phase 1 — Content Engine ✅ SELESAI (Q4 2026)
 
 > **Goal:** Jadi rujukan konten AI praktis untuk UMKM Indonesia. Konten adalah SEO.
 
@@ -59,11 +59,11 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 - ✅ Tampilan kategori dihapus (badge & filter); navigasi artikel via hashtag
 - ✅ Halaman `/search` dengan pencarian hashtag (#tag) & kata kunci
 - ✅ Syntax highlighting (Shiki), reading time, newsletter CTA
-- 📋 Tambah hingga **30+ artikel ID** (sekarang 24 terbit): fokus tutorial langkah-demi-langkah
+- ✅ **30 artikel ID terbit** — target tercapai: tutorial, template prompt, studi kasus UMKM, side hustle
   - Otomatisasi order (WhatsApp → spreadsheet, dst.)
   - Prompt template siap pakai per jenis usaha (kuliner, fashion, jasa)
   - Studi kasus UMKM (format seperti "Bu Siti naik 3x omzet")
-- 📋 Konsistensi editorial: 2 artikel/minggu
+- 📋 Konsistensi editorial: 2 artikel/minggu (rutin berikutnya)
 
 ### Learn Tracks
 - ✅ Struktur GitBook-style: sidebar, prev/next navigation
@@ -73,7 +73,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 - ✅ Track **No-Code Tools** (5 lesson: pengantar, landing page, katalog, chatbot, form order)
 - ✅ Progress tracker sederhana (localStorage — tombol tandai selesai + progress bar per track)
 
-**Deliverable:** 30+ artikel, 3 track learn lengkap. 🎉
+**Deliverable tercapai:** 30 artikel, 4 track learn lengkap. 🎉
 
 ---
 
