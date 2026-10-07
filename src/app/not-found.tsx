@@ -3,11 +3,11 @@ import { ArrowRight } from "lucide-react"
 import { publicIcons } from "@/components/icons/public-icons"
 import { BRAND } from "@/lib/brand"
 
-const { learn: LearnIcon, airdrop: AirdropIcon, search: SearchIcon, home: HomeIcon } = publicIcons
+const { learn: LearnIcon, tools: ToolsIcon, search: SearchIcon, home: HomeIcon } = publicIcons
 
 const recoveryLinks = [
-  { href: "/learn", label: "Learn Track", description: "Lanjutkan materi Web3 & AI", icon: LearnIcon },
-  { href: "/airdrop", label: "Airdrop Hub", description: "Cari peluang airdrop aktif", icon: AirdropIcon },
+  { href: "/ai-tools", label: "AI Tools", description: "Jelajahi direktori tools AI untuk UMKM", icon: ToolsIcon },
+  { href: "/learn", label: "Learn Track", description: "Lanjutkan materi AI step-by-step", icon: LearnIcon },
   { href: "/search", label: "Global Search", description: "Temukan blog, lesson, tools", icon: SearchIcon },
 ]
 

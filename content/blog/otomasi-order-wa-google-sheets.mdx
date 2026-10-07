@@ -1,0 +1,205 @@
+---
+title: "Otomasi Order WhatsApp ke Google Sheets (No-Code, 15 Menit)"
+date: "2025-01-20"
+author: "Admin"
+authors: ["admin"]
+category: "AI Automation"
+tags: ["automation", "no-code", "whatsapp", "google-sheets", "make", "zapier"]
+excerpt: "Tutorial lengkap otomatisasi order dari WhatsApp Business ke Google Sheets pakai Make (gratis 1000 operasi/bln). Termasuk notifikasi WA otomatis ke admin & customer."
+published: true
+featured: true
+---
+
+# Otomasi Order WhatsApp ke Google Sheets (No-Code, 15 Menit)
+
+Masih manual copy-paste order WA ke Excel? **Stop.** Tutorial ini bikin sistem order otomatis dalam 15 menit, gratis selamanya pakai **Make (dulunya Integromat)**.
+
+## Arsitektur Sistem
+
+```
+Customer WA → Webhook → Filter Validasi → Google Sheets → Notifikasi Admin (WA) → Balasan ke Customer
+```
+
+## Prasyarat
+
+- Akun **Make** (gratis 1000 operasi/bln) — [daftar di make.com](https://make.com)
+- **WhatsApp Business API** (gratis via Meta Business) atau provider lokal: [Fonnte](https://fonnte.com), [Wablas](https://wablas.com), [Qontak](https://qontak.com)
+- **Google Sheets** + akun Google
+- 15 menit waktu luang ☕
+
+---
+
+## Langkah 1: Siapkan Google Sheets
+
+Buat spreadsheet baru dengan kolom:
+
+| Kolom | Contoh | Keterangan |
+|-------|--------|------------|
+| `Tanggal` | `2025-01-20 14:30` | Timestamp otomatis |
+| `Nomor WA` | `628123456789` | Format internasional |
+| `Nama` | `Budi Santoso` | Dari profil WA / input manual |
+| `Produk` | `Nasi Goreng Spesial x2, Es Teh x1` | Parsing dari pesan |
+| `Total` | `45000` | Bisa dihitung otomatis nanti |
+| `Status` | `Baru` | `Baru` \| `Diproses` \| `Selesai` \| `Batal` |
+| `Catatan` | `Sedikit pedas` | Opsional |
+
+> 💡 **Tip:** Freeze row 1, filter kolom Status, conditional formatting untuk status "Baru" = merah.
+
+---
+
+## Langkah 2: Setup WhatsApp Business API (Pilih 1)
+
+### Opsi A: Fonnte (Paling Mudah, Gratis 1000 pesan/bln)
+1. Daftar di [fonnte.com](https://fonnte.com)
+2. Scan QR code pakai WhatsApp Business
+3. Dapatkan **Token** & **Target URL** (webhook URL nanti)
+
+### Opsi B: Wablas (Populer di Indonesia)
+1. Daftar di [wablas.com](https://wablas.com)
+2. Koneksi device → dapatkan **API Key** & **Secret**
+
+### Opsi C: Meta Official (Gratis, Butuh Verifikasi Bisnis)
+- Gratis unlimited tapi butuh verifikasi dokumen perusahaan
+- Setup lebih kompleks, cocok skala besar
+
+> 🎯 **Rekomendasi UMKM:** Pakai **Fonnte** — setup 5 menit, UI Bahasa Indonesia, support WA grup.
+
+---
+
+## Langkah 3: Buat Scenario di Make
+
+### 3.1 Trigger: Webhook
+1. Klik **"Create a new scenario"**
+2. Cari **"Webhooks"** → **"Custom webhook"**
+3. Klik **Add** → nama `WA Order Incoming` → **Save**
+4. **Copy webhook URL** (contoh: `https://hook.eu1.make.com/xyz123abc`)
+5. Paste ke setting webhook di Fonnte/Wablas
+
+### 3.2 Filter: Validasi Pesan Order
+Tambah modul **Router** → **Filter** (ikon saringan):
+
+**Filter 1: "Pesan Order"**
+- Field: `message.body` (atau `text.body` tergantung provider)
+- Operator: `Contains` (case insensitive)
+- Value: `order` ATAU `pesan` ATAU `beli` ATAU regex: `(order|pesan|beli|\d+\s*x|\d+\s*pcs)`
+
+**Filter 2: "Bukan Spam"**
+- Field: `from` (nomor pengirim)
+- Operator: `Not equal to` (nomor bot/spam known)
+
+> 🔧 **Regex cerdas untuk deteksi order:**
+> ```regex
+> (order|pesan|beli|mau)\s+.+|(\d+\s*(x|pcs|buah|pack|box))
+> ```
+
+### 3.3 Action: Parse Pesan (Text Parser)
+Tambah **Tools** → **Text Parser** → **Match Pattern**:
+
+**Pattern untuk ekstrak produk:**
+```regex
+(.+?)\s*(?:x|\*|pcs|buah|pack|box)\s*(\d+)
+```
+
+Contoh input: `"Nasi Goreng x2, Es Teh x1"`
+Output: Array `[["Nasi Goreng", "2"], ["Es Teh", "1"]]`
+
+### 3.4 Action: Google Sheets - Add Row
+Tambah **Google Sheets** → **Add a Row**:
+
+- **Spreadsheet:** Pilih file tadi
+- **Sheet:** Sheet1
+- **Mapping:**
+  - `Tanggal`: `{{now}}` (format: `YYYY-MM-DD HH:mm`)
+  - `Nomor WA`: `{{from}}` (dari webhook)
+  - `Nama`: `{{profileName}}` atau `{{pushName}}`
+  - `Produk`: `{{1.raw}}` (hasil parse Text Parser, join dengan `, `)
+  - `Total`: `0` (hitung manual nanti, atau tambah Calculator modul)
+  - `Status`: `Baru`
+  - `Catatan`: `{{message.body}}`
+
+### 3.5 Action: Notifikasi Admin (WA)
+Tambah **HTTP** → **Make a Request** (untuk kirim WA ke admin via Fonnte):
+
+- **URL:** `https://api.fonnte.com/send`
+- **Method:** `POST`
+- **Headers:**
+  - `Authorization`: `Bearer {{FONNTE_TOKEN}}` (simpan di Variables Make)
+  - `Content-Type`: `application/json`
+- **Body (JSON):**
+```json
+{
+  "target": "{{ADMIN_WA_NUMBER}}",
+  "message": "🔔 ORDER BARU\n👤 {{profileName}} ({{from}})\n📦 {{parsedProducts}}\n💰 Total: Rp {{total}}\n📅 {{now}}",
+  "countryCode": "62"
+}
+```
+
+### 3.6 Action: Balasan ke Customer (WA)
+Tambah **HTTP** → **Make a Request** (kirim konfirmasi ke customer):
+
+- **URL:** `https://api.fonnte.com/send`
+- **Body (JSON):**
+```json
+{
+  "target": "{{from}}",
+  "message": "Halo {{profileName}}! 👋\n\nOrder kamu diterima:\n{{parsedProducts}}\n\nTotal estimasi: Rp {{total}}\nStatus: 🟡 *Menunggu Konfirmasi*\n\nAdmin akan hubungi via WA dalam 5 menit.\n\nTerima kasih! 🙏",
+  "countryCode": "62"
+}
+```
+
+---
+
+## Langkah 4: Test & Aktifkan
+
+1. Klik **"Run once"** di Make
+2. Kirim WA test ke nomor bisnis: `"Order Nasi Goreng x2, Es Teh x1"`
+3. Cek:
+   - ✅ Google Sheets terisi row baru
+   - ✅ Admin dapat WA notif
+   - ✅ Customer dapat balasan konfirmasi
+
+4. Kalau OK → klik **"Scheduling"** → **"On demand"** atau **"Every 15 minutes"**
+5. Klik **"Activate"**
+
+---
+
+## Estimasi Biaya Bulanan
+
+| Komponen | Biaya |
+|----------|-------|
+| Make (Free 1000 ops) | **Gratis** (cukup ~300 order/bln) |
+| Fonnte (Free 1000 pesan) | **Gratis** |
+| Google Sheets | **Gratis** |
+| **Total** | **Rp 0** |
+
+> 📈 **Upgrade path:** Make Core $9/bln (10k ops), Fonnte Pro Rp 50k/bln (unlimited)
+
+---
+
+## Troubleshooting Umum
+
+| Masalah | Solusi |
+|---------|--------|
+| Webhook tidak terpicu | Cek URL di Fonnte/Wablas, pastikan "Incoming Message" enabled |
+| Data tidak ke Sheets | Cek mapping di Make, pastikan kolom Sheets cocok |
+| WA tidak terkirim | Cek token Fonnte, pastikan format nomor `628xx` |
+| Parse produk gagal | Perbaiki regex di Text Parser, test di regex101.com |
+
+---
+
+## Level Up (Optional)
+
+1. **Hitung Total Otomatis** → Tambah **Calculator** modul di Make, lookup harga dari Sheets "Produk Master"
+2. **Invoice Otomatis** → Tambah **Google Docs** → **Create from Template** → generate PDF invoice
+3. **Dashboard Real-time** → Pakai **Google Data Studio (Looker Studio)** connect ke Sheets
+4. **Multi-Admin** → Router → Filter by jam kerja / kategori produk → kirim ke admin berbeda
+
+---
+
+## Template Make (Import Langsung)
+
+Download JSON scenario: [order-wa-to-sheets.json](/assets/templates/order-wa-to-sheets.json) → Import di Make: **Scenarios** → **Import** → pilih file.
+
+---
+
+*Butuh bantuan setup? [Hubungi kami](/faq) — kami bantu setup gratis untuk 5 UMKM pertama tiap bulan.*
