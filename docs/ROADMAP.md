@@ -27,8 +27,8 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 
 | Area | Status |
 |------|--------|
-| Blog (18 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
-| Learn — 2 track: AI Basics (34 materi) + Prompt Engineering untuk UMKM (5 lesson) | ✅ |
+| Blog (24 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
+| Learn — 4 track: AI Basics (34) + Prompt Engineering UMKM (5) + AI Automation (5) + No-Code Tools (5) | ✅ |
 | AI Tools Directory (90 tools, 5 kategori, filter) | ✅ |
 | FAQ, newsletter, mobile nav, dark mode | ✅ |
 | Search hashtag (/search) — via menu hamburger | ✅ |
@@ -59,7 +59,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 - ✅ Tampilan kategori dihapus (badge & filter); navigasi artikel via hashtag
 - ✅ Halaman `/search` dengan pencarian hashtag (#tag) & kata kunci
 - ✅ Syntax highlighting (Shiki), reading time, newsletter CTA
-- 📋 Tambah hingga **30+ artikel ID** (sekarang 18 terbit): fokus tutorial langkah-demi-langkah
+- 📋 Tambah hingga **30+ artikel ID** (sekarang 24 terbit): fokus tutorial langkah-demi-langkah
   - Otomatisasi order (WhatsApp → spreadsheet, dst.)
   - Prompt template siap pakai per jenis usaha (kuliner, fashion, jasa)
   - Studi kasus UMKM (format seperti "Bu Siti naik 3x omzet")
@@ -69,9 +69,9 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 - ✅ Struktur GitBook-style: sidebar, prev/next navigation
 - ✅ Track **AI Basics** (34 materi: AI intro, prompt engineering, LLM & API, RAG, fine-tuning, AI agents, etika)
 - ✅ Track **Prompt Engineering untuk UMKM** (5 lesson: dasar prompt, formula 5 elemen, template kuliner/fashion/jasa)
-- 📋 Track **AI Automation** — Make/Zapier/n8n untuk operasional UMKM
-- 📋 Track **No-Code Tools** — bangun landing page, chatbot, katalog tanpa coding
-- 📋 Progress tracker sederhana (localStorage)
+- ✅ Track **AI Automation** (5 lesson: pengantar, WA Business, Sheets, Make/Zapier, studi kasus)
+- ✅ Track **No-Code Tools** (5 lesson: pengantar, landing page, katalog, chatbot, form order)
+- ✅ Progress tracker sederhana (localStorage — tombol tandai selesai + progress bar per track)
 
 **Deliverable:** 30+ artikel, 3 track learn lengkap. 🎉
 
