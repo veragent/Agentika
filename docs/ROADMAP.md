@@ -27,7 +27,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 
 | Area | Status |
 |------|--------|
-| Blog (17 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
+| Blog (18 artikel ID terbit, MDX, URL flat /blog/slug, hashtag, SEO) | ✅ |
 | Learn — 2 track: AI Basics (34 materi) + Prompt Engineering untuk UMKM (5 lesson) | ✅ |
 | AI Tools Directory (90 tools, 5 kategori, filter) | ✅ |
 | FAQ, newsletter, mobile nav, dark mode | ✅ |
@@ -59,7 +59,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 - ✅ Tampilan kategori dihapus (badge & filter); navigasi artikel via hashtag
 - ✅ Halaman `/search` dengan pencarian hashtag (#tag) & kata kunci
 - ✅ Syntax highlighting (Shiki), reading time, newsletter CTA
-- 📋 Tambah hingga **30+ artikel ID** (sekarang 17 terbit): fokus tutorial langkah-demi-langkah
+- 📋 Tambah hingga **30+ artikel ID** (sekarang 18 terbit): fokus tutorial langkah-demi-langkah
   - Otomatisasi order (WhatsApp → spreadsheet, dst.)
   - Prompt template siap pakai per jenis usaha (kuliner, fashion, jasa)
   - Studi kasus UMKM (format seperti "Bu Siti naik 3x omzet")
