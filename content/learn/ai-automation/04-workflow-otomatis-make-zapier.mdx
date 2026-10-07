@@ -1,0 +1,143 @@
+---
+title: "Workflow Otomatis dengan Make.com & Zapier"
+order: 4
+authors: ["admin"]
+excerpt: "Kenalan dengan konsep trigger-action, lalu buat alur otomatis pertama Anda: order masuk langsung mengirim notifikasi ke Telegram."
+---
+
+## Konsep Inti: Trigger → Action
+
+Semua tools otomatisasi bekerja dengan satu pola sederhana: **kalau X terjadi, maka lakukan Y**.
+
+- X disebut **trigger** (pemicu) — peristiwa yang memulai.
+- Y disebut **action** (tindakan) — hal yang dikerjakan otomatis sebagai respons.
+
+Analogi warung: seperti bel pintu. **Kalau** ada pelanggan masuk (trigger), **maka** bel berbunyi (action) sehingga pemilik warung yang di dapur tahu ada yang datang. Pemilik tidak perlu mengawasi pintu terus-menerus.
+
+Contoh dalam bisnis online:
+- **Kalau** ada order baru masuk ke Google Form (trigger) → **maka** kirim notifikasi ke Telegram saya (action).
+- **Kalau** jam menunjukkan pukul 20.00 (trigger) → **maka** kirim rekap omzet harian ke grup Telegram keluarga (action).
+- **Kalau** ada chat WhatsApp berisi kata "ORDER" (trigger) → **maka** balas dengan link form pemesanan (action).
+
+Satu rangkaian trigger + action (bisa juga trigger + beberapa action berurutan) disebut **workflow** atau **skenario**. Di lesson ini kita akan membuat workflow pertama Anda.
+
+## Make.com vs Zapier: Pilih yang Mana?
+
+Dua layanan paling populer untuk ini adalah **Make.com** (dulu bernama Integromat) dan **Zapier**. Keduanya gratis untuk pemakaian kecil — dan pemakaian UMKM kecil hampir selalu cukup dengan paket gratis.
+
+| | Make.com (gratis) | Zapier (gratis) |
+|---|---|---|
+| Kuota | Sekitar 1.000 operasi/bulan | Sekitar 100 task/bulan |
+| Jumlah workflow aktif | Longgar | Terbatas (5 workflow) |
+| Kemudahan | Visual, drag-and-drop alur | Sangat mudah, panduan langkah |
+| Cocok untuk | Yang suka utak-atik & butuh banyak kuota | Yang ingin paling simpel |
+
+**Rekomendasi untuk UMKM:** mulai dari **Make.com** karena kuota gratisnya jauh lebih besar. Satu order yang memicu 3 action hanya memakan 3–4 operasi — kuota gratisan cukup untuk ratusan order per bulan. Nanti kalau usaha membesar, baru pertimbangkan paket berbayar.
+
+Catatan: angka kuota bisa berubah sewaktu-waktu — cek halaman harga resmi saat mendaftar. Prinsipnya sama: mulai dari yang gratis.
+
+## Persiapan: Buat Bot Telegram untuk Notifikasi
+
+Kenapa Telegram, bukan WhatsApp, untuk notifikasi internal? Karena WhatsApp tidak menyediakan jalur notifikasi otomatis gratis yang resmi, sedangkan Telegram menyediakannya gratis dan setup-nya cuma 5 menit. Notifikasi ini hanya untuk **Anda sendiri** (pemilik/karyawan), bukan untuk pelanggan — pelanggan tetap dilayani via WhatsApp seperti biasa.
+
+Langkah membuat bot Telegram:
+
+1. Buka Telegram, cari akun **@BotFather** (ada centang biru).
+2. Kirim perintah `/newbot`, ikuti instruksi: beri nama (misal "Notifikasi Warung Bu Siti") dan username (harus berakhiran `bot`, misal `warungbusiti_bot`).
+3. BotFather akan memberi **token** — kode panjang seperti `123456:ABC-DEF...`. Simpan baik-baik, ini "kunci" bot Anda.
+4. Cari bot Anda di Telegram (cari username-nya), tekan **Start**.
+5. Untuk tahu **chat ID** Anda: cari **@userinfobot**, tekan Start — ia akan membalas dengan ID angka milik Anda. Simpan.
+
+Selesai. Anda sekarang punya "asisten Telegram" yang siap diperintah oleh Make.com.
+
+## Langkah Praktik: Workflow "Order Baru → Notif Telegram"
+
+Ini workflow paling berguna untuk UMKM: setiap ada order masuk via Google Form, Anda langsung dapat notifikasi Telegram berisi detail order — tanpa harus membuka spreadsheet terus-menerus.
+
+### Bagian A: Siapkan di Make.com
+
+1. Daftar di [make.com](https://www.make.com) (gratis, cukup email).
+2. Klik **Create a new scenario** (skenario = workflow).
+3. Klik lingkaran **+** pertama → cari **Google Forms** → pilih trigger **Watch Responses**.
+4. Hubungkan akun Google Anda (klik Add → login Google → izinkan akses).
+5. Pilih form pemesanan yang dibuat di Lesson 3.
+6. Atur jadwal pengecekan: **Every 15 minutes** (paket gratis tidak bisa tiap menit — 15 menit sudah cukup untuk UMKM).
+
+### Bagian B: Tambahkan Action Telegram
+
+7. Klik **+** berikutnya → cari **Telegram Bot** → pilih action **Send a Text Message**.
+8. Klik Add untuk koneksi baru → masukkan **token bot** dari BotFather → Save.
+9. Di kolom **Chat ID**, masukkan ID angka Anda.
+10. Di kolom **Text**, tulis pesan notifikasi. Anda bisa menyisipkan data dari form dengan mengklik variabel yang muncul. Contoh:
+
+> 🔔 *ORDER BARU MASUK!*
+>
+> Nama: [variabel nama dari form]
+> Produk: [variabel produk] x [variabel jumlah]
+> WA: [variabel nomor WA]
+>
+> Segera proses ya!
+
+11. Klik **OK**, lalu klik **Run once** untuk uji coba — isi form pemesanan sebagai percobaan, dan lihat apakah notifikasi masuk ke Telegram Anda.
+12. Kalau berhasil, aktifkan **scheduling** (ON) agar skenario berjalan otomatis.
+
+Selamat! Anda baru saja membuat "bel pintu digital" untuk order online Anda.
+
+## Contoh Workflow Lain yang Bisa Ditiru
+
+Setelah workflow pertama berhasil, ini ide workflow berikutnya dari yang paling mudah:
+
+**1. Pengingat follow-up pelanggan (mudah)**
+- Trigger: baris baru di Sheets berstatus "Menunggu Pembayaran" lebih dari 2 hari.
+- Action: kirim pengingat ke Telegram Anda: "Follow-up Dewi Lestari — order 2 hari lalu belum bayar."
+- Manfaat: tidak ada lagi pelanggan yang lupa bayar dan tidak tertagih.
+
+**2. Ucapan terima kasih otomatis (mudah)**
+- Trigger: status order di Sheets berubah menjadi "Dikirim".
+- Action: kirim pesan WhatsApp manual? Tidak — keterbatasan API WA membuat ini sulit di paket gratis. Alternatif: catat di Sheets kolom "Follow-up" dan kirim manual via template `/terimakasih` dari Lesson 2. Semi-otomatis tetap jauh lebih baik daripada lupa sama sekali.
+
+**3. Rekap omzet malam hari (sedang)**
+- Trigger: jadwal harian pukul 21.00.
+- Action 1: baca total omzet hari ini dari Google Sheets.
+- Action 2: kirim ke Telegram: "Rekap 8 Okt: 23 transaksi, omzet Rp 1.845.000. Produk terlaris: Ayam Goreng."
+- Manfaat: laporan harian tanpa buka spreadsheet.
+
+**4. Arsip bukti transfer (sedang)**
+- Trigger: ada file baru di folder Google Drive "Bukti Transfer".
+- Action: catat nama file + tanggal ke Sheets "Arsip Pembayaran".
+- Manfaat: bukti transfer terdokumentasi rapi, mudah dicari saat ada selisih.
+
+Mulailah dari workflow nomor 1. Jangan membuat 10 workflow sekaligus — satu yang berjalan sempurna lebih berharga daripada sepuluh yang setengah jalan.
+
+## Tips Hemat Kuota Gratisan
+
+Kuota gratis itu cukup, asal dipakai bijak. Lima triknya:
+
+1. **Gabungkan action dalam satu skenario.** Daripada 3 skenario terpisah (notif Telegram, catat Sheets, kirim email), buat 1 skenario dengan 3 action berurutan. Lebih hemat dan lebih mudah dirawat.
+2. **Pakai filter.** Tambahkan filter "hanya lanjutkan jika total order > Rp 50.000" misalnya — skenario berhenti sebelum menghabiskan operasi untuk data yang tidak penting.
+3. **Atur jadwal pengecekan realistis.** Cek tiap 15 menit untuk order (penting), tapi cukup 1x sehari untuk rekap (tidak penting-per-amat). Jangan set semuanya ke interval tercepat.
+4. **Nonaktifkan skenario yang tidak dipakai.** Skenario aktif yang trigger-nya "watch" tetap memakan operasi tiap pengecekan walau tidak ada data baru.
+5. **Pantau dashboard pemakaian.** Make.com menampilkan sisa kuota di dashboard. Kalau 3 bulan berturut-turut selalu habis, barulah pertimbangkan upgrade — artinya usaha Anda tumbuh dan otomatisasi terbukti menghasilkan.
+
+## Contoh Kasus: Laundry "Bersih Kinclong" di Tangerang
+
+Pak Dedi punya laundry kiloan. Masalahnya: pelanggan sering tanya " cucian saya sudah selesai belum?" via WA, dan ia harus mengecek tumpukan nota satu per satu.
+
+Solusi workflow-nya:
+- Setiap nota laundry dicatat di Google Sheets (via form sederhana) dengan kolom status: Diterima / Dicuci / Siap Diambil.
+- Workflow Make.com: **kalau** status berubah menjadi "Siap Diambil" (trigger) → **maka** kirim notifikasi Telegram ke Pak Dedi berisi nama pelanggan (action).
+- Pak Dedi tinggal meneruskan info ke pelanggan via template WA `/siapdiambil` yang sudah disiapkan.
+
+Hasil: pertanyaan "sudah selesai belum?" turun drastis karena pelanggan dihubungi proaktif. Pelanggan senang, Pak Dedi tidak lagi mengobrak-abrik nota.
+
+## Checklist Lesson 4
+
+- [ ] Buat bot Telegram via @BotFather dan simpan token + chat ID Anda.
+- [ ] Daftar akun Make.com (gratis).
+- [ ] Buat skenario pertama: Google Forms (Watch Responses) → Telegram (Send Message).
+- [ ] Uji dengan mengisi form percobaan — pastikan notifikasi masuk ke Telegram.
+- [ ] Aktifkan scheduling skenario (ON).
+- [ ] Cek dashboard kuota Make.com dan catat sisa operasi bulan ini.
+- [ ] Pilih SATU ide workflow tambahan dari daftar di atas untuk dibuat minggu ini.
+
+Di lesson terakhir, kita rangkai semuanya menjadi studi kasus utuh: melihat bagaimana "Warung Bu Siti" mengotomatisasi order dari WhatsApp sampai rekap harian — lengkap dengan hitungan penghematan waktu dan biayanya.

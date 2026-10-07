@@ -1,0 +1,118 @@
+---
+title: "Form Order Online & Pembayaran"
+order: 5
+authors: ["admin"]
+excerpt: "Bikin formulir order online yang rekapnya otomatis masuk spreadsheet, terima pembayaran via transfer & QRIS, plus cara cegah order fiktif."
+---
+
+## Kenapa Order via Chat Saja Itu Berisiko
+
+Order yang masuk lewat chat WhatsApp memang terasa akrab, tapi coba ingat kejadian-kejadian ini: pesanan tercecer karena chat tertimpa chat lain; salah catat jumlah ("tadi katanya 20 box atau 12 box ya?"); alamat pengiriman tidak lengkap; lupa siapa yang sudah bayar dan siapa yang belum. Satu-dua order mungkin masih aman. Tapi begitu order harian mencapai belasan, kekacauan tinggal menunggu waktu.
+
+**Formulir order online** adalah solusinya. Anggap saja seperti **kasir yang rapi dan tidak pernah lupa**: setiap pembeli mengisi sendiri nama, pesanan, dan alamatnya dalam format yang sama — datanya otomatis tersusun dalam tabel, tidak ada lagi salah catat atau pesanan hilang.
+
+Di lesson terakhir ini kita praktik membuat form order, menghubungkannya ke spreadsheet otomatis, menyiapkan opsi pembayaran (transfer & QRIS), dan — penting — cara mencegah order fiktif yang merugikan.
+
+## Pilihan Tools: Google Form vs Mayar
+
+### Google Form — gratis dan otomatis ke spreadsheet
+
+- **Gratis** sepenuhnya, bagian dari akun Google-mu.
+- **Kelebihan:** setiap jawaban otomatis masuk ke Google Sheets dalam bentuk tabel rapi. Bikinnya 30 menit, bisa dipakai bertahun-tahun. Bisa wajibkan isian (mis. nomor WA wajib diisi) supaya data tidak bolong.
+- **Kekurangan:** tidak ada fitur pembayaran di dalam form — pembayaran (transfer/QRIS) dilakukan terpisah lalu pembeli mengunggah bukti di form.
+- **Cocok untuk:** hampir semua UMKM yang baru mulai. Ini titik awal terbaik.
+
+### Mayar — ada fitur pembayaran terintegrasi
+
+- **Gratis daftar**, ada potongan kecil per transaksi yang berhasil (umumnya 2–4%).
+- **Kelebihan:** pembeli bisa langsung bayar di dalam alur order (transfer bank, e-wallet, QRIS) tanpa bolak-balik kirim bukti. Ada halaman checkout yang terlihat profesional.
+- **Kekurangan:** potongan per transaksi — untuk margin tipis, ini terasa. Fiturnya juga lebih banyak sehingga butuh waktu belajar lebih lama.
+- **Cocok untuk:** usaha yang order online-nya sudah ramai (puluhan per hari) dan ingin alur bayar yang mulus.
+
+**Rekomendasi:** mulai dari **Google Form + pembayaran manual (transfer/QRIS)**. Gratis, sederhana, dan kamu tetap pegang kendali penuh. Pindah ke Mayar nanti kalau volume order sudah membenarkan potongan transaksinya.
+
+## Cara Menerima Pembayaran: Transfer & QRIS
+
+Sebelum bikin form, siapkan dulu "kasir" pembayarannya:
+
+1. **Transfer bank.** Cantumkan 1–2 nomor rekening (atas nama usaha kalau ada, atau nama pribadi — tidak masalah untuk tahap awal). Tulis jelas: nama bank, nomor rekening, nama pemilik rekening.
+2. **QRIS — satu QR untuk semua.** QRIS (dari Bank Indonesia) memungkinkan pembeli membayar dari **aplikasi apa pun** — GoPay, OVO, DANA, m-banking — cukup pindai satu kode QR yang sama. Cara dapatnya: daftar lewat bank tempat kamu punya rekening, atau lewat aplikasi e-wallet/penyedia QRIS (banyak yang gratis dan prosesnya 1–3 hari). Cetak QR-nya, tempel di form order dan di kemasan.
+3. **E-wallet langsung.** Kalau target pembelimu kebanyakan anak muda, cantumkan juga nomor e-wallet (DANA/GoPay/OVO) sebagai alternatif.
+
+Tips penting: **selalu cantumkan total yang harus dibayar dengan jelas** di form/konfirmasi, termasuk ongkir kalau ada. Kebanyakan drama pembayaran berawal dari total yang tidak jelas.
+
+## Langkah Praktik: Membuat Form Order di Google Form
+
+Ikuti langkah ini (contoh untuk Dapur Bu Rina):
+
+1. **Buat form baru.** Buka forms.google.com → "Blank form". Beri judul: "Form Order Dapur Bu Rina".
+2. **Tambah kolom wajib ini** (klik "+" untuk tiap pertanyaan, aktifkan "Required"):
+   - Nama lengkap (jawaban singkat)
+   - Nomor WhatsApp aktif (jawaban singkat)
+   - Pilih produk (pilihan ganda: Paket Harian / Paket Acara / Tumpeng)
+   - Jumlah box (jawaban singkat, validasi angka)
+   - Tanggal dibutuhkan (tanggal)
+   - Alamat lengkap pengiriman (paragraf)
+   - Metode pembayaran (pilihan ganda: Transfer BCA / QRIS / DANA)
+   - Upload bukti pembayaran (upload file — aktifkan setelah metode dipilih)
+3. **Tulis instruksi pembayaran** di bagian deskripsi form: "Setelah isi form, lakukan pembayaran ke BCA 1234567890 a.n. Bu Rina / pindai QRIS di bawah, lalu upload buktinya di kolom terakhir. Order diproses setelah pembayaran terverifikasi."
+4. **Hubungkan ke spreadsheet:** klik tab "Responses" → ikon spreadsheet hijau → "Create a new spreadsheet". Mulai sekarang, setiap order otomatis jadi satu baris rapi: nama, WA, produk, jumlah, total, status bayar.
+5. **Atur notifikasi:** di spreadsheet, buka "Tools" → "Notification rules" → aktifkan "any changes are made". Kamu dapat email tiap ada order masuk — tidak perlu mengecek manual terus.
+6. **Buat template pesan konfirmasi** dan simpan di catatan HP:
+   > "Halo kak [NAMA], terima kasih sudah order [PRODUK] sebanyak [JUMLAH]. Total [TOTAL]. Pembayaran kami terima ✅ Pesanan akan dikirim tanggal [TANGGAL]. Terima kasih! 🙏"
+   Tinggal salin-tempel dan ganti bagian dalam kurung siku setiap ada order.
+7. **Uji sendiri sampai tuntas:** isi form sebagai pembeli → cek baris baru muncul di spreadsheet → cek email notifikasi masuk → kirim template konfirmasi ke diri sendiri. Kalau semua jalan, form-mu siap disebar.
+
+Sebar link form di: landing page (lesson 2), katalog (lesson 3), bio media sosial, dan jadikan balasan andalan chatbot-mu (lesson 4). Lihat — semua lesson saling tersambung!
+
+## Rekap Otomatis: Spreadsheet yang Bekerja untukmu
+
+Karena data sudah dalam bentuk tabel, kamu bisa:
+
+- **Filter** per tanggal untuk tahu order hari ini (menu Data → Filter).
+- **Hitung total** otomatis: di bawah kolom jumlah, ketik `=SUM(C2:C100)` (sesuaikan huruf kolom) untuk total box; kalikan dengan harga untuk estimasi omzet.
+- **Tandai status:** tambah kolom "Status" diisi manual: Baru / Dibayar / Diproses / Terkirim. Warnai dengan "Conditional formatting" supaya yang belum bayar langsung terlihat merah.
+- **Arsip bulanan:** tiap awal bulan, duplikat sheet menjadi "Order Oktober 2026" dan kosongkan sheet aktif. Arsip rapi, evaluasi gampang.
+
+Ini setara punya asisten admin — tanpa gaji.
+
+## Tips Mencegah Order Fiktif
+
+Ini bagian yang sering diabaikan sampai kena batunya. Order fiktif (bukti transfer palsu, alamat palsu, PHP alias pemberi harapan palsu) bisa bikin rugi bahan dan tenaga. Pertahanan berlapis:
+
+1. **Wajib DP atau pelunasan sebelum produksi.** Aturan emas: untuk order di atas Rp100 ribu atau H-1, minta **DP minimal 50% atau lunas di depan**. Tulis aturan ini jelas di form. Pembeli serius tidak akan keberatan.
+2. **Verifikasi bukti transfer, jangan cuma lihat screenshot.** Screenshot sangat mudah dipalsukan. Selalu **cek mutasi rekening/e-wallet-mu** — uang masuk atau tidak, itu satu-satunya kebenaran. Luangkan 2 menit untuk ini setiap order.
+3. **Cocokkan nominal dan waktu.** Nominal harus persis (termasuk 3 digit terakhir kalau kamu pakai kode unik, mis. Rp150.123). Waktu transfer harus masuk akal (baru saja, bukan kemarin).
+4. **Waspadai pola mencurigakan:** order pertama langsung dalam jumlah sangat besar, terburu-buru minta dikirim, nomor WA baru tanpa foto profil, menolak DP dengan banyak alasan. Tidak semua begini itu penipu — tapi layak diverifikasi ekstra.
+5. **Batasi COD.** Cash on Delivery enak untuk pembeli tapi berisiko untukmu (pembeli tiba-tiba tidak di tempat). Kalau pakai COD, batasi untuk area dekat dan nominal kecil saja.
+6. **Simpan bukti semuanya.** Arsipkan chat, form order, dan bukti transfer minimal 3 bulan. Kalau ada sengketa, kamu punya pegangan.
+
+## Tips Hemat Biaya
+
+1. **Google Form + QRIS gratis = sistem order lengkap tanpa biaya bulanan.** Ini kombinasi paling hemat yang sudah dipakai ribuan UMKM.
+2. **Kode unik 3 digit** (mis. total Rp150.000 jadi Rp150.123) bikin verifikasi transfer 10x lebih mudah — gratis, cuma butuh disiplin.
+3. **Jangan sewa payment gateway mahal** sebelum volume order-mu puluhan per hari. Potongan 3% dari omzet Rp10 juta/bulan = Rp300 ribu — lumayan untuk ditabung dulu.
+4. **Satu rekening khusus usaha** (bisa rekening bank digital gratis) memisahkan uang usaha dan pribadi — verifikasi mutasi jadi jauh lebih gampang dan pembukuanmu sehat.
+
+## Tugas Praktik (Penutup Track)
+
+1. Buat Google Form order dengan 8 kolom wajib di atas, hubungkan ke spreadsheet, aktifkan notifikasi email.
+2. Daftar QRIS (lewat bank atau e-wallet) dan cantumkan di form.
+3. Lakukan **simulasi penuh 1 order**: minta teman/keluarga mengisi form → kamu verifikasi → kirim template konfirmasi → tandai status di spreadsheet.
+4. Tulis **aturan pembayaranmu** (DP berapa persen? batas COD?) dan tempel di deskripsi form supaya pembeli tahu sejak awal.
+
+---
+
+## Selamat! Kamu Lulus Track Ini 🎉
+
+Mari lihat perjalananmu dalam 5 lesson:
+
+1. **Peta no-code** — kamu paham kenapa tidak perlu developer puluhan juta.
+2. **Landing page** — etalase digital 24 jam yang menjual.
+3. **Katalog online** — daftar dagangan rapi + tombol order WhatsApp.
+4. **Chatbot** — asisten otomatis untuk pertanyaan berulang.
+5. **Form order + pembayaran** — kasir rapi yang tercatat otomatis.
+
+Lima aset digital itu, semuanya **gratis atau nyaris gratis**, semuanya bisa kamu kelola sendiri dari HP. Kalau kamu mengerjakan semua tugas praktiknya, usahamu sekarang punya fondasi digital yang bahkan banyak usaha menengah belum punya.
+
+Langkah selanjutnya? Konsisten pakai sistem ini 30 hari, catat apa yang masih merepotkan, lalu perbaiki satu per satu. Digitalisasi bukan proyek sekali jadi — ia kebiasaan. Semangat, dan sampai jumpa di track berikutnya! 🚀

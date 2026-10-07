@@ -1,0 +1,141 @@
+---
+title: "Studi Kasus: Otomatisasi Order Warung Bu Siti"
+order: 5
+authors: ["admin"]
+excerpt: "Rangkai semua lesson menjadi sistem utuh: ikuti perjalanan Warung Bu Siti mengotomatisasi order dari WhatsApp sampai rekap harian, lengkap dengan hitungan hematnya."
+---
+
+## Kenalan dengan Warung Bu Siti
+
+Bu Siti (52 tahun) punya warung makan di kawasan kampus di Yogyakarta. Menunya masakan rumahan: ayam goreng, lele goreng, sayur lodeh, dan aneka lauk harian. Warungnya buka 07.00–20.00, dibantu satu karyawan bernama Dini.
+
+Sejak pandemi, 40% omzet Bu Siti datang dari **pesanan via WhatsApp** — mahasiswa kos yang mager keluar, ibu-ibu arisan yang pesan catering kecil, dan karyawan kantor sekitar yang pesan makan siang. Rata-rata **25 order WA per hari**.
+
+### Masalah Sebelum Otomatisasi
+
+Mari kita lihat hari biasa Bu Siti sebelum mengenal otomatisasi:
+
+**Pagi (07.00–09.00):** Chat WA sudah menumpuk 15 pesan dari semalam. Bu Siti membalas satu per satu sambil menyiapkan dagangan. Pertanyaan sama berulang: "Hari ini ada ayam goreng?", "Berapa harganya?", "Bisa diantar ke kos Jl. Kaliurang?".
+
+**Siang (11.00–14.00):** Jam tersibuk. Order masuk bersamaan dengan pembeli yang datang langsung. Bu Siti mencatat order di buku tulis — kadang sambil lalu, tulisannya sulit dibaca. Dini sering harus bertanya ulang "Ini tadi yang pesan siapa, Bu?"
+
+**Sore (16.00–18.00):** Ada 3–4 pelanggan yang tanya "Pesanan saya sudah dikirim belum?" karena Bu Siti lupa mengabari. Satu order pernah terlewat total — pelanggan sudah transfer, makanannya tidak dikirim. Bu Siti harus mengembalikan uang plus meminta maaf.
+
+**Malam (20.00–21.30):** Setelah warung tutup, Bu Siti duduk menghitung omzet dari buku tulis: menjumlahkan satu per satu dengan kalkulator HP. Sering salah hitung dan harus mengulang. Total **1,5 jam** habis untuk administrasi setiap malam.
+
+**Kerugian per bulan (estimasi):**
+- Waktu administrasi: ±2,5 jam/hari × 30 hari = **75 jam/bulan** (setara 9 hari kerja penuh!)
+- Order terlewat/terlambat: 3–5 order/bulan × Rp 25.000 = **Rp 75.000–125.000** pendapatan hilang + pelanggan kecewa
+- Pelanggan kabur karena respons lambat: tidak terhitung, tapi Bu Siti sadar beberapa pelanggan tetap berhenti order
+
+## Rancangan Sistem Otomatisasi (Minggu 1)
+
+Bu Siti mengikuti track ini langkah demi langkah. Berikut rancangannya — perhatikan bagaimana setiap lesson tersambung:
+
+### Fondasi: WhatsApp Business (Lesson 2)
+
+**Hari 1–2:** Bu Siti install WhatsApp Business dan setup:
+- Pesan sapaan: menyapa + mengarahkan ke KATALOG, HARGA, dan ORDER
+- 6 balasan cepat: `/salam`, `/menu` (menu hari ini), `/harga`, `/ongkir`, `/order` (berisi link Google Form!), `/bayar` (QRIS + nomor rekening)
+- Katalog: 15 menu andalan dengan foto, harga, dan deskripsi
+- Pesan di luar jam kerja (20.00–07.00): "Warung tutup, silakan lihat katalog & isi form order, kami proses jam 7 pagi."
+- 4 label: Order Baru, Menunggu Pembayaran, Sudah Bayar, Dikirim
+
+### Database: Google Form + Sheets (Lesson 3)
+
+**Hari 3–4:** Bu Siti membuat:
+- Google Form "Order Warung Bu Siti" dengan kolom: Nama, No. WA, Menu (pilihan ganda dari 15 menu), Jumlah, Alamat antar, Catatan
+- Form terhubung otomatis ke spreadsheet "Database Order Bu Siti"
+- Kolom Status dengan dropdown: Order Baru → Menunggu Pembayaran → Sudah Bayar → Dikirim
+- Sheet "Dashboard Harian" dengan rumus: omzet hari ini, jumlah transaksi, menu terlaris
+- Link form dipasang di: profil WA Business, template `/order`, dan status WA
+
+### Otomatisasi: Make.com + Bot Telegram (Lesson 4)
+
+**Hari 5–6:** Bu Siti membuat 2 skenario di Make.com:
+- **Skenario 1 — Notifikasi order:** Google Form ada respons baru → kirim Telegram ke Bu Siti & Dini: "🔔 ORDER BARU: [nama] — [menu] x [jumlah]. Total Rp [total]."
+- **Skenario 2 — Rekap malam:** Setiap hari pukul 20.30 → baca Dashboard Harian → kirim Telegram: "Rekap [tanggal]: [x] transaksi, omzet Rp [y]. Terlaris: [menu]."
+
+Total biaya setup: **Rp 0**. Total waktu: sekitar 5–6 jam yang disebar selama seminggu (dikerjakan saat warung sepi, dibantu Dini untuk foto katalog).
+
+## Alur Kerja Baru Setelah Otomatisasi
+
+Mari kita lihat hari biasa Bu Siti **sesudah** sistem berjalan:
+
+**Pagi (07.00–07.15):** Bu Siti buka Telegram — ada 8 notifikasi order yang masuk semalam. Semuanya sudah tercatat rapi di spreadsheet (nama, menu, jumlah, alamat). Tidak ada chat yang perlu dibalas satu per satu karena pesan sapaan + katalog sudah menjawab pertanyaan umum. Bu Siti tinggal memfilter spreadsheet: tampilkan yang berstatus "Order Baru".
+
+**Siang (11.00–14.00):** Order masuk → notifikasi Telegram bunyi → Dini langsung menyiapkan makanan. Tidak ada buku tulis, tidak ada tulisan sulit dibaca. Pelanggan yang tanya "sudah dikirim belum?" tinggal dicek statusnya di spreadsheet — jawabannya akurat dalam 10 detik.
+
+**Sore:** Bu Siti mengubah status order yang sudah dikirim menjadi "Dikirim". Pelanggan yang statusnya masih "Menunggu Pembayaran" lebih dari 1 hari otomatis masuk daftar follow-up (Bu Siti cek tiap sore, 5 menit).
+
+**Malam (20.00–20.10):** Warung tutup. Pukul 20.30, Telegram berbunyi: *"Rekap 8 Okt: 27 transaksi, omzet Rp 1.685.000. Terlaris: Ayam Goreng (34 porsi)."* Bu Siti tersenyum — tidak perlu menghitung manual lagi. Administrasi malam hari: **10 menit** (verifikasi cepat), turun dari 90 menit.
+
+## Hitungan Penghematan: Waktu & Uang
+
+Sekarang bagian favorit: angka-angkanya. Mari kita hitung dengan jujur.
+
+### Penghematan Waktu
+
+| Aktivitas | Sebelum | Sesudah | Hemat/hari |
+|-----------|---------|---------|------------|
+| Balas chat berulang | 90 menit | 20 menit | 70 menit |
+| Catat order manual | 45 menit | 10 menit (verifikasi) | 35 menit |
+| Cari order yang tercecer/komplain | 20 menit | 5 menit | 15 menit |
+| Hitung omzet malam hari | 60 menit | 10 menit | 50 menit |
+| **Total** | **215 menit (3,5 jam)** | **45 menit** | **170 menit (~3 jam)** |
+
+**3 jam per hari × 30 hari = 90 jam per bulan.** Itu setara dengan **11 hari kerja** yang kembali ke Bu Siti setiap bulan. Waktu itu dipakai untuk: mencoba 3 menu baru (satu jadi best seller), mengunjungi supplier untuk nego harga bahan 5% lebih murah, dan — yang paling penting — istirahat cukup sehingga tidak gampang sakit.
+
+### Penghematan & Penambahan Uang
+
+| Pos | Per bulan |
+|-----|-----------|
+| Order terlewat (sebelum: 4 × Rp 25.000) | +Rp 100.000 terselamatkan |
+| Pelanggan kembali karena respons cepat (estimasi 10 order tambahan × Rp 25.000) | +Rp 250.000 |
+| Biaya tools otomatisasi | Rp 0 |
+| **Total dampak** | **+Rp 350.000/bulan** |
+
+Rp 350.000 mungkin terdengar kecil — tapi ini **tanpa modal, tanpa karyawan baru, tanpa jam kerja tambahan**. Dan angka ini tumbuh: semakin banyak order, semakin besar nilai otomatisasinya. Kalau order naik 2x lipat, sistem yang sama tetap bekerja tanpa tambahan biaya.
+
+### Break-even: Kapan "Balik Modal"?
+
+Modalnya hanya waktu setup: ±6 jam sekali saja. Dengan penghematan 3 jam/hari, **investasi 6 jam kembali dalam 2 hari**. Setelah itu, setiap hari adalah keuntungan bersih. Ini mungkin investasi dengan ROI tercepat yang pernah dilakukan Bu Siti.
+
+## Pelajaran yang Bisa Dipetik
+
+Tiga pelajaran universal dari kasus Bu Siti:
+
+**1. Mulai dari yang paling menyakitkan, bukan yang paling canggih.**
+Bu Siti tidak mulai dari AI chatbot atau integrasi rumit. Ia mulai dari masalah terbesarnya: chat menumpuk dan order tercecer. Otomatisasi terbaik adalah yang menyelesaikan rasa sakit nyata, bukan yang terlihat keren.
+
+**2. Sistem sederhana yang dipakai > sistem sempurna yang tidak dipakai.**
+Setup Bu Siti jauh dari sempurna — ia masih update status manual, masih follow-up pembayaran manual. Tapi karena sederhana, ia dan Dini **konsisten memakainya setiap hari**. Konsistensi mengalahkan kecanggihan.
+
+**3. Otomatisasi bukan menggantikan manusia, tapi mengangkat manusia.**
+Bu Siti tidak memecat Dini atau mengurangi jam kerja. Sebaliknya, Dini yang tadinya tenggelam dalam urusan catat-mencatat sekarang bisa fokus membantu masak dan melayani pembeli langsung — pekerjaan yang benar-benar butuh sentuhan manusia.
+
+## Peta Jalan 7 Hari untuk Usaha Anda
+
+Terakhir, terapkan pola Bu Siti ke usaha Anda sendiri. Ini rencana konkret 7 hari:
+
+- **Hari 1:** Kerjakan audit dari Lesson 1. Tentukan 3 tugas paling menyita waktu.
+- **Hari 2:** Install WhatsApp Business, lengkapi profil + pesan sapaan + pesan di luar jam kerja.
+- **Hari 3:** Buat 5–7 balasan cepat dan isi katalog produk (foto 10 produk dulu, cukup).
+- **Hari 4:** Buat Google Form pemesanan + hubungkan ke spreadsheet. Pasang link form di WA Business.
+- **Hari 5:** Rapikan spreadsheet: filter, dropdown status, rumus total otomatis, Dashboard Harian.
+- **Hari 6:** Buat bot Telegram + skenario Make.com pertama (notifikasi order baru). Uji sampai berhasil.
+- **Hari 7:** Uji end-to-end: minta 2–3 teman/keluarga order beneran lewat sistem baru. Perbaiki yang janggal.
+
+Setelah 7 hari, Anda punya sistem yang bekerja. Setelah 30 hari, hitung penghematan Anda seperti Bu Siti — dan rasakan bedanya.
+
+## Checklist Lesson 5 (Penutup Track)
+
+- [ ] Tulis ulang 3 masalah terbesar usaha Anda (dari audit Lesson 1) dan pasangkan dengan solusi dari Lesson 2–4.
+- [ ] Buat peta alur sederhana di kertas: dari pelanggan menghubungi → sampai order selesai → rekap. Tandai bagian mana yang sudah otomatis.
+- [ ] Jalankan rencana 7 hari di atas. Tandai tiap hari yang selesai.
+- [ ] Setelah 30 hari, hitung: berapa jam/hemat per hari? Berapa order yang terselamatkan?
+- [ ] Ceritakan hasilnya ke sesama pemilik UMKM — otomatisasi menular paling cepat lewat cerita nyata.
+
+---
+
+**Selamat!** Anda telah menyelesaikan track *AI Automation untuk UMKM*. Anda sekarang punya fondasi: WhatsApp Business yang melayani otomatis, database order yang rapi, dan workflow yang bekerja sendiri. Langkah selanjutnya: kembangkan ke track *No-Code Tools* untuk membangun katalog digital dan chatbot tanpa coding — atau mulai terapkan dan rasakan sendiri 3 jam ekstra setiap hari. Semangat! 🎉

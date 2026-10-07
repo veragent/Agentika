@@ -1,0 +1,90 @@
+---
+title: "Chatbot Sederhana Tanpa Coding"
+order: 4
+authors: ["admin"]
+excerpt: "Buat asisten chat otomatis dengan Tawk.to atau Manychat yang menjawab pertanyaan berulang — supaya kamu tidak begadang membalas chat."
+---
+
+## Kenapa Usahamu Butuh Chatbot
+
+Jujur-jujuran: berapa kali sehari kamu menjawab pertanyaan yang **sama persis**? "Harganya berapa?", "Buka jam berapa?", "Bisa diantar ke sini?", "Minimal order berapa?". Pertanyaan itu penting — tapi menjawabnya berulang-ulang itu melelahkan dan menyita waktu yang seharusnya dipakai untuk masak, packing, atau istirahat.
+
+**Chatbot** adalah asisten otomatis yang menjawab pertanyaan-pertanyaan berulang itu untukmu — 24 jam, tidak tidur, tidak mengeluh. Anggap saja seperti **resepsionis toko**: ia menyambut tamu, menjawab pertanyaan umum, dan kalau ada hal rumit, ia mengarahkan tamu ke kamu (manusianya).
+
+Penting dipahami: chatbot di sini **bukan robot super pintar**. Ia tidak perlu AI canggih. Cukup chatbot sederhana berbasis **kata kunci dan tombol pilihan** — dan itu sudah menghemat berjam-jam waktumu setiap minggu. Di lesson ini kita praktik membuatnya tanpa coding sama sekali.
+
+## Pilihan Tools: Tawk.to vs Manychat
+
+### Tawk.to — gratis, untuk website/landing page
+
+- **Gratis** sepenuhnya untuk fitur dasar (ini luar biasa — tools sejenis biasanya berbayar).
+- **Kelebihan:** berupa widget chat kecil yang menempel di pojok landing page-mu (hasil lesson 2). Pengunjung bisa langsung chat. Ada fitur chatbot sederhana berbasis kata kunci + balasan otomatis.
+- **Kekurangan:** berjalan di website — kalau calon pembelimu kebanyakan dari Instagram/WhatsApp, jangkauannya terbatas.
+- **Cocok untuk:** yang sudah punya landing page dan ingin ada layanan chat di sana.
+
+### Manychat — untuk Instagram, Messenger & WhatsApp
+
+- **Gratis** untuk sampai 1.000 kontak, cukup untuk UMKM yang baru mulai.
+- **Kelebihan:** terhubung ke tempat pembelimu sudah nongkrong: DM Instagram, Facebook Messenger, dan WhatsApp. Bisa bikin alur percakapan pakai tombol-tombol pilihan (tanpa coding, tinggal seret).
+- **Kekurangan:** fitur lanjutan (broadcast massal, integrasi rumit) berbayar. Pengaturan awal butuh 1–2 jam fokus.
+- **Cocok untuk:** yang ordernya banyak masuk lewat DM Instagram atau WhatsApp.
+
+**Rekomendasi:** kalau landing page-mu sudah jadi → pasang **Tawk.to** di sana. Kalau mayoritas pembeli datang dari Instagram/DM → mulai dari **Manychat**. Keduanya gratis untuk mulai, jadi tidak ada salah pilih.
+
+## Merancang Skenario Percakapan
+
+Sebelum menyentuh tools-nya, rancang dulu **alur percakapannya** di atas kertas. Chatbot yang baik itu seperti pramuniaga yang ramah dan sigap. Alur dasarnya selalu sama:
+
+**Salam → tanya kebutuhan → beri info → arahkan ke pembelian/CS manusia.**
+
+Contoh naskah untuk Dapur Bu Rina (katering fiktif dari lesson 2):
+
+1. **Salam:** "Halo! Selamat datang di Dapur Bu Rina 🍱 Ada yang bisa kami bantu hari ini?"
+   - Tombol pilihan: [Lihat Menu] [Cek Harga] [Bicara dengan Admin]
+2. **Jika pilih "Lihat Menu":** "Kami punya 3 paket: Paket Harian Rp20rb/box, Paket Acara Rp25rb/box, Paket Nasi Tumpeng mulai Rp500rb. Mau info yang mana?"
+   - Tombol: [Paket Harian] [Paket Acara] [Tumpeng]
+3. **Jika pilih "Paket Harian":** "Paket Harian Rp20.000/box (min. 10 box): nasi, ayam goreng/ikan, sayur, sambal, dan buah. Bisa pesan H-1 ya!"
+   - Tombol: [Pesan Sekarang] [Kembali]
+4. **Jika pilih "Pesan Sekarang":** "Siap! Klik tombol di bawah untuk lanjut pesan via WhatsApp, admin kami akan bantu. 👇" + tombol link WA.
+5. **Jalan keluar ke manusia:** di setiap langkah ada opsi "Bicara dengan Admin". Dan kalau chatbot tidak paham pertanyaan ("maaf, saya kurang paham"), ia harus menjawab: "Saya teruskan ke admin ya, mohon tunggu sebentar 🙏" — bukan diam atau mengulang-ulang.
+
+Perhatikan: tidak ada langkah yang berputar-putar. Maksimal 3–4 klik menuju pembelian atau manusia.
+
+## Langkah Praktik: Memasang Tawk.to di Landing Page
+
+1. **Daftar** di tawk.to dengan email (gratis, tanpa kartu kredit).
+2. **Buat properti:** masukkan nama usahamu dan alamat landing page-mu.
+3. **Ambil kode widget:** di dashboard, buka menu "Administration" → "Chat Widget", salin kode yang diberikan.
+4. **Pasang di Carrd:** buka editor Carrd → tambah elemen "Embed" → tempel kode Tawk.to → publish ulang. (Di Google Sites: menu "Sisipkan" → "Sematkan" → tempel kode.)
+5. **Buka landing page-mu** — sekarang ada gelembung chat di pojok kanan bawah. Klik dan coba kirim pesan ke diri sendiri.
+6. **Atur balasan otomatis:** di dashboard Tawk.to, buka "Add-ons" → aktifkan fitur chatbot/triggers sederhana. Buat aturan mis: jika pengunjung membuka halaman 10 detik → sapa otomatis "Halo! Butuh info menu? Ketik MENU ya 😊".
+7. **Buat 5–10 pasangan kata kunci–jawaban:** mis. kata "harga" → jawab daftar harga; kata "jam" → jawab jam operasional; kata "lokasi" → jawab alamat. Ini inti chatbot sederhanamu.
+
+Untuk Manychat prinsipnya sama: daftar → hubungkan akun Instagram/WhatsApp → pakai builder visual untuk menyusun alur seperti naskah Dapur Bu Rina di atas (seret blok "pesan" dan "tombol", sambungkan dengan garis).
+
+## Tips Agar Chatbot Tidak Kaku
+
+Chatbot yang kaku bikin orang malas. Ini rahasia supaya terasa ramah:
+
+1. **Pakai bahasa sehari-hari.** Tulis seperti kamu chat dengan teman, bukan seperti surat dinas. "Halo kak!" lebih baik dari "Selamat datang, dengan siapa kami berbicara?"
+2. **Pendek-pendek saja.** Satu pesan maksimal 2–3 baris. Kalau infonya panjang, pecah jadi beberapa pesan atau kasih tombol pilihan.
+3. **Kasih tombol, jangan suruh mengetik.** Orang malas mengetik — tombol [Lihat Menu] [Cek Harga] jauh lebih nyaman diklik.
+4. **Selalu sediakan jalan ke manusia.** Di setiap tahap harus ada opsi "Bicara dengan Admin/CS". Chatbot yang menjebak orang tanpa jalan keluar itu mimpi buruk pelayanan.
+5. **Akhiri dengan aksi jelas.** Setiap jawaban sebaiknya diakhiri ajakan: "Mau langsung pesan? Klik tombol di bawah ya 👇".
+6. **Uji dengan orang asli.** Minta 2–3 teman/keluarga mencoba chatbot-mu dan catat di mana mereka bingung. Perbaiki bagian itu.
+
+## Tips Hemat Biaya
+
+1. **Paket gratis sudah cukup lama.** Tawk.to gratis selamanya untuk fitur dasar; Manychat gratis sampai 1.000 kontak. Jangan upgrade sebelum benar-benar butuh.
+2. **Mulai dari 5 pertanyaan tersering.** Jangan coba mengotomatisasi semuanya sekaligus. Catat 5 pertanyaan yang paling sering masuk ke WA-mu minggu ini — itu saja yang dibuatkan jawaban otomatis.
+3. **Satu channel dulu.** Kalau pembelimu 90% dari WhatsApp, fokus di sana. Jangan pasang chatbot di 4 channel sekaligus lalu kewalahan.
+4. **Chatbot + manusia, bukan chatbot vs manusia.** Chatbot menangani yang berulang; kamu menangani yang butuh sentuhan personal. Kombinasi ini yang paling hemat tenaga.
+
+## Tugas Praktik
+
+1. Buka riwayat chat usahamu, catat **5 pertanyaan yang paling sering** ditanyakan pelanggan.
+2. Tulis naskah jawaban untuk masing-masing — singkat, ramah, maksimal 3 baris, diakhiri ajakan bertindak.
+3. Rancang **satu alur percakapan** 5 langkah seperti contoh Dapur Bu Rina (salam → pilihan → info → pesan → jalan ke admin), sesuaikan dengan usahamu.
+4. Pasang Tawk.to di landing page-mu (atau mulai akun Manychat), masukkan 5 jawaban otomatis itu, lalu **uji dengan HP teman**: apakah mereka bisa sampai ke tombol order tanpa bingung?
+
+Di lesson terakhir (lesson 5), kita tutup lingkarannya: membuat **formulir order online + sistem pembayaran** supaya pesanan tercatat rapi dan uang masuk dengan aman. Sampai jumpa!

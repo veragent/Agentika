@@ -1,0 +1,133 @@
+---
+title: "Google Sheets sebagai Database Order"
+order: 3
+authors: ["admin"]
+excerpt: "Bangun sistem pencatatan order otomatis: struktur spreadsheet yang rapi, Google Form untuk terima pesanan, dan rumus rekap otomatis."
+---
+
+## Masalahnya: Order Tercatat di Mana-Mana
+
+Coba jujur: di mana order usaha Anda tercatat sekarang? Sebagian di chat WhatsApp, sebagian di buku tulis, sebagian di kepala, sebagian di screenshot transfer. Kalau ada pelanggan komplain "Saya sudah order kemarin kok belum dikirim?", Anda harus mengobrak-abrik chat berhari-hari untuk membuktikan.
+
+Solusinya bukan aplikasi kasir mahal. **Google Sheets** — yang gratis dan mungkin sudah terinstal di HP Anda — bisa menjadi database order yang rapi, bisa diakses dari HP maupun laptop, dan tidak akan hilang kalau HP rusak.
+
+Analogi sederhananya: kalau buku tulis adalah catatan order versi manual, Google Sheets adalah **buku tulis ajaib** yang bisa menghitung sendiri, tidak bisa hilang, dan bisa diisi banyak orang sekaligus dari tempat berbeda.
+
+## Langkah 1: Buat Spreadsheet Order dengan Struktur yang Benar
+
+Buka [sheets.google.com](https://sheets.google.com) (atau aplikasi Google Sheets di HP), buat spreadsheet baru, beri nama misalnya "Database Order 2026". Di baris pertama (header), buat kolom-kolom ini:
+
+| Kolom | Contoh Isi | Keterangan |
+|-------|------------|------------|
+| No | 1, 2, 3... | Nomor urut otomatis |
+| Tanggal | 08/10/2026 | Tanggal order masuk |
+| Nama Pelanggan | Dewi Lestari | Nama pemesan |
+| No. WA | 0812xxxx | Untuk follow-up |
+| Produk | Kemeja Flanel Navy L | Nama produk (sesuai katalog!) |
+| Jumlah | 2 | Qty |
+| Harga Satuan | 85000 | Harga per pcs |
+| Total | 170000 | Jumlah × harga (otomatis) |
+| Status | Sudah Bayar | Order Baru / Menunggu Pembayaran / Sudah Bayar / Dikirim |
+| Catatan | Minta dibungkus kado | Opsional |
+
+Tiga aturan emas struktur ini:
+
+1. **Satu baris = satu order.** Jangan gabungkan dua order pelanggan berbeda dalam satu baris.
+2. **Nama produk harus konsisten** — samakan dengan nama di katalog WhatsApp Business (Lesson 2). Jangan hari ini tulis "kemeja flanel", besok "Kemeja Flanel Navy". Data yang tidak konsisten tidak bisa direkap otomatis.
+3. **Jangan kosongkan kolom Total** — isi dengan rumus (lihat Langkah 4), bukan angka ketikan.
+
+## Langkah 2: Terima Pesanan Lewat Google Form (Otomatis Masuk Sheets)
+
+Mencatat order manual dari chat ke spreadsheet tetap merepotkan. Cara yang lebih cerdas: biarkan **pelanggan (atau Anda) mengisi form**, dan datanya otomatis masuk ke spreadsheet.
+
+Caranya:
+
+1. Buka [forms.google.com](https://forms.google.com) → buat form baru → beri judul "Formulir Pemesanan [Nama Usaha]".
+2. Tambahkan pertanyaan sesuai kolom spreadsheet:
+   - Nama Lengkap (jawaban singkat, wajib)
+   - Nomor WhatsApp (jawaban singkat, wajib)
+   - Pilih Produk (pilihan ganda — isi dengan daftar produk dari katalog Anda)
+   - Jumlah (jawaban singkat, wajib)
+   - Alamat Lengkap (paragraf, wajib)
+   - Catatan (paragraf, opsional)
+3. Klik tab **Respons** → klik ikon Sheets (warna hijau) → **Buat spreadsheet baru**. Sekarang setiap form yang diisi otomatis menjadi satu baris baru di spreadsheet.
+4. Klik **Kirim** → salin link form → pasang di:
+   - Profil WhatsApp Business (sebagai link website)
+   - Template balasan cepat `/order` (Lesson 2)
+   - Bio Instagram/Facebook usaha Anda
+
+Alur barunya: pelanggan klik link → isi form 1 menit → data langsung rapi di spreadsheet Anda. Tidak ada lagi order tercecer di chat.
+
+Tips: untuk usaha kuliner harian, Anda bisa membuat form terpisah per hari ("Order Selasa 14 Okt") atau satu form dengan kolom tanggal. Pilih yang paling nyaman.
+
+## Langkah 3: Rapikan dengan Filter dan Validasi
+
+Setelah data mulai masuk, dua fitur ini menjaga spreadsheet tetap bersih:
+
+**Filter:** Klik header kolom → **Data → Buat filter**. Sekarang Anda bisa menampilkan hanya order berstatus "Order Baru", atau hanya order tanggal hari ini, dengan dua klik. Sangat berguna tiap pagi saat memproses order.
+
+**Validasi data untuk kolom Status:** Blok kolom Status → **Data → Validasi data** → pilih "Daftar dari rentang" atau "Daftar item" → isi: `Order Baru, Menunggu Pembayaran, Sudah Bayar, Dikirim, Batal`. Sekarang kolom Status hanya bisa diisi dengan pilihan tersebut (muncul sebagai dropdown). Ini mencegah typo seperti "sudah bayar" vs "Sudah Bayar" yang merusak rekap otomatis.
+
+## Langkah 4: Rumus Sederhana untuk Rekap Otomatis
+
+Ini bagian "ajaib"-nya. Anda tidak perlu jago Excel — cukup 4 rumus ini:
+
+**1. Total otomatis (kolom H):**
+Di sel H2 (baris pertama data), tulis:
+```
+=F2*G2
+```
+Artinya: Jumlah × Harga Satuan. Tarik ke bawah (drag kotak kecil di pojok sel) agar berlaku untuk semua baris baru.
+
+**2. Total omzet hari ini:**
+Di sel kosong (misalnya di sheet terpisah bernama "Rekap"), tulis:
+```
+=SUMIF('Respons Form'!B:B; TODAY(); 'Respons Form'!H:H)
+```
+Artinya: jumlahkan kolom Total (H) di mana kolom Tanggal (B) sama dengan hari ini. Ganti `;` dengan `,` jika spreadsheet Anda memakai koma.
+
+**3. Jumlah transaksi hari ini:**
+```
+=COUNTIF('Respons Form'!B:B; TODAY())
+```
+
+**4. Produk terlaris:**
+```
+=SUMIF('Respons Form'!E:E; "Kemeja Flanel Navy L"; 'Respons Form'!F:F)
+```
+Artinya: total qty terjual untuk produk tertentu. Ulangi untuk tiap produk unggulan, dan Anda tahu persis mana yang paling laku.
+
+Buat satu sheet bernama **"Dashboard Harian"** berisi keempat angka ini dengan huruf besar. Setiap pagi, buka sheet itu — Anda langsung tahu omzet kemarin, tanpa menghitung manual.
+
+## Langkah 5: Amankan Data Anda
+
+Database order adalah aset usaha. Lakukan tiga hal ini:
+
+1. **Jangan bagikan link edit sembarangan.** Form untuk pelanggan hanya butuh link form, bukan link spreadsheet.
+2. **Aktifkan riwayat versi**: Google Sheets otomatis menyimpan semua perubahan. Kalau ada yang terhapus tidak sengaja, buka **File → Riwayat versi** untuk mengembalikan.
+3. **Backup bulanan**: tiap akhir bulan, **File → Download → Microsoft Excel**, simpan di HP/laptop. Butuh waktu 30 detik, tapi menyelamatkan Anda kalau terjadi apa-apa.
+
+## Contoh Kasus: Warung Katering "Dapur Mbok Darmi"
+
+Mbok Darmi menerima 20–40 order katering harian via WhatsApp. Sebelumnya, ia mencatat di buku tulis — sering salah hitung total, dan pernah ada 3 order yang tidak tercatat sampai pelanggan komplain.
+
+Setelah menerapkan sistem ini:
+- Pelanggan mengisi Google Form (link dipasang di balasan cepat `/order`).
+- Semua order otomatis masuk spreadsheet, lengkap dengan jam masuknya.
+- Kolom Status dengan dropdown memudahkan tracking: mana yang sudah dibayar, mana yang sudah dikirim.
+- Dashboard Harian menampilkan omzet otomatis — Mbok Darmi tidak lagi lembur menghitung di malam hari.
+
+Waktu pencatatan turun dari 1,5 jam/hari menjadi sekitar 15 menit/hari (hanya untuk verifikasi dan update status).
+
+## Checklist Lesson 3
+
+- [ ] Buat spreadsheet "Database Order" dengan 10 kolom sesuai struktur di atas.
+- [ ] Buat Google Form pemesanan dan hubungkan ke spreadsheet (tab Respons → ikon Sheets).
+- [ ] Pasang link form di profil WA Business, template `/order`, dan bio sosmed.
+- [ ] Aktifkan filter di header kolom dan validasi dropdown untuk kolom Status.
+- [ ] Pasang rumus Total otomatis (`=F2*G2`) dan tarik ke bawah.
+- [ ] Buat sheet "Dashboard Harian" dengan 4 rumus rekap (omzet, transaksi, produk terlaris).
+- [ ] Lakukan order percobaan: isi form sebagai pelanggan, pastikan datanya masuk rapi.
+- [ ] Download backup Excel pertama sebagai arsip.
+
+Di lesson berikutnya, kita naik level: menghubungkan semua tools ini agar berjalan sendiri dengan Make.com atau Zapier — misalnya order baru otomatis mengirim notifikasi ke Telegram Anda.
