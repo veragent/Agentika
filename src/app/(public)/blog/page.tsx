@@ -2,7 +2,7 @@ import { AdSlot } from "@/components/ads/ad-slot"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { getPublishedBlogPosts, slugifyHeading } from "@/lib/blog"
+import { getPublishedBlogPosts } from "@/lib/blog"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NewsletterForm } from "@/components/newsletter/newsletter-form"
@@ -33,7 +33,7 @@ export default async function BlogPage() {
       <div className="space-y-3">
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <Link key={tag} href={`/blog/tag/${slugifyHeading(tag)}`}>
+            <Link key={tag} href={`/search?q=%23${encodeURIComponent(tag)}`}>
               <Badge variant="secondary">#{tag}</Badge>
             </Link>
           ))}
