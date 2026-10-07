@@ -1,6 +1,7 @@
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getLearnNavigation } from "@/lib/learn"
+import { TrackProgressBar } from "@/components/learn/lesson-progress"
 import { ArrowRight, Book } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
@@ -30,11 +31,14 @@ export default async function LearnIndexPage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <Book className="h-6 w-6" />
               </div>
-              <div>
+              <div className="w-full">
                 <CardTitle>{track.title}</CardTitle>
                 <CardDescription className="text-sm">
                   {track.sections.reduce((count, section) => count + section.pages.length, 0)} Materi
                 </CardDescription>
+                <TrackProgressBar
+                  lessonIds={track.sections.flatMap((section) => section.pages).map((page) => page.slug)}
+                />
               </div>
             </CardHeader>
             <CardContent>

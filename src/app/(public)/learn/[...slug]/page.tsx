@@ -1,6 +1,7 @@
 import { AdSlot } from "@/components/ads/ad-slot"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { components } from "@/components/mdx"
+import { MarkCompleteButton } from "@/components/learn/lesson-progress"
 import { getLearnPageBySlug, getLearnPagination } from "@/lib/learn"
 import type { Metadata } from "next"
 import Link from "next/link"
@@ -53,6 +54,10 @@ export default async function LearnPage({ params }: LearnPageProps) {
 
       <div className="prose prose-zinc max-w-none dark:prose-invert">
         <MDXRemote source={page.content} components={components} />
+      </div>
+
+      <div className="flex justify-center border-t pt-6">
+        <MarkCompleteButton lessonId={slugPath} />
       </div>
 
       <div className="grid gap-3 border-t pt-6 md:grid-cols-2">
