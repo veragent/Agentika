@@ -80,6 +80,23 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+
+  // Blog flat URLs: 301 redirect legacy /blog/<category>/<slug> to /blog/<slug>.
+  // Disk folders under content/blog/ remain for organization; public URLs are flat.
+  async redirects() {
+    const legacyCategories = [
+      "ai-tools",
+      "ai-automation",
+      "prompt-engineering",
+      "side-hustle",
+      "umkm-case-studies",
+    ]
+    return legacyCategories.map((cat) => ({
+      source: `/blog/${cat}/:slug`,
+      destination: "/blog/:slug",
+      permanent: true,
+    }))
+  },
 }
 
 export default withBundleAnalyzer(nextConfig)

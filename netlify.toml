@@ -46,29 +46,3 @@
 # Enable skew protection (requires Netlify Pro+)
 # [build.environment]
 #   NETLIFY_NEXT_SKEW_PROTECTION = "true"
-# Blog flat URLs: redirect legacy /blog/<category>/<slug> to /blog/<slug> (301)
-# Disk folders under content/blog/ remain for organization; public URLs are flat.
-[[redirects]]
-  from = "/blog/ai-tools/*"
-  to = "/blog/:splat"
-  status = 301
-
-[[redirects]]
-  from = "/blog/ai-automation/*"
-  to = "/blog/:splat"
-  status = 301
-
-[[redirects]]
-  from = "/blog/prompt-engineering/*"
-  to = "/blog/:splat"
-  status = 301
-
-[[redirects]]
-  from = "/blog/side-hustle/*"
-  to = "/blog/:splat"
-  status = 301
-
-[[redirects]]
-  from = "/blog/umkm-case-studies/*"
-  to = "/blog/:splat"
-  status = 301
