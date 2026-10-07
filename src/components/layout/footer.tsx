@@ -24,7 +24,7 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold mb-4">Community</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="https://twitter.com/ai3myid" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Twitter / X</Link></li>
+              <li><Link href="https://x.com/Agentika_ai" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Twitter / X</Link></li>
               <li><Link href="https://github.com/veragent/Agentika" target="_blank" rel="noopener noreferrer" className="hover:text-primary">GitHub</Link></li>
             </ul>
           </div>
