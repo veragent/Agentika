@@ -1,0 +1,165 @@
+import type { Metadata } from "next"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { aiTools, getToolBySlug, getToolsByCategory } from "@/lib/ai-tools"
+
+export async function generateStaticParams() {
+  return aiTools.map((tool) => ({ slug: tool.slug }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const tool = getToolBySlug(slug)
+  if (!tool) return {}
+  return {
+    title: `${tool.name} — ${tool.tagline}`,
+    description: tool.description,
+    alternates: { canonical: `/ai-tools/${tool.slug}` },
+  }
+}
+
+export default async function ToolDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const tool = getToolBySlug(slug)
+  if (!tool) notFound()
+
+  const alternatives = getToolsByCategory(tool.category)
+    .filter((t) => t.slug !== tool.slug)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3)
+
+  return (
+    <section className="container py-8">
+      <Link
+        href="/ai-tools"
+        className="text-sm text-muted-foreground hover:text-primary"
+      >
+        ← Semua tools
+      </Link>
+
+      <div className="space-y-4 mt-6 mb-8">
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            {tool.name}
+          </h1>
+          <span
+            className={`text-xs px-2 py-0.5 rounded-full border ${
+              tool.pricing === "Free"
+                ? "border-green-300 text-green-700 bg-green-50"
+                : tool.pricing === "Freemium"
+                  ? "border-yellow-300 text-yellow-700 bg-yellow-50"
+                  : "border-blue-300 text-blue-700 bg-blue-50"
+            }`}
+          >
+            {tool.pricing}
+          </span>
+          <span className="text-xs px-2 py-0.5 rounded bg-muted">
+            {tool.category}
+          </span>
+        </div>
+        <p className="text-base text-muted-foreground sm:text-lg max-w-2xl">
+          {tool.tagline}
+        </p>
+        <p className="text-sm text-muted-foreground flex items-center gap-1">
+          <span className="text-yellow-500">★</span> {tool.rating} / 5
+        </p>
+      </div>
+
+      <div className="space-y-8 max-w-3xl">
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Tentang {tool.name}</h2>
+          <p className="text-muted-foreground">{tool.description}</p>
+        </div>
+
+        {tool.features && tool.features.length > 0 && (
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Fitur utama</h2>
+            <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+              {tool.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {((tool.pros && tool.pros.length > 0) ||
+          (tool.cons && tool.cons.length > 0)) && (
+          <div className="grid gap-6 sm:grid-cols-2">
+            {tool.pros && tool.pros.length > 0 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Kelebihan</h2>
+                <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                  {tool.pros.map((pro) => (
+                    <li key={pro}>{pro}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {tool.cons && tool.cons.length > 0 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Kekurangan</h2>
+                <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                  {tool.cons.map((con) => (
+                    <li key={con}>{con}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        {tool.affiliateLink && (
+          <div>
+            <a
+              href={tool.affiliateLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90"
+            >
+              Kunjungi {tool.name} ↗
+            </a>
+          </div>
+        )}
+
+        {alternatives.length > 0 && (
+          <div>
+            <h2 className="text-xl font-semibold mb-4">
+              Alternatif di kategori {tool.category}
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {alternatives.map((alt) => (
+                <Link key={alt.slug} href={`/ai-tools/${alt.slug}`}>
+                  <Card className="h-full transition-all hover:shadow-lg">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-base">{alt.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {alt.tagline}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+                        <span className="text-yellow-500">★</span> {alt.rating}
+                        <span className="ml-2 px-2 py-0.5 rounded bg-muted">
+                          {alt.pricing}
+                        </span>
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

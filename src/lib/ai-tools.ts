@@ -14,6 +14,12 @@ export interface AITool {
   featured: boolean
   rating: number
   affiliateLink?: string | null
+  /** Fitur utama, diisi per tool dari riset (opsional — disembunyikan bila kosong). */
+  features?: string[]
+  /** Kelebihan, diisi per tool dari riset (opsional). */
+  pros?: string[]
+  /** Kekurangan, diisi per tool dari riset (opsional). */
+  cons?: string[]
 }
 
 export const aiTools: AITool[] = [

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { getAllFilesMetadata } from "@/lib/mdx"
 import { getPublishedBlogPosts } from "@/lib/blog"
+import { aiTools } from "@/lib/ai-tools"
 import { env } from "@/lib/env"
 
 const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
@@ -35,7 +36,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }))
 
-  return [...staticRoutes, ...blogRoutes, ...learnRoutes]
+  const toolRoutes: MetadataRoute.Sitemap = aiTools.map((tool) => ({
+    url: `${baseUrl}/ai-tools/${tool.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }))
+
+  return [...staticRoutes, ...blogRoutes, ...learnRoutes, ...toolRoutes]
 }
 
 export const dynamic = "force-static"

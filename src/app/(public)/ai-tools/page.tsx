@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Link from 'next/link'
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { aiTools, getAllCategories, getFeaturedTools } from '@/lib/ai-tools'
 import { ToolsFilter } from '@/components/ai-tools/ToolsFilter'
 
@@ -79,7 +80,11 @@ export default function AiToolsPage() {
           >
             <CardHeader className="flex flex-col gap-2 pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg line-clamp-1">{tool.name}</CardTitle>
+                <CardTitle className="text-lg line-clamp-1">
+                  <Link href={`/ai-tools/${tool.slug}`} className="hover:text-primary hover:underline">
+                    {tool.name}
+                  </Link>
+                </CardTitle>
                 <span className="text-xs px-2 py-0.5 rounded-full border
                   {tool.pricing === 'Free' ? 'border-green-300 text-green-700 bg-green-50' :
                    tool.pricing === 'Freemium' ? 'border-yellow-300 text-yellow-700 bg-yellow-50' :
@@ -101,6 +106,12 @@ export default function AiToolsPage() {
                   {tool.rating}
                 </span>
                 <span className="px-2 py-0.5 rounded bg-muted">{tool.category}</span>
+                <Link
+                  href={`/ai-tools/${tool.slug}`}
+                  className="text-primary hover:underline"
+                >
+                  Lihat detail →
+                </Link>
                 {tool.affiliateLink && (
                   <a
                     href={tool.affiliateLink}
