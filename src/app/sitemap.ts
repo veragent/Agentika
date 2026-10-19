@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   const learnRoutes: MetadataRoute.Sitemap = learnPages.map((page) => ({
-    url: `${baseUrl}/${page.slug}`,
+    url: `${baseUrl}/learn/${page.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.65,
