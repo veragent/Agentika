@@ -9,6 +9,9 @@ const serverEnvSchema = z.object({
   GOOGLE_AI_API_KEY: z.string().optional(),
   GROQ_API_KEY: z.string().optional(),
 
+  // AI Chat Sidebar (kill switch; "true" untuk mengaktifkan)
+  AI_CHAT_ENABLED: z.string().default("false"),
+
   // AdSense
   NEXT_PUBLIC_ADSENSE_CLIENT: z.string().optional(),
 
