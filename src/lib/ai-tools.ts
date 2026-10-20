@@ -33,6 +33,24 @@ export const aiTools: AITool[] = [
     featured: true,
     rating: 4.8,
     affiliateLink: "https://openai.com/chatgpt",
+    features: [
+      "Chat teks dan mode suara untuk tanya jawab dan brainstorming",
+      "Upload dan analisis file (PDF, spreadsheet, gambar)",
+      "Pembuatan gambar langsung dari prompt",
+      "Deep research: riset multi-langkah yang hasilnya berupa laporan",
+      "Custom GPT: asisten khusus dari GPT Store, dan bisa membuat sendiri di paket berbayar",
+      "Projects dan memori percakapan agar konteks berlanjut antar chat",
+    ],
+    pros: [
+      "Paling serbaguna: teks, gambar, file, dan suara dalam satu tempat",
+      "Ekosistem Custom GPT terbesar, banyak asisten siap pakai",
+      "Versi gratisnya sudah cukup untuk kebanyakan tugas harian UMKM",
+    ],
+    cons: [
+      "Di versi gratis, batas upload file, pembuatan gambar, dan deep research cepat habis",
+      "Versi gratis menampilkan iklan di beberapa negara",
+      "Fitur terbaik (model reasoning, kuota deep research lebih besar) terkunci di paket berbayar mulai $20/bulan",
+    ],
   },
   {
     name: "Claude",
@@ -44,6 +62,23 @@ export const aiTools: AITool[] = [
     featured: true,
     rating: 4.9,
     affiliateLink: "https://www.anthropic.com/claude",
+    features: [
+      "Projects: ruang kerja berisi dokumen dan instruksi khusus yang berlaku di semua chat di dalamnya",
+      "Artifacts: dokumen, tabel, dan kode dibuat di panel samping chat dan bisa diedit langsung",
+      "Upload dan analisis dokumen (PDF, spreadsheet, gambar)",
+      "Konteks percakapan sangat panjang, cocok untuk kontrak dan laporan tebal",
+      "Pencarian web langsung dari dalam chat",
+    ],
+    pros: [
+      "Kualitas tulisan rapi untuk artikel, email, dan dokumen bisnis",
+      "Kuat menganalisis dokumen panjang dalam sekali jalan",
+      "Projects menjaga gaya dan konteks usaha tetap konsisten tanpa mengulang instruksi",
+    ],
+    cons: [
+      "Tidak bisa membuat gambar dari prompt seperti ChatGPT",
+      "Batas pemakaian per jendela 5 jam sering dikeluhkan pengguna aktif",
+      "Kalau batas Pro ($20/bulan) kurang, loncat ke Max mulai $100/bulan terasa jauh",
+    ],
   },
   {
     name: "Jasper",
