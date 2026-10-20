@@ -42,3 +42,6 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# Artefak build: search index gabungan (dibuat oleh scripts/build-search-index.ts)
+/public/search-index.json

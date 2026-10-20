@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
+    "prebuild": "node --import tsx scripts/build-search-index.ts",
     "build": "next build",
+    "search-index": "node --import tsx scripts/build-search-index.ts",
     "start": "next start",
     "lint": "eslint .",
     "analyze": "ANALYZE=true next build",
