@@ -1,0 +1,92 @@
+---
+title: 'Kelola Stok UMKM Pakai AI: Berhenti Kehabisan Barang yang Laris'
+slug: 'kelola-stok-umkm-dengan-ai'
+category: 'ai-tutorial'
+tags: ['umkm', 'stok', 'ai-tutorial', 'bisnis']
+date: '2026-10-20'
+published: true
+readingTime: 6
+wordCount: 960
+language: 'id'
+difficulty: 'beginner'
+description: 'Stok habis saat ramai itu kehilangan uang, stok menumpuk itu modal mati. Catat stok di spreadsheet, lalu minta AI menghitung kapan harus pesan lagi.'
+---
+
+# Kelola Stok UMKM Pakai AI: Berhenti Kehabisan Barang yang Laris
+
+Barang yang paling laris justru yang paling sering habis. Pembeli datang, stok kosong, dia pindah ke toko sebelah. Sebaliknya, barang yang jarang laku dibeli banyak-banyak dan menumpuk di gudang sampai kedaluwarsa. Dua-duanya bikin rugi, cuma jalannya beda.
+
+Masalahnya jarang di niat. Kebanyakan pemilik usaha kecil memang tidak punya catatan stok yang bisa dibaca. Stok diingat-ingat, atau ditulis di buku yang entah di mana. Selama penjualan masih sedikit, cara itu jalan. Begitu produknya belasan dan pembelinya ramai, ingatan mulai kalah.
+
+AI tidak bisa menggantikan catatan. Tapi kalau catatannya ada, AI bisa membaca pola dari catatan itu jauh lebih cepat daripada kamu menghitung manual. Artikel ini membahas urutannya: catat dulu, baru minta AI yang mengolah.
+
+## Langkah 1: Catat stok masuk dan keluar di spreadsheet
+
+Tidak perlu aplikasi inventaris berbayar. Google Sheets atau Excel cukup, dengan lima kolom: tanggal, nama produk, masuk, keluar, sisa. Setiap ada barang datang, tulis di kolom masuk. Setiap penjualan, tulis di kolom keluar. Sisa adalah hasil pengurangan yang bisa dihitung otomatis pakai rumus sederhana.
+
+Bagian tersulitnya bukan medianya, tapi disiplinnya. Catat di hari yang sama, jangan ditumpuk sampai akhir pekan, karena di situlah angka mulai dikarang dari ingatan. Lima menit sehari biasanya cukup untuk toko dengan puluhan produk.
+
+Kalau kamu sudah punya catatan penjualan dari aplikasi kasir atau dari riwayat order marketplace, itu lebih bagus lagi. Ekspor ke spreadsheet, dan kamu langsung punya bahan untuk langkah berikutnya.
+
+## Langkah 2: Minta AI menghitung kapan harus pesan lagi
+
+Konsepnya sederhana, namanya titik pesan ulang. Kamu perlu tahu tiga angka untuk tiap produk:
+
+- Rata-rata penjualan per hari
+- Berapa hari supplier mengirim sejak kamu pesan
+- Stok pengaman, yaitu cadangan untuk hari-hari ramai di luar rata-rata
+
+Rumusnya: rata-rata penjualan harian dikali lama pengiriman, lalu tambah stok pengaman. Kalau hasilnya 114, artinya begitu stok menyentuh 114, kamu pesan hari itu juga. Bukan saat stok tinggal 10.
+
+Menghitung ini manual untuk 30 produk itu membosankan dan rawan salah. Di sinilah AI kepakai. Tempel data penjualan 30 hari dari spreadsheet kamu, dan minta AI menghitung ketiga angka itu untuk semua produk sekaligus, dalam bentuk tabel.
+
+## Langkah 3: Baca pola musiman dari data sendiri
+
+Rata-rata saja belum cukup, karena penjualan UMKM jarang rata. Ada pola hari gajian, pola akhir pekan, pola Ramadan dan Lebaran, pola musim hujan untuk produk tertentu. Data tiga bulan biasanya sudah memperlihatkan pola kasarnya.
+
+Minta AI membandingkan penjualan per minggu dan menandai produk yang naik turunnya mengikuti pola tertentu. Hasilnya bukan ramalan pasti. Anggap saja pengingat: bulan depan produk A biasanya naik, jadi pesan lebih awal dan sedikit lebih banyak. Keputusan terakhir tetap di kamu, karena kamu yang tahu ada promo kompetitor atau jalan di depan toko sedang ditutup untuk galian.
+
+Contoh polanya gampang ditebak setelah data bicara. Toko bahan kue biasanya melihat tepung, mentega, dan cokelat naik dua sampai tiga minggu sebelum Lebaran, lalu turun tajam sesudahnya. Warung kopi naik di tanggal muda dan turun di tanggal tua. Kalau pola seperti itu muncul di datamu, titik pesan ulang untuk minggu-minggu ramai perlu dinaikkan sementara, bukan disamakan dengan minggu biasa.
+
+## Template prompt: hitung titik pesan ulang
+
+Salin prompt ini, lalu tempel data penjualanmu di bawahnya (dari spreadsheet, pilih semua, salin, tempel):
+
+```text
+Berikut data penjualan toko saya selama 30 hari terakhir.
+Kolomnya: tanggal, nama produk, jumlah terjual.
+
+Untuk setiap produk, hitung:
+1. Rata-rata penjualan per hari
+2. Perkiraan stok habis dalam berapa hari, jika stok saat ini saya tulis di bawah data
+3. Titik pesan ulang, dengan asumsi pengiriman supplier 2 hari dan stok pengaman sebesar 1 hari penjualan
+
+Sajikan hasilnya dalam tabel, urutkan dari yang paling cepat habis.
+Tandai produk yang stoknya akan habis dalam 3 hari atau kurang.
+```
+
+Sesuaikan dua angka di prompt itu dengan keadaan tokomu: lama pengiriman supplier dan stok pengaman. Supplier yang sering telat butuh pengaman lebih tebal.
+
+## Contoh perhitungan
+
+Sebuah toko kelontong menjual mi instan merek tertentu. Dari data 30 hari, rata-ratanya 38 bungkus per hari. Supplier mengirim dalam 2 hari. Stok pengaman dipatok 1 hari penjualan, yaitu 38 bungkus.
+
+Titik pesan ulangnya: 38 dikali 2, tambah 38, hasilnya 114 bungkus. Jadi pemilik toko tidak menunggu rak kosong. Begitu hitungan stok mencapai 114, dia pesan. Saat kiriman datang dua hari kemudian, stok masih tersisa sekitar 38, dan dia tidak pernah kehabisan di tengah hari ramai.
+
+Angka ini tidak sakral. Setelah sebulan, hitung ulang dari data terbaru, karena rata-rata penjualan berubah.
+
+## Yang tidak bisa dilakukan AI
+
+AI hanya membaca data yang kamu berikan. Ia tidak tahu supplier langgananmu sedang bermasalah, tidak tahu ada dua karton rusak di pojok gudang, dan tidak tahu kompetitor sebelah sedang diskon besar. Karena itu angka dari AI tetap perlu dicek dengan stok fisik, setidaknya seminggu sekali. Selisih antara catatan dan fisik itu normal, dan justru dari selisih itu kamu tahu ada yang bocor, entah karena salah catat, barang rusak, atau hilang.
+
+Satu hal lagi: jangan tempel data yang memuat informasi pribadi pelanggan ke AI publik. Untuk urusan stok, yang dibutuhkan hanya tanggal, produk, dan jumlah. Nama dan nomor HP pembeli tidak perlu ikut.
+
+## Kesalahan yang sering terjadi
+
+Kesalahan pertama, memesan berdasarkan rasa laris. Produk yang terlihat laris belum tentu paling cepat habis, dan produk yang sepi di etalase kadang justru habis duluan karena stok awalnya memang sedikit.
+
+Kesalahan kedua, menghitung rata-rata dari data yang terlalu pendek. Tiga hari penjualan tidak menggambarkan apa-apa. Pakai minimal 30 hari.
+
+Kesalahan ketiga, berhenti di perhitungan. Titik pesan ulang tidak berguna kalau tidak ada kebiasaan melihat stok setiap hari. Pasang pengingat sederhana: cek daftar produk yang mendekati titik pesan ulang setiap pagi sebelum toko buka, cukup lima menit.
+
+Mulai dari yang paling gampang: pilih 5 produk terlarismu, catat stoknya mulai hari ini, dan setelah 30 hari jalankan prompt di atas. Dari situ polanya akan kelihatan sendiri.
