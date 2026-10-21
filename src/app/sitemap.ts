@@ -43,7 +43,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticRoutes, ...blogRoutes, ...learnRoutes, ...toolRoutes]
+  const compareRoute: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/ai-tools/bandingkan`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    },
+  ]
+
+  return [
+    ...staticRoutes,
+    ...blogRoutes,
+    ...learnRoutes,
+    ...toolRoutes,
+    ...compareRoute,
+  ]
 }
 
 export const dynamic = "force-static"

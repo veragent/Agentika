@@ -22,7 +22,12 @@ export default function AiToolsPage() {
         <p className="text-base text-muted-foreground sm:text-lg max-w-2xl">
           Kumpulan tools AI untuk konten, produktivitas, dan bisnis online. {aiTools.length} tools dalam {categories.length} kategori.
         </p>
-        
+        <p>
+          <Link href="/ai-tools/bandingkan" className="text-sm font-medium text-primary hover:underline">
+            Bandingkan sampai 3 tools side-by-side →
+          </Link>
+        </p>
+
         {/* Featured tools */}
         {featured.length > 0 && (
           <div className="flex flex-wrap gap-2">

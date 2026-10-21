@@ -984,3 +984,6 @@ export function getAllCategories(): string[] {
 export function getToolBySlug(slug: string): AITool | undefined {
   return aiTools.find((tool) => tool.slug === slug)
 }
+
+/** Maksimal tool yang bisa dibandingkan sekaligus di /ai-tools/bandingkan. */
+export const MAX_COMPARE_TOOLS = 3
