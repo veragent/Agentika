@@ -2,7 +2,13 @@ import { AdSlot } from "@/components/ads/ad-slot"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { components } from "@/components/mdx"
 import { MarkCompleteButton } from "@/components/learn/lesson-progress"
+import { ChatSidebar } from "@/components/learn/chat-sidebar"
+import {
+  JsonLdScript,
+  buildLearningResourceJsonLd,
+} from "@/components/seo/json-ld-data"
 import { getLearnPageBySlug, getLearnPagination } from "@/lib/learn"
+import { env } from "@/lib/env"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -41,8 +47,18 @@ export default async function LearnPage({ params }: LearnPageProps) {
 
   const { prev, next } = await getLearnPagination(slugPath)
 
+  const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
+  const lessonJsonLd = buildLearningResourceJsonLd({
+    title: page.title,
+    description: page.excerpt ?? "",
+    url: `${baseUrl}/learn/${slugPath}`,
+    trackTitle: page.trackTitle,
+  })
+
   return (
+    <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
     <article className="space-y-8 py-6">
+      <JsonLdScript json={lessonJsonLd} id="lesson-json-ld" />
       <nav className="text-sm text-muted-foreground">
         <Link href="/learn" className="hover:text-primary">
           Learn
@@ -83,5 +99,7 @@ export default async function LearnPage({ params }: LearnPageProps) {
       <AdSlot section="learn_detail" className="rounded-xl border p-4" />
       <InternalLinksBlock />
     </article>
+    <ChatSidebar slug={slugPath} lessonTitle={page.title} />
+    </div>
   )
 }
