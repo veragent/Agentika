@@ -200,3 +200,70 @@ export function buildBreadcrumbJsonLd(
     })),
   }
 }
+
+/**
+ * Builds a SoftwareApplication JSON-LD for an AI tool detail page.
+ * Rating adalah penilaian editorial Agentika (satu penilai).
+ * Offers harga 0 hanya untuk tool dengan tier gratis (Free/Freemium).
+ */
+export function buildSoftwareApplicationJsonLd(opts: {
+  name: string
+  description: string
+  url: string
+  rating: number
+  pricing: "Free" | "Freemium" | "Paid"
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: opts.rating,
+      bestRating: 5,
+      ratingCount: 1,
+    },
+    ...(opts.pricing !== "Paid"
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+        }
+      : {}),
+    inLanguage: "id-ID",
+  }
+}
+
+/**
+ * Builds a LearningResource JSON-LD for a learn lesson page.
+ */
+export function buildLearningResourceJsonLd(opts: {
+  title: string
+  description: string
+  url: string
+  trackTitle?: string
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name: opts.title,
+    description: opts.description,
+    url: opts.url,
+    learningResourceType: "lesson",
+    inLanguage: "id-ID",
+    ...(opts.trackTitle
+      ? {
+          isPartOf: {
+            "@type": "Course",
+            name: opts.trackTitle,
+          },
+        }
+      : {}),
+  }
+}

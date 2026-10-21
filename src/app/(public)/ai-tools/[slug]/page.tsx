@@ -3,6 +3,11 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { aiTools, getToolBySlug, getToolsByCategory } from "@/lib/ai-tools"
+import {
+  JsonLdScript,
+  buildSoftwareApplicationJsonLd,
+} from "@/components/seo/json-ld-data"
+import { env } from "@/lib/env"
 
 export async function generateStaticParams() {
   return aiTools.map((tool) => ({ slug: tool.slug }))
@@ -37,8 +42,18 @@ export default async function ToolDetailPage({
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 3)
 
+  const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
+  const toolJsonLd = buildSoftwareApplicationJsonLd({
+    name: tool.name,
+    description: tool.description,
+    url: `${baseUrl}/ai-tools/${tool.slug}`,
+    rating: tool.rating,
+    pricing: tool.pricing,
+  })
+
   return (
     <section className="container py-8">
+      <JsonLdScript json={toolJsonLd} id="tool-json-ld" />
       <Link
         href="/ai-tools"
         className="text-sm text-muted-foreground hover:text-primary"
@@ -71,6 +86,14 @@ export default async function ToolDetailPage({
         </p>
         <p className="text-sm text-muted-foreground flex items-center gap-1">
           <span className="text-yellow-500">★</span> {tool.rating} / 5
+        </p>
+        <p>
+          <Link
+            href={`/ai-tools/bandingkan?tools=${tool.slug}`}
+            className="text-sm font-medium text-primary hover:underline"
+          >
+            Bandingkan {tool.name} dengan tool lain →
+          </Link>
         </p>
       </div>
 
