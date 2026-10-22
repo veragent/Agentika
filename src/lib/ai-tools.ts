@@ -165,7 +165,7 @@ export const aiTools: AITool[] = [
     slug: "notion-ai",
     tagline: "AI di dalam workspace Notion.",
     category: "Writing & Content",
-    pricing: "Freemium",
+    pricing: "Paid",
     description: "Notion AI membantu menulis, merangkum, dan menyusun catatan.",
     features: [
       "Membantu menulis, meringkas, dan memperbaiki teks langsung di halaman Notion",
