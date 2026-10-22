@@ -3,6 +3,8 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { aiTools, getToolBySlug, getToolsByCategory } from "@/lib/ai-tools"
+import { InternalLinksBlock } from "@/components/layout/internal-links"
+import { findPostsMentioningTool } from "@/lib/internal-links"
 import {
   JsonLdScript,
   buildSoftwareApplicationJsonLd,
@@ -41,6 +43,7 @@ export default async function ToolDetailPage({
     .filter((t) => t.slug !== tool.slug)
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 3)
+  const mentioningPosts = findPostsMentioningTool(tool.slug)
 
   const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
   const toolJsonLd = buildSoftwareApplicationJsonLd({
@@ -182,6 +185,33 @@ export default async function ToolDetailPage({
             </div>
           </div>
         )}
+
+        {mentioningPosts.length > 0 && (
+          <div>
+            <h2 className="text-xl font-semibold mb-4">
+              Artikel yang membahas {tool.name}
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {mentioningPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="rounded-lg border p-4 transition-colors hover:border-primary"
+                >
+                  <p className="text-sm text-muted-foreground">
+                    {post.category ?? "General"}
+                  </p>
+                  <p className="mt-1 font-semibold">{post.title}</p>
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                    {post.excerpt ?? "Tanpa deskripsi."}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <InternalLinksBlock title="Jelajahi Konten Lain" />
       </div>
     </section>
   )

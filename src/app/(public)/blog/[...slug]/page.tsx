@@ -4,6 +4,7 @@ import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { components } from "@/components/mdx"
 import { Badge } from "@/components/ui/badge"
 import { extractToc, getReadingStats, getPublishedBlogPosts, getPublicBlogPostBySlug, getPrevNextPosts, slugifyHeading } from "@/lib/blog"
+import { findMentionedTools } from "@/lib/internal-links"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
@@ -70,6 +71,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((entry) => entry.slug !== post.slug)
     .filter((entry) => entry.category === post.category || (entry.tags ?? []).some((tag) => (post.tags ?? []).includes(tag)))
     .slice(0, 3)
+  const mentionedTools = findMentionedTools(post)
 
   const readingStats = getReadingStats(post.content)
   const toc = extractToc(post.content)
@@ -153,6 +155,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <p className="text-sm text-muted-foreground">{relatedPost.category ?? "General"}</p>
                   <p className="mt-1 font-semibold">{relatedPost.title}</p>
                   <p className="mt-2 text-sm text-muted-foreground">{relatedPost.excerpt ?? "Tanpa deskripsi."}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {mentionedTools.length > 0 && (
+          <div className="mt-12 space-y-4 border-t pt-8">
+            <h2 className="text-2xl font-bold">AI tools terkait artikel ini</h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {mentionedTools.map((tool) => (
+                <Link key={tool.slug} href={`/ai-tools/${tool.slug}`} className="rounded-lg border p-4 transition-colors hover:border-primary">
+                  <p className="font-semibold">{tool.name}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{tool.tagline}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Rating {tool.rating.toFixed(1)} · {tool.pricing}
+                  </p>
                 </Link>
               ))}
             </div>
