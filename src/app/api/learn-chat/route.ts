@@ -6,6 +6,7 @@ import {
   isAiChatAvailable,
   streamLearnChat,
 } from "@/lib/ai/chat-provider"
+import { checkAiChatRateLimit } from "@/lib/ai/rate-limit"
 
 /**
  * AI Chat Sidebar — Phase 4, Tahap 0 (scaffolding).
@@ -43,6 +44,23 @@ export async function POST(req: Request) {
   }
 
   const { slug, messages } = parsed.data
+
+  const clientKey =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+  const rate = checkAiChatRateLimit(clientKey)
+  if (!rate.allowed) {
+    return NextResponse.json(
+      {
+        error:
+          "Terlalu banyak pesan dalam waktu singkat. Tunggu sebentar, lalu coba lagi ya.",
+      },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rate.retryAfterSeconds) },
+      },
+    )
+  }
+
   const lesson = await getLearnPageBySlug(slug)
   if (!lesson) {
     return NextResponse.json(
