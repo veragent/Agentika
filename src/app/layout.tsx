@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { BRAND } from "@/lib/brand"
 import { Providers } from "@/components/providers"
+import { getAdSettings } from "@/lib/ads"
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.agentika.web.id"
 
@@ -38,11 +40,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Script AdSense global: dibutuhkan untuk verifikasi situs dan Auto ads.
+  // Slot manual tetap dikendalikan adsense.json (globallyEnabled + slotId).
+  const adSettings = getAdSettings()
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
@@ -65,6 +70,15 @@ export default function RootLayout({
           </ThemeProvider>
         </Providers>
       </body>
+      {adSettings.clientId && (
+        <Script
+          id={`adsense-script-${adSettings.clientId}`}
+          async
+          strategy="afterInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSettings.clientId}`}
+          crossOrigin="anonymous"
+        />
+      )}
       <GoogleAnalytics gaId={GA_ID} />
     </html>
   )

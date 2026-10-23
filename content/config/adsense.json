@@ -1,6 +1,6 @@
 {
   "globallyEnabled": false,
-  "clientId": "",
+  "clientId": "ca-pub-8284519503817385",
   "sections": {
     "homepage": { "enabled": true, "slotId": "" },
     "blog_list": { "enabled": true, "slotId": "" },
