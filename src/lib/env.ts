@@ -34,7 +34,7 @@ const serverEnvSchema = z.object({
   TELEGRAM_ANNOUNCEMENTS_CHANNEL_ID: z.string().optional(),
 
   // Newsletter
-  NEWSLETTER_PROVIDER: z.enum(["convertkit", "mailerlite", "buttondown", "mailchimp"]).optional(),
+  NEWSLETTER_PROVIDER: z.enum(["convertkit", "mailerlite", "buttondown", "mailchimp", "resend"]).optional(),
   NEWSLETTER_API_KEY: z.string().optional(),
   NEWSLETTER_FORM_ID: z.string().optional(),
   NEWSLETTER_LIST_ID: z.string().optional(),

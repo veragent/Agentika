@@ -22,6 +22,12 @@ export const NEWSLETTER_PROVIDERS = {
     apiUrl: "https://<dc>.api.mailchimp.com/3.0/lists/<list_id>/members",
     fields: ["email_address", "merge_fields", "tags"],
     docUrl: "https://mailchimp.com/developer/"
+  },
+  resend: {
+    name: "Resend",
+    apiUrl: "https://api.resend.com/audiences",
+    fields: ["email", "first_name"],
+    docUrl: "https://resend.com/docs/api-reference/contacts/create-contact"
   }
 } as const
 
@@ -92,6 +98,20 @@ export async function subscribeToNewsletter(
         })
         const data = await res.json()
         return { success: res.ok, message: data.title || (res.ok ? "Subscribed!" : "Failed"), subscriberId: data.id }
+      }
+
+      case "resend": {
+        // Resend mengelompokkan subscriber sebagai Contacts di dalam Audience.
+        // Audience ID diisi lewat NEWSLETTER_LIST_ID (atau FORM_ID sebagai cadangan).
+        const audienceId = listId || formId
+        if (!audienceId) throw new Error("Resend requires an audience ID (NEWSLETTER_LIST_ID)")
+        const res = await fetch(`${NEWSLETTER_PROVIDERS.resend.apiUrl}/${audienceId}/contacts`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+          body: JSON.stringify({ email, first_name: name || undefined, unsubscribed: false })
+        })
+        const data = await res.json()
+        return { success: res.ok, message: data.message || (res.ok ? "Subscribed!" : "Failed"), subscriberId: data.id }
       }
 
       default:
