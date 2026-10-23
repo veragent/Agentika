@@ -40,17 +40,42 @@ function ListCell({ items }: { items?: string[] }) {
   )
 }
 
+const PRICING_ORDER: Record<AITool["pricing"], number> = {
+  Free: 0,
+  Freemium: 1,
+  Paid: 2,
+}
+
+function WinnerBadge({ label }: { label: string }) {
+  return (
+    <span className="ml-2 rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-medium whitespace-nowrap">
+      {label}
+    </span>
+  )
+}
+
 const ROWS: Array<{
   label: string
-  render: (tool: AITool) => React.ReactNode
+  render: (tool: AITool, selected: AITool[]) => React.ReactNode
 }> = [
   {
     label: "Rating",
-    render: (tool) => (
-      <span className="flex items-center gap-1">
-        <span className="text-yellow-500">★</span> {tool.rating} / 5
-      </span>
-    ),
+    render: (tool, selected) => {
+      const max = Math.max(...selected.map((t) => t.rating))
+      const isUniqueTop =
+        selected.length > 1 &&
+        tool.rating === max &&
+        selected.filter((t) => t.rating === max).length === 1
+      return (
+        <span className="flex items-center gap-1 flex-wrap">
+          <span className="text-yellow-500">★</span>
+          <span className={isUniqueTop ? "font-semibold" : undefined}>
+            {tool.rating} / 5
+          </span>
+          {isUniqueTop && <WinnerBadge label="Rating tertinggi" />}
+        </span>
+      )
+    },
   },
   {
     label: "Kategori",
@@ -58,7 +83,23 @@ const ROWS: Array<{
   },
   {
     label: "Model harga",
-    render: (tool) => tool.pricing,
+    render: (tool, selected) => {
+      const min = Math.min(
+        ...selected.map((t) => PRICING_ORDER[t.pricing]),
+      )
+      const isUniqueCheapest =
+        selected.length > 1 &&
+        PRICING_ORDER[tool.pricing] === min &&
+        selected.filter((t) => PRICING_ORDER[t.pricing] === min).length === 1
+      return (
+        <span className="flex items-center gap-1 flex-wrap">
+          <span className={isUniqueCheapest ? "font-semibold" : undefined}>
+            {tool.pricing}
+          </span>
+          {isUniqueCheapest && <WinnerBadge label="Paling terjangkau" />}
+        </span>
+      )
+    },
   },
   {
     label: "Cocok untuk",
@@ -126,12 +167,26 @@ export default async function CompareToolsPage({
             Belum ada tool yang dibandingkan. Mulai dari pasangan yang paling
             sering ditanyakan:
           </p>
-          <Link
-            href="/ai-tools/bandingkan?tools=chatgpt,claude"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90"
-          >
-            ChatGPT vs Claude →
-          </Link>
+          <div className="flex flex-wrap justify-center gap-2">
+            <Link
+              href="/ai-tools/bandingkan?tools=chatgpt,claude"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90"
+            >
+              ChatGPT vs Claude →
+            </Link>
+            <Link
+              href="/ai-tools/bandingkan?tools=chatgpt,gemini"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md border text-sm font-medium hover:bg-muted"
+            >
+              ChatGPT vs Gemini →
+            </Link>
+            <Link
+              href="/ai-tools/bandingkan?tools=claude,gemini"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md border text-sm font-medium hover:bg-muted"
+            >
+              Claude vs Gemini →
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="overflow-x-auto rounded-lg border">
@@ -164,7 +219,7 @@ export default async function CompareToolsPage({
                   </th>
                   {selected.map((tool) => (
                     <td key={tool.slug} className="p-4 align-top">
-                      {row.render(tool)}
+                      {row.render(tool, selected)}
                     </td>
                   ))}
                 </tr>
