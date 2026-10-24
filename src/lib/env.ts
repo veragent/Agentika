@@ -38,6 +38,20 @@ const serverEnvSchema = z.object({
   NEWSLETTER_API_KEY: z.string().optional(),
   NEWSLETTER_FORM_ID: z.string().optional(),
   NEWSLETTER_LIST_ID: z.string().optional(),
+  // Alamat pengirim untuk welcome email + digest (harus terverifikasi di Resend)
+  NEWSLETTER_FROM_EMAIL: z.string().optional(),
+
+  // Pelindung route cron (digest newsletter); dipakai juga Vercel Cron
+  CRON_SECRET: z.string().optional(),
+
+  // AI Writer (kill switch; "true" untuk mengaktifkan)
+  AI_WRITER_ENABLED: z.string().default("false"),
+
+  // Giscus (komentar blog via GitHub Discussions; kosong = komponen tidak dirender)
+  NEXT_PUBLIC_GISCUS_REPO: z.string().optional(),
+  NEXT_PUBLIC_GISCUS_REPO_ID: z.string().optional(),
+  NEXT_PUBLIC_GISCUS_CATEGORY: z.string().optional(),
+  NEXT_PUBLIC_GISCUS_CATEGORY_ID: z.string().optional(),
 
   // App URL (for sitemap, OG, canonical)
   NEXT_PUBLIC_APP_URL: z.string().url().optional(),

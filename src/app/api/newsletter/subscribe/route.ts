@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { subscribeToNewsletter } from "@/lib/newsletter"
+import { sendWelcomeEmail } from "@/lib/newsletter-automation"
 import { env } from "@/lib/env"
 
 export async function POST(request: NextRequest) {
@@ -37,6 +38,10 @@ export async function POST(request: NextRequest) {
 
     if (result.success) {
       console.log(`[Newsletter] Success: ${email}`)
+      // Welcome email (Phase 5 automation). Inert bila Resend belum
+      // dikonfigurasi, dan kegagalannya tidak menggagalkan subscribe.
+      const welcome = await sendWelcomeEmail(email, name).catch(() => ({ sent: false }))
+      if (welcome.sent) console.log(`[Newsletter] Welcome email sent: ${email}`)
       return NextResponse.json({ success: true, message: result.message })
     } else {
       console.error(`[Newsletter] Failed: ${email} - ${result.message}`)
