@@ -12,12 +12,12 @@ const SECURITY_HEADERS = {
   "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
   "Content-Security-Policy": [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com",
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://giscus.app",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: blob: https://og-images.pearlanalytics.ai https://*.vercel.app https://*.amazonaws.com https://images.unsplash.com https://*.googlesyndication.com https://googleads.g.doubleclick.net https://*.google.com",
     "connect-src 'self' https://api.coingecko.com https://*.vercel.app wss: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.googlesyndication.com",
-    "frame-src 'self' https://www.youtube.com https://www.googletagmanager.com https://*.googlesyndication.com https://googleads.g.doubleclick.net",
+    "frame-src 'self' https://www.youtube.com https://www.googletagmanager.com https://*.googlesyndication.com https://googleads.g.doubleclick.net https://giscus.app",
     "frame-ancestors 'none'",
   ].join("; "),
 }
