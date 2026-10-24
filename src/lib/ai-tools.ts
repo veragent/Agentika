@@ -89,6 +89,24 @@ export const aiTools: AITool[] = [
     description: "Jasper mempercepat pembuatan konten marketing dengan template dan tone brand.",
     featured: false,
     rating: 4.5,
+    features: [
+      "Brand Voice dan Jasper IQ: gaya bahasa, fakta produk, dan panduan gaya brand disimpan sekali, lalu dipakai di semua konten",
+      "50+ template dan aplikasi marketing: iklan Facebook dan Google, deskripsi produk, email, framework AIDA dan PAS",
+      "Canvas dan mode dokumen untuk menyusun konten panjang bersama tim",
+      "Jasper Chat untuk brainstorming dan penulisan bebas",
+      "Integrasi Surfer SEO untuk skor optimasi on-page saat menulis (butuh langganan Surfer terpisah)",
+      "Pembuatan gambar (Image Suite) dan pemeriksa plagiarisme bawaan",
+    ],
+    pros: [
+      "Konsistensi suara brand termasuk terbaik di kelasnya untuk tim yang menerbitkan banyak konten",
+      "Semua paket memberi kata tanpa batas (unlimited words), tidak ada hitungan kredit kata",
+      "Fitur tim lengkap: peran admin dan editor, kampanye, serta aset pengetahuan bersama",
+    ],
+    cons: [
+      "Mahal untuk pemakaian solo: mulai $49/bulan dan Pro $69 per kursi, tanpa paket gratis (hanya trial 7 hari)",
+      "Integrasi Surfer SEO yang menjadi andalan justru memerlukan langganan terpisah",
+      "Untuk kebutuhan UMKM sederhana seperti caption dan deskripsi produk, fitur dan harganya berlebihan",
+    ],
   },
   {
     name: "Copy.ai",
@@ -99,6 +117,23 @@ export const aiTools: AITool[] = [
     description: "Copy.ai membantu membuat headline, caption, dan landing page dengan cepat.",
     featured: false,
     rating: 4.4,
+    features: [
+      "Chat multi-model: akses model OpenAI, Anthropic, dan Gemini dalam satu workspace",
+      "90+ template copywriting: headline, iklan, email, deskripsi produk, dan konten media sosial",
+      "Workflows: otomatisasi multi-langkah untuk proses go-to-market, misalnya riset prospek lalu menyusun draf outreach personal",
+      "Brand Voice dan Infobase: menyimpan fakta produk dan gaya bahasa brand agar hasil konsisten",
+      "Integrasi CRM dan tool sales seperti Salesforce, HubSpot, Outreach, dan Zapier di paket platform",
+    ],
+    pros: [
+      "Sangat cepat untuk copy pendek: iklan, email, dan caption jadi dengan sedikit edit",
+      "Paket Chat $29/bulan sudah termasuk 5 kursi dengan kata tanpa batas di chat",
+      "Workflow otomatisnya nyata menghemat waktu tim sales dan marketing yang volumenya tinggi",
+    ],
+    cons: [
+      "Lonjakan harga ekstrem: dari paket Chat $29 langsung ke paket platform mulai $1.000/bulan, tidak ada kelas menengah",
+      "Kualitas konten panjang seperti artikel editorial kalah dari Jasper atau Claude",
+      "Fokus produk sudah bergeser ke platform go-to-market untuk tim sales, penulis konten murni bukan lagi prioritasnya",
+    ],
   },
   {
     name: "GrammarlyGO",
@@ -109,6 +144,24 @@ export const aiTools: AITool[] = [
     description: "GrammarlyGO memberi saran gaya bahasa, struktur, dan tone secara real-time.",
     featured: false,
     rating: 4.3,
+    features: [
+      "Pemeriksaan grammar, ejaan, dan tanda baca secara real-time lewat ekstensi browser, aplikasi desktop, dan keyboard mobile",
+      "GrammarlyGO: AI generatif untuk menyusun draf email, menulis ulang paragraf, dan memendekkan teks dari prompt singkat",
+      "Deteksi tone dan saran penyesuaian nada tulisan (percaya diri, ramah, formal)",
+      "Rewrite kalimat penuh untuk kejelasan dan pilihan kata di paket berbayar",
+      "Pemeriksa plagiarisme dan generator sitasi di paket berbayar (Pro)",
+      "Kuota prompt AI: 100 per bulan di paket gratis, 2.000 per bulan di Pro",
+    ],
+    pros: [
+      "Mesin grammar dan kejelasan termasuk yang terbaik, bekerja di Google Docs, email, dan media sosial tanpa pindah aplikasi",
+      "Paket gratisnya sudah fungsional untuk koreksi harian dan prompt AI dasar",
+      "Saran tone membantu menulis email bisnis berbahasa Inggris yang sopan dan jelas",
+    ],
+    cons: [
+      "Fokusnya bahasa Inggris; dukungan Bahasa Indonesia sangat terbatas, kurang relevan untuk konten lokal",
+      "Harga Pro $30/bulan bila dibayar bulanan terasa mahal; masuk akal hanya pada langganan tahunan ($12/bulan)",
+      "Perannya lebih sebagai editor dan asisten tulis ulang, bukan generator konten dari nol, dan sarannya kadang mengikis gaya pribadi penulis",
+    ],
   },
   {
     name: "Sudowrite",
@@ -119,6 +172,24 @@ export const aiTools: AITool[] = [
     description: "Sudowrite membantu membuat plot, dialog, dan deskripsi kreatif.",
     featured: false,
     rating: 4.4,
+    features: [
+      "Story Bible dan Story Engine: dari ide dan outline menjadi beat per bab, lalu draf novel yang konsisten dengan karakter dan alur",
+      "Write: saran lanjutan beberapa ratus kata yang mengikuti gaya dan konteks cerita",
+      "Describe dan Expand: memperkaya adegan dengan detail sensorik dan memperpanjang adegan yang terasa datar",
+      "Rewrite dan Feedback: revisi mengikuti arahan gaya, plus masukan editorial soal pacing dan karakter",
+      "Canvas: papan visual untuk merencanakan plot, arc karakter, dan tema",
+      "Model khusus fiksi (Muse dan Ballad) plus pilihan model lain di paket berbayar",
+    ],
+    pros: [
+      "Dibangun khusus untuk fiksi, memahami struktur naratif dan kesinambungan karakter di dokumen panjang",
+      "Fitur Describe sangat membantu penulis yang kesulitan membuat adegan terasa hidup",
+      "Ada trial gratis tanpa kartu kredit untuk mencoba sebelum berlangganan",
+    ],
+    cons: [
+      "Tidak ada paket gratis permanen; memakai sistem kredit bulanan dan kredit di paket murah tidak terakumulasi ke bulan berikutnya",
+      "Tidak berguna untuk copywriting marketing, SEO, atau tulisan bisnis, karena ini tool fiksi murni",
+      "Hasil Story Engine tetap butuh edit berat dari manusia, dan fitur editorial lanjutan hanya tersedia di paket Max ($44/bulan)",
+    ],
   },
   {
     name: "Writesonic",
@@ -129,6 +200,24 @@ export const aiTools: AITool[] = [
     description: "Writesonic menawarkan generator artikel SEO dan copy iklan.",
     featured: false,
     rating: 4.2,
+    features: [
+      "Article Writer: menyusun artikel SEO dari riset kata kunci sampai draf utuh dalam hitungan menit",
+      "Chatsonic: chatbot dengan akses web real-time, analisis file (PDF, dokumen, gambar), dan penyesuaian brand voice",
+      "Data pencarian Google real-time dan optimasi SEO bawaan saat menulis",
+      "80+ template untuk iklan, email, landing page, deskripsi produk, dan konten blog",
+      "Brand Voice yang dilatih dari dokumen atau tautan contoh tulisan",
+      "Publikasi langsung ke WordPress dan dukungan 25+ bahasa",
+    ],
+    pros: [
+      "Harga termasuk murah di kelasnya; paket Chatsonic Individual mulai $16/bulan pada langganan tahunan",
+      "Alur riset sampai draf yang cepat untuk blogger dan tim konten SEO",
+      "Ada paket gratis berisi 25 kredit tanpa kartu kredit untuk mengevaluasi fiturnya",
+    ],
+    cons: [
+      "Kualitas hasil tidak konsisten pada topik yang kompleks, tetap perlu edit dan cek fakta",
+      "Arah produk bergeser ke platform AI SEO dan visibilitas pencarian, fitur menulis murni bukan lagi fokus utamanya",
+      "Brand voice dan polesan templatenya kalah matang dibanding Jasper",
+    ],
   },
   {
     name: "Rytr",
