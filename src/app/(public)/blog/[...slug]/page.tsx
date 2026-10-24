@@ -1,4 +1,5 @@
 import { AdSlot } from "@/components/ads/ad-slot"
+import { GiscusComments } from "@/components/blog/giscus-comments"
 import { ShareButtons } from "@/components/blog/share-buttons"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { components } from "@/components/mdx"
@@ -179,6 +180,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         <InternalLinksBlock title="Jelajahi Konten Lain" />
+        <GiscusComments />
       </article>
 
       <aside className="hidden lg:block space-y-4">
