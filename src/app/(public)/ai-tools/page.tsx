@@ -111,6 +111,16 @@ export default function AiToolsPage() {
                   {tool.rating}
                 </span>
                 <span className="px-2 py-0.5 rounded bg-muted">{tool.category}</span>
+                {tool.newThisWeek && (
+                  <span className="px-2 py-0.5 rounded border border-emerald-300 bg-emerald-50 text-emerald-700">
+                    Baru minggu ini
+                  </span>
+                )}
+                {tool.curatedForUmkm && (
+                  <span className="px-2 py-0.5 rounded border border-violet-300 bg-violet-50 text-violet-700">
+                    Pilihan untuk UMKM
+                  </span>
+                )}
                 <Link
                   href={`/ai-tools/${tool.slug}`}
                   className="text-primary hover:underline"

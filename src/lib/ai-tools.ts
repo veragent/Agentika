@@ -20,6 +20,18 @@ export interface AITool {
   pros?: string[]
   /** Kekurangan, diisi per tool dari riset (opsional). */
   cons?: string[]
+  /**
+   * Badge kurasi "Baru minggu ini". Opsional — hanya true bila kurasi
+   * editorial sudah menetapkan tool ini sebagai baru minggu ini.
+   * Tidak ada tool yang ditandai tanpa penetapan kurasi.
+   */
+  newThisWeek?: boolean
+  /**
+   * Badge kurasi "Pilihan untuk UMKM". Opsional — hanya true bila
+   * kurasi editorial sudah menetapkan tool ini sebagai pilihan UMKM.
+   * Tidak ada tool yang ditandai tanpa penetapan kurasi.
+   */
+  curatedForUmkm?: boolean
 }
 
 export const aiTools: AITool[] = [

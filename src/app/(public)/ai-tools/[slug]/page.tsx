@@ -83,6 +83,16 @@ export default async function ToolDetailPage({
           <span className="text-xs px-2 py-0.5 rounded bg-muted">
             {tool.category}
           </span>
+          {tool.newThisWeek && (
+            <span className="text-xs px-2 py-0.5 rounded-full border border-emerald-300 text-emerald-700 bg-emerald-50">
+              Baru minggu ini
+            </span>
+          )}
+          {tool.curatedForUmkm && (
+            <span className="text-xs px-2 py-0.5 rounded-full border border-violet-300 text-violet-700 bg-violet-50">
+              Pilihan untuk UMKM
+            </span>
+          )}
         </div>
         <p className="text-base text-muted-foreground sm:text-lg max-w-2xl">
           {tool.tagline}
