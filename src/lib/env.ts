@@ -47,6 +47,9 @@ const serverEnvSchema = z.object({
   // AI Writer (kill switch; "true" untuk mengaktifkan)
   AI_WRITER_ENABLED: z.string().default("false"),
 
+  // Prompt Generator (kill switch; "true" untuk mengaktifkan)
+  PROMPT_GENERATOR_ENABLED: z.string().default("false"),
+
   // Giscus (komentar blog via GitHub Discussions; kosong = komponen tidak dirender)
   NEXT_PUBLIC_GISCUS_REPO: z.string().optional(),
   NEXT_PUBLIC_GISCUS_REPO_ID: z.string().optional(),
