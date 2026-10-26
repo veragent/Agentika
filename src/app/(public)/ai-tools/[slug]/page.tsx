@@ -11,6 +11,8 @@ import {
 } from "@/components/seo/json-ld-data"
 import { env } from "@/lib/env"
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return aiTools.map((tool) => ({ slug: tool.slug }))
 }

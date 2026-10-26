@@ -24,6 +24,12 @@ function headingWithId(Tag: "h2" | "h3") {
   }
 }
 
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return getPublishedBlogPosts().map((post) => ({ slug: [post.slug] }))
+}
+
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug: slugParts } = await params
   const slug = slugParts.join("/")

@@ -7,7 +7,7 @@ import {
   JsonLdScript,
   buildLearningResourceJsonLd,
 } from "@/components/seo/json-ld-data"
-import { getLearnPageBySlug, getLearnPagination } from "@/lib/learn"
+import { getLearnNavigation, getLearnPageBySlug, getLearnPagination } from "@/lib/learn"
 import { env } from "@/lib/env"
 import type { Metadata } from "next"
 import Link from "next/link"
@@ -18,6 +18,27 @@ interface LearnPageProps {
   params: Promise<{
     slug: string[]
   }>
+}
+
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const nav = await getLearnNavigation()
+  const pages = nav.flatMap((track) =>
+    track.sections.flatMap((section) => section.pages),
+  )
+  // Full paths (track/slug) plus bare last segments: both forms resolve
+  // today via the basename fallback in getFileBySlug, so both stay 200.
+  // Anything outside this set now 404s at routing level instead of
+  // rendering the not-found UI with a 200 (soft 404).
+  const params = new Map<string, { slug: string[] }>()
+  for (const page of pages) {
+    const parts = page.slug.split("/")
+    params.set(page.slug, { slug: parts })
+    const bare = parts[parts.length - 1]
+    if (bare) params.set(`bare:${bare}`, { slug: [bare] })
+  }
+  return [...params.values()]
 }
 
 export async function generateMetadata({ params }: LearnPageProps): Promise<Metadata> {
