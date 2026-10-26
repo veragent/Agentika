@@ -83,6 +83,8 @@ const nextConfig: NextConfig = {
 
   // Blog flat URLs: 301 redirect legacy /blog/<category>/<slug> to /blog/<slug>.
   // Disk folders under content/blog/ remain for organization; public URLs are flat.
+  // Learn URLs: 301 redirect legacy /<category>/<slug> (pre-/learn/ prefix, 404 in GSC)
+  // to /learn/<category>/<slug>.
   async redirects() {
     const legacyCategories = [
       "ai-tools",
@@ -91,11 +93,24 @@ const nextConfig: NextConfig = {
       "side-hustle",
       "umkm-case-studies",
     ]
-    return legacyCategories.map((cat) => ({
-      source: `/blog/${cat}/:slug`,
-      destination: "/blog/:slug",
-      permanent: true,
-    }))
+    const legacyLearnCategories = [
+      "ai-automation",
+      "ai-basics",
+      "no-code-tools",
+      "prompt-engineering-umkm",
+    ]
+    return [
+      ...legacyCategories.map((cat) => ({
+        source: `/blog/${cat}/:slug`,
+        destination: "/blog/:slug",
+        permanent: true,
+      })),
+      ...legacyLearnCategories.map((cat) => ({
+        source: `/${cat}/:slug`,
+        destination: `/learn/${cat}/:slug`,
+        permanent: true,
+      })),
+    ]
   },
 }
 
