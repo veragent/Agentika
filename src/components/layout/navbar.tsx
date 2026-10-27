@@ -125,7 +125,16 @@ export function Navbar() {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full",
           !isMobileMenuOpen && "pointer-events-none",
         )}
-        aria-hidden={!isMobileMenuOpen}
+        // JANGAN pakai aria-hidden di sini: panel ini selalu ter-mount dan
+        // berisi elemen focusable (form search, link navigasi, tombol tutup).
+        // aria-hidden="true" pada ancestor elemen focusable melanggar aturan
+        // axe aria-hidden-focus dan menggagalkan audit aksesibilitas agen
+        // Lighthouse (pohon aksesibilitas jadi tidak terbentuk dengan baik).
+        // `inert` adalah primitif yang benar untuk panel tertutup: ia
+        // mengeluarkan subtree dari urutan tab DAN dari pohon aksesibilitas,
+        // tanpa membuat aturan aria-hidden-focus berlaku. Saat dibuka,
+        // inert hilang dan panel menjadi dialog yang sepenuhnya interaktif.
+        inert={!isMobileMenuOpen}
       >
         <div
           id="mobile-navigation"
