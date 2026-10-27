@@ -1,6 +1,6 @@
 import { AdSlot } from "@/components/ads/ad-slot"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
-import { components } from "@/components/mdx"
+import { components, mdxOptions } from "@/components/mdx"
 import { MarkCompleteButton } from "@/components/learn/lesson-progress"
 import { ChatSidebar } from "@/components/learn/chat-sidebar"
 import {
@@ -90,7 +90,7 @@ export default async function LearnPage({ params }: LearnPageProps) {
       </nav>
 
       <div className="prose prose-zinc max-w-none dark:prose-invert">
-        <MDXRemote source={page.content} components={components} />
+        <MDXRemote source={page.content} components={components} options={mdxOptions} />
       </div>
 
       <div className="flex justify-center border-t pt-6">

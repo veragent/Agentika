@@ -2,7 +2,7 @@ import { AdSlot } from "@/components/ads/ad-slot"
 import { GiscusComments } from "@/components/blog/giscus-comments"
 import { ShareButtons } from "@/components/blog/share-buttons"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
-import { components } from "@/components/mdx"
+import { components, mdxOptions } from "@/components/mdx"
 import { Badge } from "@/components/ui/badge"
 import { extractToc, getReadingStats, getPublishedBlogPosts, getPublicBlogPostBySlug, getPrevNextPosts, slugifyHeading } from "@/lib/blog"
 import { findMentionedTools } from "@/lib/internal-links"
@@ -125,7 +125,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         <div className="prose prose-zinc max-w-none dark:prose-invert">
-          <MDXRemote source={post.content} components={{ ...components, h2: headingWithId("h2"), h3: headingWithId("h3") }} />
+          <MDXRemote source={post.content} components={{ ...components, h2: headingWithId("h2"), h3: headingWithId("h3") }} options={mdxOptions} />
         </div>
 
         <AdSlot section="blog_detail_inline" label="Sponsored content" className="mt-8 rounded-xl border p-4" />
