@@ -1,5 +1,6 @@
 import type { NextConfig } from "next"
 import bundleAnalyzer from "@next/bundle-analyzer"
+import { WEBMCP_ORIGIN_TRIAL_TOKEN } from "./src/lib/origin-trial"
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -33,6 +34,12 @@ const securityHeaders = [
   {
     key: "X-XSS-Protection",
     value: "1; mode=block",
+  },
+  {
+    // WebMCP origin trial: activates document.modelContext for visitors
+    // on www.agentika.web.id. Token is public by design (see origin-trial.ts).
+    key: "Origin-Trial",
+    value: WEBMCP_ORIGIN_TRIAL_TOKEN,
   },
 ]
 

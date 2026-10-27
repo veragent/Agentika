@@ -63,6 +63,7 @@
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "webmcp-types": "^0.1.10"
   }
 }

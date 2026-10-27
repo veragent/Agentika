@@ -1,0 +1,20 @@
+# Agentika
+
+> Platform AI untuk UMKM Indonesia: direktori tools AI, tutorial otomatisasi, dan strategi side hustle dalam Bahasa Indonesia.
+
+## Konten utama
+
+- [Beranda](https://www.agentika.web.id/)
+- [Blog](https://www.agentika.web.id/blog)
+- [Learn](https://www.agentika.web.id/learn)
+- [AI Tools](https://www.agentika.web.id/ai-tools)
+- [FAQ](https://www.agentika.web.id/faq)
+- [Pencarian](https://www.agentika.web.id/search)
+
+## Untuk AI agent
+
+Situs ini mengekspos WebMCP tools di setiap halaman untuk agen browser yang mendukung WebMCP: search_site, get_blog_article, list_ai_tools, get_ai_tool, dan list_learn_lessons. Semua tool bersifat read-only dan hanya mengembalikan konten publik situs ini.
+
+## Peta situs
+
+- [Sitemap](https://www.agentika.web.id/sitemap.xml)

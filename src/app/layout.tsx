@@ -5,7 +5,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { BRAND } from "@/lib/brand"
 import { Providers } from "@/components/providers"
+import { WebMcpTools } from "@/components/webmcp-tools"
 import { getAdSettings } from "@/lib/ads"
+import { WEBMCP_ORIGIN_TRIAL_TOKEN } from "@/lib/origin-trial"
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.agentika.web.id"
 
@@ -51,6 +53,7 @@ export default async function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <head>
+        <meta httpEquiv="origin-trial" content={WEBMCP_ORIGIN_TRIAL_TOKEN} />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
@@ -66,6 +69,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <WebMcpTools />
             {children}
           </ThemeProvider>
         </Providers>
