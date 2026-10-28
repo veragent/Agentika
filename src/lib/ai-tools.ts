@@ -626,6 +626,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Paid",
     description: "Anyword memberi skor konversi untuk copy iklan dan email.",
+    features: [
+      "Skor Prediksi Performa 0-100 untuk tiap varian copy sebelum tayang, dibenchmark ke teks sejenis per channel dan audiens",
+      "Varian copy ganda yang bisa dibandingkan dengan metrik yang sama, untuk iklan, email, subject line, dan landing page",
+      "Copy Intelligence yang menganalisis konten historis berperforma terbaik untuk dipakai sebagai acuan",
+      "Brand Voice dan Custom AI Mode yang dilatih dari messaging brand sendiri agar nada tetap konsisten",
+      "Template pemasaran per channel plus integrasi HubSpot, Salesforce, Hootsuite, WordPress, dan Google Ads",
+      "Data-Driven Editor yang menampilkan skor saat menulis dan mengedit"
+    ],
+    pros: [
+      "Pembeda jelas dibanding penulis AI umum: skor membantu memilih copy sebelum anggaran iklan dibelanjakan",
+      "Cocok untuk pengujian A/B karena banyak varian bisa dibandingkan dengan satu metrik yang sama",
+      "Kontrol brand dan audiens menjaga konsistensi antar kampanye"
+    ],
+    cons: [
+      "Skor adalah estimasi, bukan jaminan konversi; klaim akurasi vendor bukan hasil audit independen",
+      "Paket awal membatasi jumlah prediksi per bulan, sehingga pemakaian serius butuh paket lebih mahal",
+      "Kurang cocok untuk tulisan long-form editorial; model prediksinya dirancang untuk copy pemasaran pendek"
+    ],
     featured: false,
     rating: 4.2,
   },
@@ -636,6 +654,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Paid",
     description: "Writer.com menjaga konsistensi brand voice di seluruh tim.",
+    features: [
+      "WRITER Agent dengan Playbooks dan Routines untuk alur kerja konten multi-langkah yang bisa diulang",
+      "Knowledge Graph yang mengaitkan agen ke data dan file perusahaan dengan sitasi sumber",
+      "Model proprietary keluarga Palmyra yang dirancang untuk penulisan enterprise",
+      "Profil brand voice, style guide, dan daftar istilah terlarang untuk menjaga konsistensi bahasa",
+      "Kontrol enterprise: SSO/SAML dan SCIM, audit log, dan approval di paket Enterprise",
+      "API dan konektor data, termasuk konektor Semrush untuk data SEO, plus integrasi CMS seperti Webflow dan Contentful"
+    ],
+    pros: [
+      "Tata kelola brand dan kepatuhan paling kuat di batch ini, relevan untuk industri teregulasi",
+      "Playbooks menstandarkan alur kerja berulang di banyak tim, bukan sekadar draf sekali pakai",
+      "Ulasan memuji kemudahan pakai dan konsistensi brand voice"
+    ],
+    cons: [
+      "Bukan tool SEO: tidak ada analisis SERP atau keyword bawaan yang terdokumentasi",
+      "Harga dan batas kredit tidak transparan di halaman paket, sehingga sulit dianggarkan untuk UMKM",
+      "Output kadang terasa generik dan tetap butuh editing; fitur keamanan lengkap hanya di paket Enterprise"
+    ],
     featured: false,
     rating: 4.3,
   },
@@ -646,6 +682,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Paid",
     description: "Frase membantu membuat artikel SEO lengkap dengan outline otomatis.",
+    features: [
+      "Analisis 20 hasil SERP teratas untuk tiap kata kunci target, lengkap dengan heading, pertanyaan, dan topik pesaing",
+      "Brief konten dan outline AI otomatis yang bisa diserahkan ke penulis",
+      "Editor dengan skor SEO dan GEO real-time saat menulis, termasuk pelacakan visibilitas di mesin AI",
+      "Riset pertanyaan dari People Also Ask untuk menemukan sudut dan subheading yang ditanyakan audiens",
+      "AI Agent dengan puluhan skill untuk alur riset, brief, dan optimasi multi-langkah",
+      "Audit situs dan pemantauan halaman yang menurun, plus publikasi satu klik ke WordPress dan integrasi Google Docs"
+    ],
+    pros: [
+      "Satu alur dari riset sampai optimasi, tanpa merangkai banyak tool",
+      "Brief dan riset SERP disebut kekuatan utamanya di banyak ulasan",
+      "Pelacakan visibilitas AI sudah termasuk sejak paket awal menurut halaman perbandingan Frase"
+    ],
+    cons: [
+      "Kualitas tulisan AI bervariasi dan tetap butuh review manusia",
+      "Batas paket awal sempit untuk penerbit bervolume, termasuk jumlah artikel per bulan",
+      "Antarmuka terasa kompleks dan ada kurva belajar untuk memakai semua fitur; skor bukan prediksi peringkat yang terjamin"
+    ],
     featured: false,
     rating: 4.2,
   },
@@ -656,6 +710,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Paid",
     description: "Surfer AI menggabungkan keyword research dan draft artikel.",
+    features: [
+      "Content Editor real-time dengan target kata, heading, gambar, dan istilah NLP dari halaman peringkat atas, plus Content Score 0-100",
+      "Surfer AI yang menghasilkan draf artikel long-form dari kata kunci, outline, dan tone",
+      "Surfy, asisten AI di dalam editor untuk draf bagian, riset kompetitor, dan repurpose konten",
+      "Auto-Optimize yang menerapkan rekomendasi editor ke draf dalam satu klik",
+      "Content Audit untuk memantau halaman terbit dan menyarankan refresh saat performa menurun",
+      "Topical Map dan riset kata kunci untuk klaster topik, plus pelacakan visibilitas AI di paket menengah ke atas"
+    ],
+    pros: [
+      "Panduan on-page paling konkret di batch ini: skor dan checklist istilah yang mudah diikuti penulis",
+      "Penulisan dan optimasi dalam satu editor, tanpa bolak-balik tool",
+      "Integrasi WordPress dan Google Docs memudahkan penerbitan langsung"
+    ],
+    cons: [
+      "Tidak ada paket gratis; paket tahunan ditagih di muka sekaligus sehingga beban kas awal besar untuk UMKM",
+      "Kredit dokumen tahunan tidak reset bulanan, sehingga salah hitung kuota bisa mahal",
+      "Content Score adalah panduan, bukan jaminan peringkat; pelacakan visibilitas AI tidak ada di paket termurah"
+    ],
     featured: false,
     rating: 4.1,
   },
@@ -666,6 +738,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Paid",
     description: "Scalenut membantu riset, outline, dan draft konten dalam satu dashboard.",
+    features: [
+      "Cruise Mode, alur terpandu dari konteks, judul, dan outline sampai draf artikel SEO lengkap dalam hitungan menit",
+      "Keyword Planner dengan klaster kata kunci berdasarkan search intent, volume pencarian, dan difficulty",
+      "Content Optimizer dengan skor SEO real-time dan rekomendasi istilah NLP serta meta tag",
+      "Audit konten dan Traffic Analyzer yang terhubung ke Google Search Console untuk memantau halaman terbit",
+      "Pelacakan visibilitas AI-search untuk melihat seberapa sering brand disitasi mesin jawaban AI",
+      "Lebih dari 40 template AI untuk deskripsi produk, posting sosial, dan copy iklan, plus publikasi ke WordPress"
+    ],
+    pros: [
+      "Satu dashboard dari riset sampai draf, cocok untuk tim kecil tanpa banyak langganan",
+      "Cruise Mode mempercepat draf pertama long-form secara nyata menurut ulasan pengguna",
+      "Klaster kata kunci membantu membangun otoritas topikal, bukan sekadar artikel lepas"
+    ],
+    cons: [
+      "Draf tetap butuh fact-check, editing, dan internal linking manual; bukan artikel siap tayang otomatis",
+      "Paket awal sempit, termasuk jumlah artikel, optimasi, dan klaster per bulan yang terbatas",
+      "Gaya tulisan AI kadang repetitif meski ada fitur Humanize; banyaknya fitur bisa membingungkan pemakai yang hanya butuh satu pekerjaan"
+    ],
     featured: false,
     rating: 4.0,
   },
