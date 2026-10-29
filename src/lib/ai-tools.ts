@@ -766,6 +766,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Freemium",
     description: "HyperWrite membantu menulis email, artikel, dan ide konten lebih cepat.",
+    features: [
+      "TypeAhead: pelengkapan kalimat prediktif real-time di kolom teks web mana pun lewat ekstensi Chrome, diterima dengan Tab",
+      "AutoWrite untuk draf dan paragraf dari topik dan jenis konten",
+      "HyperChat: asisten chat AI di dalam alur menulis, plus Email Responder untuk draf balasan cepat",
+      "Scholar AI: riset dengan pencarian artikel dan sitasi pada paket berbayar",
+      "Custom Personas untuk memisahkan gaya menulis per konteks, dan Custom Tools untuk alat sekali pakai sendiri",
+      "Personal Assistant dan Assistant Studio untuk merekam dan menyunting workflow multi-langkah yang bisa diulang"
+    ],
+    pros: [
+      "Bekerja di tempat pengguna sudah menulis, tanpa pindah tab terus-menerus",
+      "TypeAhead paling terasa manfaatnya untuk email, caption, dan draf pendek rutin",
+      "Paket gratis tersedia untuk mencoba dasar-dasarnya sebelum berlangganan"
+    ],
+    cons: [
+      "Paket gratis sangat terbatas dan batas pastinya antar sumber berbeda, jadi jangan mengandalkannya untuk volume harian",
+      "Tulisan panjang dilaporkan menurun kualitasnya dan tetap butuh edit berat",
+      "Dibangun untuk penulis individu; fitur tim dan tata kelola brand dilaporkan lemah"
+    ],
     featured: false,
     rating: 4.2,
   },
@@ -776,6 +794,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Freemium",
     description: "Z.AI menyediakan chat AI dengan beberapa model dan mode reasoning.",
+    features: [
+      "Chat web gratis di chat.z.ai untuk tanya jawab, menulis, dan penalaran umum",
+      "Pilihan banyak model keluarga GLM, termasuk varian Flash yang ringan dan varian flagship untuk penalaran",
+      "Mode reasoning untuk soal yang butuh langkah berpikir lebih dalam",
+      "AI Slides untuk membuat deck presentasi otomatis dari prompt teks",
+      "Magic Design untuk membuat poster dan visual dari prompt pada tier tertentu",
+      "API yang kompatibel dengan gaya OpenAI untuk developer, plus bobot model terbuka pada sebagian varian GLM"
+    ],
+    pros: [
+      "Chat web gratis memberi jalan masuk murah untuk mencoba model GLM",
+      "Kuat untuk penalaran, coding, dan dokumen panjang menurut ulasan",
+      "API per token dan varian Flash gratis memberi opsi biaya rendah bagi developer"
+    ],
+    cons: [
+      "Nama dan nomor model berubah cepat, sehingga daftar model di entri ini bisa cepat usang",
+      "Kualitas untuk bahasa selain Inggris dan Mandarin tidak terverifikasi secara spesifik",
+      "Mode analisis mendalam dilaporkan lebih lambat dibanding kompetitor menurut satu ulasan"
+    ],
     featured: false,
     rating: 4.1,
   },
@@ -786,6 +822,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Freemium",
     description: "TextCortex mendukung rewriting, summarization, dan translation.",
+    features: [
+      "ZenoChat: asisten chat AI yang bisa diarahkan ke beberapa model besar, bukan terkunci satu vendor",
+      "Ekstensi browser yang bekerja di Google Docs, Notion, dan banyak aplikasi web lain, plus aplikasi mobile",
+      "Knowledge Bases: AI menjawab dari dokumen internal sendiri, misalnya Drive atau SharePoint",
+      "Agen AI tanpa kode untuk riset, laporan, dan tugas teks berulang",
+      "Toolkit menulis lengkap: parafrase, ringkas, perluas teks, ubah tone, dan terjemahan 25 bahasa lebih",
+      "Deep Research untuk riset mendalam dari sumber yang dihubungkan, plus 60 template lebih untuk berbagai jenis konten"
+    ],
+    pros: [
+      "Satu langganan bisa memakai beberapa model besar, sehingga tidak terkunci satu vendor",
+      "Knowledge Base dan agen kustom sudah tersedia di paket gratis menurut sumber 2026, hal yang langka dibanding kompetitor",
+      "Klaim vendor: hosting di UE dengan GDPR, data pengguna tidak dipakai melatih model, dan sertifikasi ISO 27001 dan SOC 2"
+    ],
+    cons: [
+      "Paket gratis dibatasi ketat sehingga pemakai berat cepat habis",
+      "Harga paket berbayar antar sumber lama dan baru sangat berbeda, jadi cek halaman resmi sebelum berlangganan",
+      "Output kadang terasa generik dan tetap butuh sentuhan personal sebelum tayang"
+    ],
     featured: false,
     rating: 4.1,
   },
@@ -796,6 +850,24 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Freemium",
     description: "Qwen membantu menulis, merangkum, dan reasoning dalam berbagai bahasa.",
+    features: [
+      "Chat teks umum: menulis, merangkum, menjawab, dan penalaran langkah demi langkah dengan mode thinking untuk soal sulit",
+      "Deep Research: riset multi-pencarian menjadi laporan bersumber yang bisa diubah menjadi halaman web",
+      "Generasi gambar dan video dari teks atau gambar",
+      "Pemrosesan dokumen dan multimodal: upload PDF, Word, PPT, gambar, audio, dan video untuk diringkas atau dianalisis",
+      "Bantuan coding dengan sandbox yang bisa menjalankan kode, plus mode Web Dev yang mengubah permintaan menjadi situs web",
+      "Pencarian web live, voice dan video chat, dan memori antar percakapan menurut ulasan 2026"
+    ],
+    pros: [
+      "Aplikasi chat konsumennya gratis, tanpa langganan bulanan ala kompetitor, sehingga ramah UMKM",
+      "Fitur sangat luas untuk produk gratis: riset, gambar, video, dokumen, coding, dan web dev dalam satu aplikasi",
+      "Sebagian model tersedia open-weight sehingga developer bisa self-host varian kecil"
+    ],
+    cons: [
+      "Gratis bukan tanpa batas: berlaku batas pemakaian harian yang besarnya tidak dirinci konsisten antar sumber",
+      "API developer adalah produk terpisah yang ditagih per token, jangan disamakan dengan chat gratis",
+      "Model dan daftar fitur di aplikasi berubah tiap beberapa minggu, sehingga entri ini bisa cepat usang"
+    ],
     featured: false,
     rating: 4.2,
   },
@@ -804,8 +876,26 @@ export const aiTools: AITool[] = [
     slug: "github-copilot",
     tagline: "AI pair programmer untuk developer.",
     category: "Coding & Development",
-    pricing: "Paid",
+    pricing: "Freemium",
     description: "GitHub Copilot menyarankan kode secara real-time di editor.",
+    features: [
+      "Saran kode inline real-time dan next-edit suggestions saat mengetik di IDE seperti VS Code dan JetBrains",
+      "Copilot Chat di IDE, di GitHub.com, dan di aplikasi mobile, plus inline chat dan slash commands",
+      "Agent Mode, Copilot CLI, dan cloud agent untuk tugas coding multi-langkah",
+      "Code review otomatis di pull request, penjelasan kode, dan pembuatan dokumentasi serta unit test",
+      "Akses multi-model dari beberapa penyedia dalam satu alat pada paket berbayar",
+      "Fitur organisasi pada paket tim: kontrol kebijakan, audit log, content exclusion, dan IP indemnity"
+    ],
+    pros: [
+      "Integrasi paling dalam dengan GitHub dan VS Code, dengan setup yang mudah bagi developer",
+      "Saran kode inline pada paket berbayar tidak memakan kredit AI dan tanpa batas, sehingga biaya intinya dapat diprediksi",
+      "Paket gratis dan paket pelajar terverifikasi memberi jalan masuk murah untuk mencoba"
+    ],
+    cons: [
+      "Saran kode bisa tidak akurat atau tidak aman dan wajib ditinjau manual, bukan kode siap produksi tanpa review",
+      "Sejak Juni 2026, chat, agen, dan CLI memakai sistem kredit AI, sehingga pemakaian agen berat bisa membengkak bila tidak dipantau",
+      "Relevan untuk UMKM yang punya developer atau memakai jasa developer, bukan untuk pemilik usaha non-teknis"
+    ],
     featured: true,
     rating: 4.6,
     affiliateLink: "https://github.com/features/copilot",
