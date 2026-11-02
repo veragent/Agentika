@@ -6,6 +6,7 @@ import {
   isRateLimitError,
   toRateLimitError,
 } from "@/lib/ai/provider"
+import { cacheGet, cacheSet, hashKey } from "@/lib/cache/redis"
 
 /**
  * Pembungkus tunggal untuk AI Writer (Phase 4): generate draf artikel
@@ -36,6 +37,8 @@ export interface WriterDraft {
   outline: string[]
   draftMarkdown: string
   mode: "demo" | "live"
+  /** True bila draf diambil dari cache (tanpa panggilan provider baru). */
+  cached?: boolean
 }
 
 /** True bila kill switch menyala DAN provider AI generik terkonfigurasi. */
@@ -168,6 +171,17 @@ function toStringArray(value: unknown): string[] {
 export async function generateArticleDraft(request: WriterRequest): Promise<WriterDraft> {
   const client = getAiClient()
   if (!client) return generateMockDraft(request)
+  // Cache hanya untuk hasil live: draf demo tidak butuh biaya, jadi
+  // tidak ada yang dihemat dengan men-cache-nya. Kunci mencakup model
+  // agar ganti model tidak mengembalikan draf model lain.
+  const cacheKey = hashKey("ai:writer", [
+    getAiModel(),
+    buildWriterUserPrompt(request),
+  ])
+  const cached = await cacheGet<WriterDraft>(cacheKey)
+  if (cached && cached.mode === "live") {
+    return { ...cached, cached: true }
+  }
   try {
     const completion = await client.chat.completions.create({
       model: getAiModel(),
@@ -180,12 +194,14 @@ export async function generateArticleDraft(request: WriterRequest): Promise<Writ
     const text = completion.choices[0]?.message?.content ?? ""
     const parsed = parseWriterJson(text)
     if (!parsed) {
-      return {
+      const draft: WriterDraft = {
         titleSuggestions: [capitalize(request.topic.trim())],
         outline: generateMockDraft(request).outline,
         draftMarkdown: text || generateMockDraft(request).draftMarkdown,
         mode: "live",
       }
+      await cacheSet(cacheKey, draft, 3600)
+      return draft
     }
     const titleSuggestions = toStringArray(parsed.titleSuggestions)
     const outline = toStringArray(parsed.outline)
@@ -193,12 +209,14 @@ export async function generateArticleDraft(request: WriterRequest): Promise<Writ
       typeof parsed.draftMarkdown === "string" && parsed.draftMarkdown.length > 0
         ? parsed.draftMarkdown
         : text
-    return {
+    const draft: WriterDraft = {
       titleSuggestions: titleSuggestions.length > 0 ? titleSuggestions : [capitalize(request.topic.trim())],
       outline: outline.length > 0 ? outline : generateMockDraft(request).outline,
       draftMarkdown,
       mode: "live",
     }
+    await cacheSet(cacheKey, draft, 3600)
+    return draft
   } catch (error) {
     if (isRateLimitError(error)) throw toRateLimitError(error)
     return generateMockDraft(request)

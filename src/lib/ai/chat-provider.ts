@@ -6,6 +6,7 @@ import {
   isAiProviderAvailable,
   isRateLimitError,
 } from "@/lib/ai/provider"
+import { cacheGet, cacheSet, hashKey } from "@/lib/cache/redis"
 
 /**
  * Pembungkus tunggal untuk provider AI Chat Sidebar (Phase 4).
@@ -88,6 +89,22 @@ export async function* streamLearnChat(
     yield* streamMock()
     return
   }
+  // Cache hanya untuk jawaban provider (bukan mock, bukan fallback error).
+  // Kunci mencakup model + system prompt (materi lesson) + riwayat pesan,
+  // jadi pertanyaan yang sama pada lesson yang sama tidak ditagih ulang.
+  // Respons cache tetap di-streaming per kata agar UI tidak berubah.
+  const cacheKey = hashKey("ai:chat", [
+    getAiModel(),
+    params.system,
+    JSON.stringify(params.messages),
+  ])
+  const cached = await cacheGet<string>(cacheKey)
+  if (cached) {
+    for (const chunk of cached.split(/(?<=\s)/)) {
+      yield chunk
+    }
+    return
+  }
   try {
     const stream = await client.chat.completions.create({
       model: getAiModel(),
@@ -98,9 +115,16 @@ export async function* streamLearnChat(
       max_tokens: 600,
       stream: true,
     })
+    let collected = ""
     for await (const chunk of stream) {
       const text = chunk.choices[0]?.delta?.content
-      if (text) yield text
+      if (text) {
+        collected += text
+        yield text
+      }
+    }
+    if (collected) {
+      await cacheSet(cacheKey, collected, 3600)
     }
   } catch (error) {
     if (isRateLimitError(error)) {

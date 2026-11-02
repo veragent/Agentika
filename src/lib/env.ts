@@ -12,11 +12,17 @@ const serverEnvSchema = z.object({
   // Provider AI generik (OpenAI-compatible) — dipakai AI Chat & AI Writer.
   // Ganti provider cukup ganti 3 nilai ini, tanpa ubah kode:
   // base URL endpoint chat completions, API key, dan ID model.
-  // Default: BeatAPI + deepseek-v4.1-flash-free (gratis, limit 1 req/menit
-  // sebelum top-up pertama, 10/menit sesudahnya, 2.000/hari).
-  AI_BASE_URL: z.string().url().default("https://api.beatapi.io/v1"),
+  // Default: Hcnsec + MiniMax-M3.1-Flash (gratis di bawah tier 200K
+  // per panggilan, limit default 950 req/menit di akun Hcnsec).
+  AI_BASE_URL: z.string().url().default("https://api.hcnsec.cn/v1"),
   AI_API_KEY: z.string().optional(),
-  AI_MODEL: z.string().default("deepseek-v4.1-flash-free"),
+  AI_MODEL: z.string().default("MiniMax-M3.1-Flash"),
+
+  // Upstash Redis (store bersama untuk rate limit + cache respons AI).
+  // Kosong = fallback in-memory per instance (rate limit dan cache
+  // tetap jalan, tapi tidak berlaku lintas instance serverless).
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
 
   // AI Chat Sidebar (kill switch; "true" untuk mengaktifkan)
   AI_CHAT_ENABLED: z.string().default("false"),

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { z } from "zod"
 import { env } from "@/lib/env"
 import { generatePrompt } from "@/lib/ai/prompt-provider"
-import { checkAiChatRateLimit } from "@/lib/ai/rate-limit"
+import { checkAiRateLimit } from "@/lib/ai/rate-limit"
 
 /**
  * Prompt Generator — Phase 4 (scaffolding).
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   }
 
   const clientKey = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-  const rate = checkAiChatRateLimit(clientKey)
+  const rate = await checkAiRateLimit(clientKey)
   if (!rate.allowed) {
     return NextResponse.json(
       { error: "Terlalu banyak permintaan dalam waktu singkat. Tunggu sebentar, lalu coba lagi ya." },

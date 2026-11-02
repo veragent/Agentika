@@ -6,7 +6,7 @@ import {
   isAiChatAvailable,
   streamLearnChat,
 } from "@/lib/ai/chat-provider"
-import { checkAiChatRateLimit } from "@/lib/ai/rate-limit"
+import { checkAiRateLimit } from "@/lib/ai/rate-limit"
 
 /**
  * AI Chat Sidebar — Phase 4, Tahap 0 (scaffolding).
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
   const clientKey =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-  const rate = checkAiChatRateLimit(clientKey)
+  const rate = await checkAiRateLimit(clientKey)
   if (!rate.allowed) {
     return NextResponse.json(
       {
