@@ -1,6 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 interface ChatMessage {
   role: "user" | "assistant"
@@ -92,10 +94,61 @@ function ChatPanel({
             className={
               msg.role === "user"
                 ? "ml-8 rounded-lg bg-primary/10 px-3 py-2 text-sm whitespace-pre-wrap"
-                : "mr-4 rounded-lg bg-muted px-3 py-2 text-sm whitespace-pre-wrap"
+                : "mr-4 rounded-lg bg-muted px-3 py-2 text-sm break-words"
             }
           >
-            {msg.content || (loading ? "Menulis jawaban…" : "")}
+            {msg.role === "assistant" ? (
+              msg.content ? (
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({ children }: { children?: ReactNode }) => (
+                      <p className="my-1.5 first:mt-0 last:mb-0">{children}</p>
+                    ),
+                    ul: ({ children }: { children?: ReactNode }) => (
+                      <ul className="my-1.5 list-disc space-y-1 pl-5">{children}</ul>
+                    ),
+                    ol: ({ children }: { children?: ReactNode }) => (
+                      <ol className="my-1.5 list-decimal space-y-1 pl-5">{children}</ol>
+                    ),
+                    li: ({ children }: { children?: ReactNode }) => (
+                      <li className="my-0.5">{children}</li>
+                    ),
+                    strong: ({ children }: { children?: ReactNode }) => (
+                      <strong className="font-semibold">{children}</strong>
+                    ),
+                    a: ({ href, children }: { href?: string; children?: ReactNode }) => (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline break-words"
+                      >
+                        {children}
+                      </a>
+                    ),
+                    code: ({ children }: { children?: ReactNode }) => (
+                      <code className="rounded bg-background/60 px-1 py-0.5 text-[13px]">
+                        {children}
+                      </code>
+                    ),
+                    pre: ({ children }: { children?: ReactNode }) => (
+                      <pre className="my-2 overflow-x-auto rounded bg-background/60 p-2 text-xs">
+                        {children}
+                      </pre>
+                    ),
+                  }}
+                >
+                  {msg.content}
+                </ReactMarkdown>
+              ) : loading ? (
+                "Menulis jawaban…"
+              ) : (
+                ""
+              )
+            ) : (
+              msg.content
+            )}
           </div>
         ))}
       </div>
