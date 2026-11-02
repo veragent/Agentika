@@ -1,17 +1,27 @@
 import { env } from "@/lib/env"
+import {
+  getAiClient,
+  getAiModel,
+  isAiProviderAvailable,
+  isRateLimitError,
+  toRateLimitError,
+} from "@/lib/ai/provider"
 
 /**
  * Pembungkus tunggal untuk AI Writer (Phase 4): generate draf artikel
  * dari topik untuk membantu ritme editorial Agentika.
  *
  * Mengikuti pola chat-provider.ts: UI dan API route TIDAK PERNAH
- * mengimpor vendor SDK langsung. Tahap scaffold ini hanya menyediakan
- * provider mock deterministik (mode demo) yang menyusun kerangka
- * artikel dari topik, tanpa panggilan AI berbayar. Saat API key + ACC
- * budget tersedia, hanya file ini yang berubah ke provider nyata.
+ * mengimpor vendor SDK langsung. Provider nyata memakai provider AI
+ * generik (OpenAI-compatible) dari env: AI_BASE_URL, AI_API_KEY,
+ * AI_MODEL (default BeatAPI + deepseek-v4.1-flash-free, gratis).
+ * Bila key belum di-set, kembali ke mock deterministik (mode demo).
  *
  * Hasil writer SELALU draf: wajib melewati review manusia + audit
  * humanizer sebelum diterbitkan, sama seperti alur artikel manual.
+ * Model diinstruksikan untuk TIDAK mengarang fakta, angka, nama tool,
+ * atau harga — klaim yang tidak yakin ditulis sebagai placeholder
+ * [perlu verifikasi] untuk diisi penulis manusia.
  */
 
 export interface WriterRequest {
@@ -28,12 +38,9 @@ export interface WriterDraft {
   mode: "demo" | "live"
 }
 
-/** True bila kill switch menyala DAN minimal satu API key provider tersedia. */
+/** True bila kill switch menyala DAN provider AI generik terkonfigurasi. */
 export function isAiWriterAvailable(): boolean {
-  return (
-    env.AI_WRITER_ENABLED === "true" &&
-    Boolean(env.GOOGLE_AI_API_KEY || env.OPENAI_API_KEY || env.ANTHROPIC_API_KEY || env.GROQ_API_KEY)
-  )
+  return isAiProviderAvailable(env.AI_WRITER_ENABLED)
 }
 
 function capitalize(text: string): string {
@@ -105,11 +112,95 @@ export function generateMockDraft(request: WriterRequest): WriterDraft {
   return { titleSuggestions, outline, draftMarkdown, mode: "demo" }
 }
 
+const WRITER_SYSTEM_PROMPT = `Kamu membantu penulis Agentika menyusun DRAF artikel untuk pelaku UMKM Indonesia.
+Bahasa Indonesia sederhana dan praktis, contoh konkret usaha kecil (warung, kuliner, jasa, toko online).
+JANGAN mengarang fakta, angka, nama tool, harga, atau alamat. Bila tidak yakin, tulis placeholder [perlu verifikasi] dan biarkan penulis manusia mengisinya.
+Balas HANYA dengan objek JSON valid (tanpa pagar kode, tanpa teks lain) berbentuk:
+{"titleSuggestions": ["judul 1", "judul 2", "judul 3"], "outline": ["bagian 1", "bagian 2"], "draftMarkdown": "draf artikel lengkap dalam markdown"}
+Draf memakai struktur: pembuka, kenapa penting, langkah praktis, contoh penerapan, kesalahan umum, penutup dengan satu aksi kecil.`
+
+function buildWriterUserPrompt(request: WriterRequest): string {
+  const parts = [
+    `Topik: ${request.topic}`,
+    `Audiens: ${request.audience?.trim() || "pelaku UMKM Indonesia"}`,
+    `Tone: ${request.tone ?? "praktis"}`,
+  ]
+  if (request.keywords?.length) {
+    parts.push(`Kata kunci yang perlu muncul alami di teks: ${request.keywords.join(", ")}.`)
+  }
+  return parts.join("\n")
+}
+
+function parseWriterJson(text: string): {
+  titleSuggestions?: unknown
+  outline?: unknown
+  draftMarkdown?: unknown
+} | null {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/)
+  const candidate = fenced ? fenced[1] : text
+  const start = candidate.indexOf("{")
+  const end = candidate.lastIndexOf("}")
+  if (start === -1 || end === -1 || end <= start) return null
+  try {
+    return JSON.parse(candidate.slice(start, end + 1)) as {
+      titleSuggestions?: unknown
+      outline?: unknown
+      draftMarkdown?: unknown
+    }
+  } catch {
+    return null
+  }
+}
+
+function toStringArray(value: unknown): string[] {
+  return Array.isArray(value)
+    ? value.filter((v): v is string => typeof v === "string" && v.length > 0)
+    : []
+}
+
 /**
- * Titik masuk tunggal AI Writer. Selama provider nyata belum dipasang,
- * selalu mengembalikan draf mock dengan mode "demo", apa pun status
- * kill switch (route yang menegakkan kill switch untuk publik).
+ * Titik masuk tunggal AI Writer. Bila provider generik tersedia, draf
+ * dibuat model (mode "live"); bila belum, draf mock (mode "demo").
+ * Kill switch ditegakkan route, bukan di sini.
+ * Limit provider (429) dilempar sebagai AiRateLimitError agar route
+ * bisa menjawab 429 dengan Retry-After; error lain jatuh ke mock demo.
  */
 export async function generateArticleDraft(request: WriterRequest): Promise<WriterDraft> {
-  return generateMockDraft(request)
+  const client = getAiClient()
+  if (!client) return generateMockDraft(request)
+  try {
+    const completion = await client.chat.completions.create({
+      model: getAiModel(),
+      messages: [
+        { role: "system", content: WRITER_SYSTEM_PROMPT },
+        { role: "user", content: buildWriterUserPrompt(request) },
+      ],
+      max_tokens: 4000,
+    })
+    const text = completion.choices[0]?.message?.content ?? ""
+    const parsed = parseWriterJson(text)
+    if (!parsed) {
+      return {
+        titleSuggestions: [capitalize(request.topic.trim())],
+        outline: generateMockDraft(request).outline,
+        draftMarkdown: text || generateMockDraft(request).draftMarkdown,
+        mode: "live",
+      }
+    }
+    const titleSuggestions = toStringArray(parsed.titleSuggestions)
+    const outline = toStringArray(parsed.outline)
+    const draftMarkdown =
+      typeof parsed.draftMarkdown === "string" && parsed.draftMarkdown.length > 0
+        ? parsed.draftMarkdown
+        : text
+    return {
+      titleSuggestions: titleSuggestions.length > 0 ? titleSuggestions : [capitalize(request.topic.trim())],
+      outline: outline.length > 0 ? outline : generateMockDraft(request).outline,
+      draftMarkdown,
+      mode: "live",
+    }
+  } catch (error) {
+    if (isRateLimitError(error)) throw toRateLimitError(error)
+    return generateMockDraft(request)
+  }
 }

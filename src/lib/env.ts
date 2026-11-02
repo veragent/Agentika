@@ -9,6 +9,15 @@ const serverEnvSchema = z.object({
   GOOGLE_AI_API_KEY: z.string().optional(),
   GROQ_API_KEY: z.string().optional(),
 
+  // Provider AI generik (OpenAI-compatible) — dipakai AI Chat & AI Writer.
+  // Ganti provider cukup ganti 3 nilai ini, tanpa ubah kode:
+  // base URL endpoint chat completions, API key, dan ID model.
+  // Default: BeatAPI + deepseek-v4.1-flash-free (gratis, limit 1 req/menit
+  // sebelum top-up pertama, 10/menit sesudahnya, 2.000/hari).
+  AI_BASE_URL: z.string().url().default("https://api.beatapi.io/v1"),
+  AI_API_KEY: z.string().optional(),
+  AI_MODEL: z.string().default("deepseek-v4.1-flash-free"),
+
   // AI Chat Sidebar (kill switch; "true" untuk mengaktifkan)
   AI_CHAT_ENABLED: z.string().default("false"),
 

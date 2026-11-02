@@ -1,13 +1,20 @@
 import { env } from "@/lib/env"
 import type { LearnPageResult } from "@/lib/learn"
+import {
+  getAiClient,
+  getAiModel,
+  isAiProviderAvailable,
+  isRateLimitError,
+} from "@/lib/ai/provider"
 
 /**
  * Pembungkus tunggal untuk provider AI Chat Sidebar (Phase 4).
  *
  * UI dan API route TIDAK PERNAH mengimpor vendor SDK langsung — semua
- * lewat file ini. Tahap 0 (scaffolding): hanya implementasi mock
- * deterministik, tanpa panggilan AI berbayar. Saat API key + ACC budget
- * tersedia, hanya file ini yang berubah ke provider nyata.
+ * lewat file ini. Provider nyata memakai provider AI generik
+ * (OpenAI-compatible) dari env: AI_BASE_URL, AI_API_KEY, AI_MODEL
+ * (default BeatAPI + deepseek-v4.1-flash-free, gratis). Bila key belum
+ * di-set, kembali ke mock deterministik.
  *
  * Desain: ~/workspace/agentika/ai-chat-sidebar-design-2026-10-19.md
  */
@@ -22,17 +29,9 @@ export interface StreamLearnChatParams {
   messages: LearnChatMessage[]
 }
 
-/** True bila kill switch menyala DAN minimal satu API key provider tersedia. */
+/** True bila kill switch menyala DAN provider AI generik terkonfigurasi. */
 export function isAiChatAvailable(): boolean {
-  return (
-    env.AI_CHAT_ENABLED === "true" &&
-    Boolean(
-      env.GOOGLE_AI_API_KEY ||
-        env.OPENAI_API_KEY ||
-        env.ANTHROPIC_API_KEY ||
-        env.GROQ_API_KEY,
-    )
-  )
+  return isAiProviderAvailable(env.AI_CHAT_ENABLED)
 }
 
 const SYSTEM_PROMPT_TEMPLATE = `Kamu adalah tutor AI Agentika untuk pelaku UMKM Indonesia.
@@ -72,19 +71,44 @@ export function buildSystemPrompt(lesson: LearnPageResult): string {
 /**
  * Stream jawaban chat sebagai potongan teks.
  *
- * Tahap 0: selalu mock deterministik (flag off / belum ada key).
- * Tahap 1: cabang provider nyata ditambahkan di sini.
+ * Bila kill switch off atau AI_API_KEY belum di-set: mock deterministik.
+ * Bila provider tersedia: stream chat completions dari provider generik.
+ * Bila provider membatasi (429, lazim di model gratis): satu pesan ramah
+ * sebagai pengganti stream, bukan error mentah ke UI.
  */
 export async function* streamLearnChat(
   params: StreamLearnChatParams,
 ): AsyncGenerator<string> {
-  void params
   if (!isAiChatAvailable()) {
     yield* streamMock()
     return
   }
-  // Provider nyata belum diimplementasikan (menunggu API key + ACC budget).
-  yield* streamMock()
+  const client = getAiClient()
+  if (!client) {
+    yield* streamMock()
+    return
+  }
+  try {
+    const stream = await client.chat.completions.create({
+      model: getAiModel(),
+      messages: [
+        { role: "system", content: params.system },
+        ...params.messages.map((m) => ({ role: m.role, content: m.content })),
+      ],
+      max_tokens: 600,
+      stream: true,
+    })
+    for await (const chunk of stream) {
+      const text = chunk.choices[0]?.delta?.content
+      if (text) yield text
+    }
+  } catch (error) {
+    if (isRateLimitError(error)) {
+      yield "Batas permintaan AI sedang tercapai (model gratis dibatasi 1 permintaan per menit). Tunggu sebentar, lalu coba lagi ya."
+    } else {
+      yield "AI sedang tidak bisa dihubungi. Coba lagi sebentar lagi ya."
+    }
+  }
 }
 
 async function* streamMock(): AsyncGenerator<string> {
