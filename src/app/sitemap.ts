@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { getAllFilesMetadata } from "@/lib/mdx"
 import { getPublishedBlogPosts } from "@/lib/blog"
-import { aiTools } from "@/lib/ai-tools"
+import { aiTools, isToolContentFilled } from "@/lib/ai-tools"
 import { env } from "@/lib/env"
 
 const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
@@ -15,6 +15,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/blog", priority: 0.9 },
     { path: "/learn", priority: 0.9 },
     { path: "/faq", priority: 0.8 },
+    { path: "/tentang", priority: 0.5 },
+    { path: "/kontak", priority: 0.5 },
+    { path: "/privasi", priority: 0.5 },
   ].map(({ path, priority }) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
@@ -36,7 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }))
 
-  const toolRoutes: MetadataRoute.Sitemap = aiTools.map((tool) => ({
+  const toolRoutes: MetadataRoute.Sitemap = aiTools
+    .filter(isToolContentFilled)
+    .map((tool) => ({
     url: `${baseUrl}/ai-tools/${tool.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,

@@ -19,6 +19,9 @@ export function Footer() {
               <li><Link href="/blog" className="hover:text-primary">Blog</Link></li>
               <li><Link href="/learn" className="hover:text-primary">Learn</Link></li>
               <li><Link href="/faq" className="hover:text-primary">FAQ</Link></li>
+              <li><Link href="/tentang" className="hover:text-primary">Tentang</Link></li>
+              <li><Link href="/kontak" className="hover:text-primary">Kontak</Link></li>
+              <li><Link href="/privasi" className="hover:text-primary">Kebijakan Privasi</Link></li>
             </ul>
           </div>
           <div>

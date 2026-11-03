@@ -34,6 +34,20 @@ export interface AITool {
   curatedForUmkm?: boolean
 }
 
+/**
+ * Tool dianggap terisi penuh bila fitur utama, kelebihan, dan kekurangan
+ * sudah diisi dari riset. Tool yang belum terisi tidak diindeks dan tidak
+ * masuk sitemap sampai dilengkapi, supaya direktori tidak dinilai dari
+ * halaman detail yang hampir kosong.
+ */
+export function isToolContentFilled(tool: AITool): boolean {
+  return (
+    (tool.features?.length ?? 0) > 0 &&
+    (tool.pros?.length ?? 0) > 0 &&
+    (tool.cons?.length ?? 0) > 0
+  )
+}
+
 export const aiTools: AITool[] = [
   {
     name: "ChatGPT",

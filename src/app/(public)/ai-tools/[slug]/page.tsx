@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { aiTools, getToolBySlug, getToolsByCategory } from "@/lib/ai-tools"
+import { aiTools, getToolBySlug, getToolsByCategory, isToolContentFilled } from "@/lib/ai-tools"
 import { InternalLinksBlock } from "@/components/layout/internal-links"
 import { findPostsMentioningTool } from "@/lib/internal-links"
 import {
@@ -29,6 +29,9 @@ export async function generateMetadata({
     title: `${tool.name} — ${tool.tagline}`,
     description: tool.description,
     alternates: { canonical: `/ai-tools/${tool.slug}` },
+    robots: isToolContentFilled(tool)
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
   }
 }
 
