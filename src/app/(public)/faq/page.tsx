@@ -71,8 +71,9 @@ export default async function FaqIndexPage({
       <div className="space-y-3">
         <h1 className="text-4xl font-extrabold tracking-tight">FAQ</h1>
         <p className="text-lg text-muted-foreground">
-          Pertanyaan yang sering diajukan tentang AI, otomatisasi, dan platform AGENTIKA.
-          Temukan jawaban untuk topik teknis, monetisasi, dan lainnya.
+          {lang === "en"
+            ? "Frequently asked questions about AI, automation, and the AGENTIKA platform. Find answers on technical topics, monetization, and more."
+            : "Pertanyaan yang sering diajukan tentang AI, otomatisasi, dan platform AGENTIKA. Temukan jawaban untuk topik teknis, monetisasi, dan lainnya."}
         </p>
       </div>
 
@@ -100,14 +101,30 @@ export default async function FaqIndexPage({
       {/* Content */}
       {faqs.length === 0 ? (
         <div className="rounded-xl border border-dashed py-16 text-center text-muted-foreground">
-          <p>Belum ada FAQ yang dipublikasikan.</p>
+          <p>
+            {lang === "en"
+              ? "No FAQs published yet."
+              : "Belum ada FAQ yang dipublikasikan."}
+          </p>
           {lang !== "all" && (
             <p className="mt-1 text-sm">
-              Coba pilih bahasa lain atau{" "}
-              <Link href="/faq" className="underline">
-                lihat semua
-              </Link>
-              .
+              {lang === "en" ? (
+                <>
+                  Try another language or{" "}
+                  <Link href="/faq" className="underline">
+                    view all
+                  </Link>
+                  .
+                </>
+              ) : (
+                <>
+                  Coba pilih bahasa lain atau{" "}
+                  <Link href="/faq" className="underline">
+                    lihat semua
+                  </Link>
+                  .
+                </>
+              )}
             </p>
           )}
         </div>
