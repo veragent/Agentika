@@ -158,12 +158,20 @@ export default async function ToolDetailPage({
           </div>
         )}
 
+        {tool.isAffiliateLink && (
+          <p className="text-sm text-muted-foreground">
+            Beberapa tautan di halaman ini adalah tautan afiliasi. Jika
+            kamu membeli lewat tautan tersebut, Agentika bisa mendapat
+            komisi tanpa biaya tambahan untukmu.
+          </p>
+        )}
+
         {tool.affiliateLink && (
           <div>
             <a
-              href={tool.affiliateLink}
+              href={`/go/${tool.slug}`}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={tool.isAffiliateLink ? "noopener noreferrer sponsored nofollow" : "noopener noreferrer"}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90"
             >
               Kunjungi {tool.name} ↗

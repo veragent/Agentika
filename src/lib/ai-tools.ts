@@ -14,6 +14,15 @@ export interface AITool {
   featured: boolean
   rating: number
   affiliateLink?: string | null
+  /**
+   * True HANYA bila affiliateLink adalah URL afiliasi asli (membawa
+   * ref/sub-ID program). Disclosure afiliasi dan rel sponsored
+   * nofollow hanya aktif bila field ini true. Sembilan URL yang
+   * ada di data saat ini (2026-11-04) adalah URL resmi biasa,
+   * bukan afiliasi, jadi semuanya tetap false sampai link asli
+   * dari program dimasukkan.
+   */
+  isAffiliateLink?: boolean
   /** Fitur utama, diisi per tool dari riset (opsional — disembunyikan bila kosong). */
   features?: string[]
   /** Kelebihan, diisi per tool dari riset (opsional). */

@@ -239,9 +239,9 @@ export default async function CompareToolsPage({
                       </Link>
                       {tool.affiliateLink && (
                         <a
-                          href={tool.affiliateLink}
+                          href={`/go/${tool.slug}`}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={tool.isAffiliateLink ? "noopener noreferrer sponsored nofollow" : "noopener noreferrer"}
                           className="px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-medium hover:opacity-90"
                         >
                           Kunjungi ↗

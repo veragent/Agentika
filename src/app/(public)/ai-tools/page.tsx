@@ -129,9 +129,9 @@ export default function AiToolsPage() {
                 </Link>
                 {tool.affiliateLink && (
                   <a
-                    href={tool.affiliateLink}
+                    href={`/go/${tool.slug}`}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel={tool.isAffiliateLink ? "noopener noreferrer sponsored nofollow" : "noopener noreferrer"}
                     className="text-primary hover:underline flex items-center gap-1"
                   >
                     <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
