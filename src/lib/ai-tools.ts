@@ -21,15 +21,17 @@ export interface AITool {
   /** Kekurangan, diisi per tool dari riset (opsional). */
   cons?: string[]
   /**
-   * Badge kurasi "Baru minggu ini". Opsional — hanya true bila kurasi
-   * editorial sudah menetapkan tool ini sebagai baru minggu ini.
-   * Tidak ada tool yang ditandai tanpa penetapan kurasi.
+   * Badge kurasi "Baru minggu ini" (definisi 2026-11-04): true hanya
+   * untuk tool yang detailnya baru terisi penuh (fitur + pro + kontra)
+   * dalam batch 7 hari terakhir, maksimal 1 batch. Batch baru
+   * menggantikan batch lama; tool historis/sunset tidak ditandai
+   * meski baru terisi, karena label "baru" akan menyesatkan.
    */
   newThisWeek?: boolean
   /**
-   * Badge kurasi "Pilihan untuk UMKM". Opsional — hanya true bila
-   * kurasi editorial sudah menetapkan tool ini sebagai pilihan UMKM.
-   * Tidak ada tool yang ditandai tanpa penetapan kurasi.
+   * Badge kurasi "Pilihan untuk UMKM" (definisi 2026-11-04): true
+   * hanya bila tool terisi penuh, harganya Free/Freemium, kategorinya
+   * non-Coding, dan rating di data situs >= 4.5.
    */
   curatedForUmkm?: boolean
 }
@@ -59,6 +61,7 @@ export const aiTools: AITool[] = [
     featured: true,
     rating: 4.8,
     affiliateLink: "https://openai.com/chatgpt",
+    curatedForUmkm: true,
     features: [
       "Chat teks dan mode suara untuk tanya jawab dan brainstorming",
       "Upload dan analisis file (PDF, spreadsheet, gambar)",
@@ -88,6 +91,7 @@ export const aiTools: AITool[] = [
     featured: true,
     rating: 4.9,
     affiliateLink: "https://www.anthropic.com/claude",
+    curatedForUmkm: true,
     features: [
       "Projects: ruang kerja berisi dokumen dan instruksi khusus yang berlaku di semua chat di dalamnya",
       "Artifacts: dokumen, tabel, dan kode dibuat di panel samping chat dan bisa diedit langsung",
@@ -362,6 +366,7 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Freemium",
     description: "Perplexity memberikan jawaban dengan sumber yang bisa dilacak.",
+    curatedForUmkm: true,
     features: [
       "Mesin pencari AI yang menjawab dengan sitasi sumber yang bisa diklik dan diverifikasi",
       "Pencarian real-time ke web, bukan hanya dari data latih model",
@@ -390,6 +395,7 @@ export const aiTools: AITool[] = [
     category: "Writing & Content",
     pricing: "Freemium",
     description: "Gemini mendukung teks, gambar, dan reasoning untuk kebutuhan konten.",
+    curatedForUmkm: true,
     features: [
       "Chat multimodal: bisa mengolah teks, gambar, audio, dan dokumen dalam satu percakapan",
       "Terhubung ke pencarian Google, jawaban mengikuti informasi terbaru di web",
@@ -1521,6 +1527,7 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Free",
     description: "Stable Diffusion menawarkan fleksibilitas untuk membuat gambar berkualitas.",
+    curatedForUmkm: true,
     features: [
       "Text-to-image dari prompt, plus inpainting dan outpainting untuk mengubah atau memperluas bagian gambar",
       "Berjalan lokal di GPU sendiri lewat antarmuka komunitas seperti AUTOMATIC1111, ComfyUI, InvokeAI, atau Fooocus, tanpa ketergantungan cloud",
@@ -1666,6 +1673,7 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "Clipdrop mendukung remove background, relight, dan upscaling.",
+    newThisWeek: true,
     features: [
       "Hapus background otomatis dengan penanganan tepi rambut dan area transparan",
       "Cleanup: hapus objek, orang, teks, dan cacat foto dengan inpainting kontekstual",
@@ -1694,6 +1702,7 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "PhotoRoom membantu membuat foto katalog dengan background bersih.",
+    newThisWeek: true,
     features: [
       "Hapus background otomatis dari foto produk, termasuk foto dari HP",
       "Background AI studio dan lifestyle plus bayangan realistis agar produk terlihat difoto studio",
@@ -1721,6 +1730,7 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "Krea AI memungkinkan preview gambar secara live saat membuat prompt.",
+    newThisWeek: true,
     features: [
       "Kanvas real-time: gambar berubah saat mengetik atau menggambar, bukan menunggu satu render selesai",
       "Banyak model gambar dan video di satu saldo compute unit, termasuk model sendiri Krea 2/3 dan model mitra",
@@ -1749,6 +1759,7 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "Artbreeder cocok untuk eksperimen style portrait dan landscape.",
+    newThisWeek: true,
     features: [
       "Splicer: campur gambar dan geser gen seperti usia, struktur wajah, dan palet warna untuk melihat perubahan langsung",
       "Mixer dan Composer: gabung beberapa gambar dan teks menjadi gambar baru",
