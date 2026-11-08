@@ -48,3 +48,6 @@ next-env.d.ts
 
 # opennext (cloudflare adapter build output)
 /.open-next/
+
+# wrangler local state
+/.wrangler/
