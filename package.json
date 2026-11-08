@@ -54,6 +54,7 @@
   "devDependencies": {
     "@netlify/next": "^1.4.9",
     "@next/bundle-analyzer": "^15.0.0",
+    "@opennextjs/cloudflare": "^1.19.0",
     "@playwright/test": "^1.44.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20.19.41",

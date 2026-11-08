@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Artefak build: search index gabungan (dibuat oleh scripts/build-search-index.ts)
 /public/search-index.json
+
+# opennext (cloudflare adapter build output)
+/.open-next/
