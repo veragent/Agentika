@@ -9,7 +9,10 @@ import { getPublishedBlogPosts } from "@/lib/blog"
 import { publicIcons } from "@/components/icons/public-icons"
 import { NewsletterForm } from "@/components/newsletter/newsletter-form"
 
-export const revalidate = 3600
+ // Konten dibaca dari filesystem saat build; di Workers tidak ada fs saat
+// revalidasi, jadi halaman ini statis penuh (prerender) dan disajikan dari
+// R2 incremental cache. ISR akan me-render ulang menjadi kosong.
+export const revalidate = false
 
 const { blog: BlogIcon, learn: LearnIcon } = publicIcons
 
