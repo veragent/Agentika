@@ -5,8 +5,11 @@ import { ArrowRight } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { getLearnNavigation } from "@/lib/learn"
+import { getPublishedBlogPosts } from "@/lib/blog"
 import { publicIcons } from "@/components/icons/public-icons"
 import { NewsletterForm } from "@/components/newsletter/newsletter-form"
+
+export const revalidate = 3600
 
 const { blog: BlogIcon, learn: LearnIcon } = publicIcons
 
@@ -17,6 +20,7 @@ export default async function HomePage() {
       section.pages.map((page) => ({ slug: page.slug, title: page.title })),
     ),
   )
+  const latestPosts = getPublishedBlogPosts().slice(0, 10)
 
   return (
     <div className="flex flex-col gap-20 py-10 md:py-16">
@@ -82,6 +86,39 @@ export default async function HomePage() {
             </CardContent>
           </Card>
         ))}
+      </section>
+
+      {/* Latest articles */}
+      <section className="flex flex-col gap-6">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-heading">Artikel Terbaru</h2>
+            <p className="mt-1 text-muted-foreground">
+              10 artikel terbaru seputar AI, otomatisasi, dan side hustle untuk UMKM Indonesia.
+            </p>
+          </div>
+          <Link
+            href="/blog"
+            className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+          >
+            Lihat semua artikel <ArrowRight className="ml-1 h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {latestPosts.map((post) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`}>
+              <Card className="h-full transition-colors hover:border-primary">
+                <CardHeader>
+                  <CardTitle>{post.title}</CardTitle>
+                  <CardDescription>{(post.date ?? "").split("T")[0]}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="line-clamp-3 text-sm text-muted-foreground">{post.excerpt}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* CTA */}
