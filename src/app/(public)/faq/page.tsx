@@ -1,5 +1,4 @@
-import fs from "fs"
-import path from "path"
+import faqData from "../../../../content/config/faq.json"
 import { generateSeo } from "@/lib/seo"
 import { JsonLdScript, buildFaqJsonLd } from "@/components/seo/json-ld-data"
 import type { Metadata } from "next"
@@ -22,16 +21,10 @@ type FaqItem = {
 }
 
 function getFaqs(): FaqItem[] {
-  const configPath = path.join(process.cwd(), "content", "config", "faq.json")
-  if (!fs.existsSync(configPath)) {
-    return []
-  }
-  try {
-    const content = fs.readFileSync(configPath, "utf8")
-    return JSON.parse(content) as FaqItem[]
-  } catch {
-    return []
-  }
+  // Data di-import statis supaya terbundel saat build. Jangan baca via fs:
+  // halaman ini dinamis (searchParams) dan Workers tidak punya filesystem,
+  // fs.existsSync selalu false di sana sehingga FAQ tampil kosong.
+  return faqData as FaqItem[]
 }
 
 export default async function FaqIndexPage({
