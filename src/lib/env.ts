@@ -3,7 +3,8 @@ import { z } from "zod"
 const serverEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "staging", "test", "production"]).default("development"),
 
-  // AI Providers (at least one recommended)
+  // AI Providers lama (legacy) — hanya dipakai pengecekan ketersediaan
+  // Prompt Generator; provider generik di atas tidak butuh key-key ini.
   OPENAI_API_KEY: z.string().optional(),
   ANTHROPIC_API_KEY: z.string().optional(),
   GOOGLE_AI_API_KEY: z.string().optional(),
@@ -31,22 +32,11 @@ const serverEnvSchema = z.object({
   NEXT_PUBLIC_ADSENSE_CLIENT: z.string().optional(),
 
   // Analytics
-  NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string().optional(),
-  NEXT_PUBLIC_UMAMI_URL: z.string().optional(),
   NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional(),
   NEXT_PUBLIC_GSC_VERIFICATION: z.string().optional(),
 
   // Resend (email)
   RESEND_API_KEY: z.string().optional(),
-
-  // Discord
-  DISCORD_WEBHOOK_URL: z.string().url().optional(),
-  DISCORD_BOT_TOKEN: z.string().optional(),
-
-  // Telegram
-  TELEGRAM_BOT_TOKEN: z.string().optional(),
-  TELEGRAM_ADMIN_CHAT_ID: z.string().optional(),
-  TELEGRAM_ANNOUNCEMENTS_CHANNEL_ID: z.string().optional(),
 
   // Newsletter
   NEWSLETTER_PROVIDER: z.enum(["convertkit", "mailerlite", "buttondown", "mailchimp", "resend"]).optional(),
@@ -56,7 +46,7 @@ const serverEnvSchema = z.object({
   // Alamat pengirim untuk welcome email + digest (harus terverifikasi di Resend)
   NEWSLETTER_FROM_EMAIL: z.string().optional(),
 
-  // Pelindung route cron (digest newsletter); dipakai juga Vercel Cron
+  // Pelindung route cron (digest newsletter); dipakai juga cron eksternal
   CRON_SECRET: z.string().optional(),
 
   // AI Writer (kill switch; "true" untuk mengaktifkan)

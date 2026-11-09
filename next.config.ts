@@ -42,8 +42,8 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://giscus.app",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://og-images.pearlanalytics.ai https://*.vercel.app https://*.amazonaws.com https://images.unsplash.com https://*.googlesyndication.com https://googleads.g.doubleclick.net https://*.google.com",
-      "connect-src 'self' https://api.coingecko.com https://*.vercel.app wss: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.googlesyndication.com",
+      "img-src 'self' data: blob: https://og-images.pearlanalytics.ai https://*.amazonaws.com https://images.unsplash.com https://*.googlesyndication.com https://googleads.g.doubleclick.net https://*.google.com",
+      "connect-src 'self' https://api.coingecko.com wss: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.googlesyndication.com",
       "frame-src 'self' https://www.youtube.com https://www.googletagmanager.com https://*.googlesyndication.com https://googleads.g.doubleclick.net https://giscus.app",
       "frame-ancestors 'none'",
     ].join("; "),
@@ -65,8 +65,8 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
   },
   
-  // Image optimization - Netlify Image CDN handles optimization automatically
-  // We keep our config for remote patterns and formats
+  // Image optimization: Next.js optimizes images; config below sets
+  // remote patterns and formats
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
@@ -75,13 +75,12 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: false,
     remotePatterns: [
       { protocol: "https", hostname: "og-images.pearlanalytics.ai" },
-      { protocol: "https", hostname: "**.vercel.app" },
       { protocol: "https", hostname: "**.amazonaws.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
   
-  // Security headers via next.config (also in netlify.toml for edge)
+  // Security headers via next.config
   async headers() {
     return [
       {
