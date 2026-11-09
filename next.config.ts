@@ -105,7 +105,25 @@ const nextConfig: NextConfig = {
   // Disk folders under content/blog/ remain for organization; public URLs are flat.
   // Learn URLs: 301 redirect legacy /<category>/<slug> (pre-/learn/ prefix, 404 in GSC)
   // to /learn/<category>/<slug>.
+  // Removed/draft URLs (GSC 404 + noindex, 9 Nov 2026): 301 to the closest
+  // live equivalent. Draft -en posts point at their Indonesian version; if
+  // an -en post is ever published, remove its redirect first.
+  // Learn track indexes (/learn/<track>) have no category page and 404:
+  // 301 to the Learn overview.
   async redirects() {
+    const removedRedirects = [
+      { source: "/blog/prompt-engineering-untuk-konten", destination: "/blog/prompt-engineering-seni-berbicara-ai" },
+      { source: "/blog/perbandingan-llm-2026-en", destination: "/blog/perbandingan-llm-2026" },
+      { source: "/blog/10-ai-tools-produktivitas-en", destination: "/blog/10-ai-tools-produktivitas" },
+      { source: "/blog/ai-tools/perbandingan-llm-2026-en", destination: "/blog/perbandingan-llm-2026" },
+      { source: "/blog/ai-tools/10-ai-tools-produktivitas-en", destination: "/blog/10-ai-tools-produktivitas" },
+    ]
+    const learnTrackIndexes = [
+      "ai-automation",
+      "ai-basics",
+      "no-code-tools",
+      "prompt-engineering-umkm",
+    ]
     const legacyCategories = [
       "ai-tools",
       "ai-automation",
@@ -120,6 +138,15 @@ const nextConfig: NextConfig = {
       "prompt-engineering-umkm",
     ]
     return [
+      // Explicit removed-URL redirects first: first match wins, so the
+      // legacy /blog/ai-tools/:slug rule below never turns these into a
+      // two-hop chain ending in a 404.
+      ...removedRedirects.map((r) => ({ ...r, permanent: true })),
+      ...learnTrackIndexes.map((track) => ({
+        source: `/learn/${track}`,
+        destination: "/learn",
+        permanent: true,
+      })),
       ...legacyCategories.map((cat) => ({
         source: `/blog/${cat}/:slug`,
         destination: "/blog/:slug",
