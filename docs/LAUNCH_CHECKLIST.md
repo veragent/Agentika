@@ -1,34 +1,49 @@
-# AGENTIKA Launch Checklist
+# Launch Checklist — AGENTIKA
 
-Use this checklist before promoting a build from staging to production.
+> Checklist sebelum dan sesudah deploy ke production
+> (Cloudflare Workers). Terakhir diperbarui: 9 Nov 2026.
 
-## 1. Environment and secrets
-- [ ] `DATABASE_URL`, `NEXTAUTH_SECRET`, and `NEXTAUTH_URL` are configured for the target environment.
-- [ ] Bootstrap `ADMIN_PASSWORD` is changed from the development default.
-- [ ] At least one AI provider key is configured if AI Writer or Airdrop AI Helper should be enabled.
-- [ ] `AI_SETTINGS_ENCRYPTION_KEY` is set before storing provider keys in admin settings.
-- [ ] `NEXT_PUBLIC_APP_URL` points to the canonical production domain.
+## 1. Gate kode
 
-## 2. Analytics and Search Console
-- [ ] GA4 web data stream is created and `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set.
-- [ ] Google Search Console property is created and `NEXT_PUBLIC_GSC_VERIFICATION` is set.
-- [ ] Verify `page_view`, `search`, `learn_progress_toggle`, and Web Vitals events in GA4 DebugView.
-- [ ] Submit `/sitemap.xml` in Google Search Console after production deploy.
+- [ ] `npm run typecheck` lolos
+- [ ] `npm run test` lolos (23 unit test)
+- [ ] `npm run lint` lolos
+- [ ] `npm run build` lolos
 
-## 3. SEO and content readiness
-- [ ] `robots.txt` and `/sitemap.xml` return production URLs.
-- [ ] Blog, Learn, Airdrop, and AI Tools detail pages have canonical metadata.
-- [ ] Draft/scheduled posts are not visible publicly before their publish time.
-- [ ] 404 and 500 recovery pages render with working recovery links.
+## 2. Environment dan secret
 
-## 4. Monetization and outbound tracking
-- [ ] AdSense client ID and slot IDs are configured where ads should be enabled.
-- [ ] Admin/editor roles do not see suppressed ad placements.
-- [ ] AI tool affiliate outbound links redirect correctly and record clicks.
+- [ ] 5 secret produksi terisi di dashboard Cloudflare / `wrangler secret list`:
+      `AI_API_KEY`, `CRON_SECRET`, `NEWSLETTER_API_KEY`, `RESEND_API_KEY`,
+      `UPSTASH_REDIS_REST_TOKEN`
+- [ ] Env build-time ter-export **sebelum build**:
+      `NEXT_PUBLIC_GSC_VERIFICATION`, `NEXT_PUBLIC_APP_URL`,
+      `NEXT_PUBLIC_GA_MEASUREMENT_ID`, `NEXT_PUBLIC_ADSENSE_CLIENT`
 
-## 5. QA smoke test
-- [ ] Run `npm run lint`.
-- [ ] Run `npm run typecheck`.
-- [ ] Run `npm test`.
-- [ ] Run `npm run build` in an environment that can fetch configured fonts.
-- [ ] Smoke test login, post CRUD, airdrop CRUD/bulk update, tool compare, global search, and learn progress.
+## 3. Domain dan DNS
+
+- [ ] Zona `agentika.web.id` status active di Cloudflare
+- [ ] Apex `agentika.web.id` redirect 308 → `https://www.agentika.web.id`
+      (Redirect Rule `apex-ke-www` aktif)
+- [ ] Custom domain `www` + apex terpasang di Worker `agentika`
+
+## 4. SEO dan konten
+
+- [ ] `robots.txt` dan `/sitemap.xml` mengembalikan URL produksi
+- [ ] Halaman blog, learn, dan AI tools punya canonical metadata
+- [ ] Sitemap sudah di-submit di Google Search Console setelah deploy
+
+## 5. Monetisasi
+
+- [ ] `ads.txt` live dan benar
+      (`google.com, pub-8284519503817385, DIRECT, f08c47fec0942fa0`)
+- [ ] Iklan **jangan dinyalakan** sebelum Google menyetujui situs
+- [ ] Link afiliasi keluar lewat `/go/<slug>` dan tercatat kliknya
+
+## 6. Smoke test setelah deploy
+
+- [ ] Home, `/blog`, satu artikel, `/faq` mengembalikan 200
+- [ ] `/go/<slug>` yang punya affiliateLink redirect 302;
+      tanpa affiliateLink mengembalikan 404 (by design)
+- [ ] Learn Chat menjawab mode `provider` (bukan mock)
+- [ ] AI Writer menghasilkan draf mode `live` (bukan demo)
+- [ ] Form newsletter subscribe mengirim welcome email

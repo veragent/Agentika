@@ -5,7 +5,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?style=for-the-badge&logo=tailwind-css)
-![Netlify](https://img.shields.io/badge/Deploy-Netlify-00C7B7?style=for-the-badge&logo=netlify)
+![Cloudflare Workers](https://img.shields.io/badge/Deploy-Cloudflare_Workers-F6821F?style=for-the-badge&logo=cloudflare)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 **Platform AI untuk UMKM Indonesia: otomatisasi kerja & side hustle dengan AI.**
@@ -60,9 +60,9 @@ Platform ini juga dirancang untuk **menghasilkan pendapatan** melalui Google AdS
 | **Language** | TypeScript 5 |
 | **Styling** | Tailwind CSS v4 + shadcn/ui |
 | **Content** | MDX + gray-matter + next-mdx-remote |
-| **AI SDKs** | Vercel AI SDK + OpenAI, Anthropic, Google (terinstal; integrasi API menyusul) |
+| **AI SDKs** | Provider generik OpenAI-compatible — Hcnsec + MiniMax-M3.1-Flash (lokal/staging lama), Workers AI Llama 3.3 70B (produksi) |
 | **Animation** | Framer Motion |
-| **Deploy** | Netlify |
+| **Deploy** | Cloudflare Workers |
 | **Analytics** | Google Analytics 4 (via @next/third-parties) |
 | **Email** | Resend |
 
@@ -196,7 +196,7 @@ Aplikasi mendukung tiga mode runtime:
 |------|--------|---------|
 | `development` | Pengembangan lokal | Salin `.env.example` ke `.env.local`. |
 | `staging` | Preview/UAT sebelum production | Gunakan service eksternal yang sama seperti production untuk validasi integrasi. |
-| `production` | Environment live pengguna akhir | Semua secret harus diisi melalui platform deploy (mis. Netlify env). |
+| `production` | Environment live pengguna akhir | Semua secret harus diisi melalui dashboard Cloudflare (`wrangler secret put`). |
 
 ---
 

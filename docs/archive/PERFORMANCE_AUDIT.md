@@ -1,3 +1,9 @@
+> **ARSIP — baseline Juni 2026, pra-migrasi Cloudflare.** Audit ini diukur di stack lama
+> (Vercel, masih ada halaman Airdrop, konflik `force-dynamic`). Jangan dipakai sebagai
+> baseline saat ini; baseline CWV yang baru harus diukur ulang dari mesin lokal
+> (Lighthouse) setelah migrasi produksi ke Cloudflare Workers (9 Nov 2026).
+> Disimpan sebagai bukti sejarah + metodologi pengukuran.
+
 # ⚡ Performance Audit — AGENTIKA
 
 > Baseline audit on **production** (`https://agentika.web.id`), measured 2026-06-18.

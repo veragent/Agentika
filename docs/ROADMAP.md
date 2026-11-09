@@ -4,7 +4,7 @@
 > Roadmap ini ditulis ulang pada Oktober 2026 setelah repositioning dari web3ai-hub.
 > Setiap fase menghasilkan versi yang *shippable* dan dapat menghasilkan traffic/revenue.
 >
-> Live: [agentika.web.id](https://www.agentika.web.id) · Stack: Next.js 16 + React 19 + TypeScript + Tailwind v4, konten MDX, deploy Netlify.
+> Live: [agentika.web.id](https://www.agentika.web.id) · Stack: Next.js 16 + React 19 + TypeScript + Tailwind v4, konten MDX, deploy Cloudflare Workers.
 
 ---
 
@@ -40,7 +40,7 @@ Situs sudah **live dan fungsional**. Fondasi teknis selesai; fokus berikutnya ad
 ## Phase 0 — Foundation ✅ SELESAI
 
 - ✅ Next.js 16 (App Router) + React 19 + TypeScript + Tailwind v4 + shadcn/ui
-- ✅ Deploy Netlify + domain agentika.web.id
+- ✅ Deploy Cloudflare Workers + domain agentika.web.id
 - ✅ Security headers (CSP, HSTS, X-Frame-Options, dll)
 - ✅ SEO dasar: sitemap dinamis, robots.txt, OG image generator, canonical URL
 - ✅ Google Analytics 4
@@ -144,7 +144,7 @@ Item-item dari roadmap web3ai-hub lama yang **sengaja tidak dibawa**:
 - Airdrop Hub + step tracker + bounty board
 - Track Web3 (Blockchain Basics, DeFi, NFT, DAO)
 - Admin dashboard + NextAuth + Prisma/Neon database
-- Deploy Vercel, Cloudflare R2, Umami analytics
+- Deploy Vercel, Umami analytics
 - Wallet connect, live crypto price
 
 *Jika suatu saat dibutuhkan kembali, akan dievaluasi sebagai proyek terpisah.*
