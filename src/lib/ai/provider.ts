@@ -53,7 +53,14 @@ export function toRateLimitError(error: unknown): AiRateLimitError {
 /** Klien OpenAI-compatible, atau null bila AI_API_KEY belum di-set. */
 export function getAiClient(): OpenAI | null {
   if (!env.AI_API_KEY) return null
-  return new OpenAI({ apiKey: env.AI_API_KEY, baseURL: env.AI_BASE_URL })
+  return new OpenAI({
+    apiKey: env.AI_API_KEY,
+    baseURL: env.AI_BASE_URL,
+    // Tanpa retry: SDK default mengulang 2x diam-diam saat request
+    // menggantung/gagal, membengkakkan TTFB. Rate limit ditangani
+    // eksplisit oleh pemanggil (isRateLimitError).
+    maxRetries: 0,
+  })
 }
 
 /** ID model aktif dari env. */

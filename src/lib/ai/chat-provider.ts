@@ -106,15 +106,20 @@ export async function* streamLearnChat(
     return
   }
   try {
-    const stream = await client.chat.completions.create({
-      model: getAiModel(),
-      messages: [
-        { role: "system", content: params.system },
-        ...params.messages.map((m) => ({ role: m.role, content: m.content })),
-      ],
-      max_tokens: 600,
-      stream: true,
-    })
+    const stream = await client.chat.completions.create(
+      {
+        model: getAiModel(),
+        messages: [
+          { role: "system", content: params.system },
+          ...params.messages.map((m) => ({ role: m.role, content: m.content })),
+        ],
+        max_tokens: 600,
+        stream: true,
+      },
+      // Batas 120 dtk: cukup untuk TTFB terburuk Hcnsec (~87 dtk) di
+      // produksi, tapi tidak menggantung tanpa batas bila provider mati.
+      { signal: AbortSignal.timeout(120_000) },
+    )
     let collected = ""
     for await (const chunk of stream) {
       const text = chunk.choices[0]?.delta?.content
