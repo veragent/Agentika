@@ -37,7 +37,7 @@ from pathlib import Path
 sys.path.insert(0, "/opt/muse/skills/custom-connector-setup/bin")
 from dynamic_credentials import dynamic_credential_entry
 
-BUCKET = "agentika-staging-inc-cache"
+BUCKET = os.environ.get("INC_CACHE_BUCKET", "agentika-staging-inc-cache")
 ACCOUNT_ID = "39058c7c1fe9230c935b19991fa373fe"
 PREFIX = "incremental-cache"
 WORKERS = 8
