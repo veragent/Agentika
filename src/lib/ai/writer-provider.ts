@@ -183,14 +183,21 @@ export async function generateArticleDraft(request: WriterRequest): Promise<Writ
     return { ...cached, cached: true }
   }
   try {
-    const completion = await client.chat.completions.create({
-      model: getAiModel(),
-      messages: [
-        { role: "system", content: WRITER_SYSTEM_PROMPT },
-        { role: "user", content: buildWriterUserPrompt(request) },
-      ],
-      max_tokens: 4000,
-    })
+    // Batas waktu eksplisit: tanpa ini, panggilan provider yang menggantung
+    // (teramati di Workers: tidak ada respons > 4 menit) membuat route ikut
+    // menggantung selamanya. Timeout di sini melempar AbortError, yang
+    // ditangkap di bawah dan jatuh ke draf mock — sesuai desain fallback.
+    const completion = await client.chat.completions.create(
+      {
+        model: getAiModel(),
+        messages: [
+          { role: "system", content: WRITER_SYSTEM_PROMPT },
+          { role: "user", content: buildWriterUserPrompt(request) },
+        ],
+        max_tokens: 4000,
+      },
+      { signal: AbortSignal.timeout(90_000) },
+    )
     const text = completion.choices[0]?.message?.content ?? ""
     const parsed = parseWriterJson(text)
     if (!parsed) {

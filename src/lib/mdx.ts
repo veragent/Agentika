@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+import { CONTENT_BUNDLE, LEARN_STRUCTURE } from "./content-bundle.generated"
 
 const CONTENT_PATH = path.join(process.cwd(), "content")
 
@@ -53,24 +54,43 @@ interface LearnTrack {
 }
 
 export function getFileBySlug(type: ContentType, slug: string) {
-  let filePath = path.join(CONTENT_PATH, type, `${slug}.mdx`)
-  if (!fs.existsSync(filePath)) {
-    // Fallback: blog posts may live in category subdirectories on disk.
-    // Resolve by basename so public URLs stay flat (/blog/<slug>).
-    const found = findFileByBasename(path.join(CONTENT_PATH, type), `${slug}.mdx`)
-    if (!found) return null
-    filePath = found
+  // Bundled copy first: the only path that works in Cloudflare Workers,
+  // where there is no filesystem at request time.
+  const bundled = CONTENT_BUNDLE[`${type}/${slug}`]
+  if (bundled) {
+    return {
+      content: bundled.content,
+      frontMatter: {
+        slug,
+        ...bundled.frontMatter,
+      } as PostMetadata,
+    }
   }
 
-  const source = fs.readFileSync(filePath, "utf8")
-  const { data, content } = matter(source)
+  // Filesystem fallback (local dev / Vercel). Guarded: in Workers fs calls
+  // throw, and a missing file must be a 404, not a 500.
+  try {
+    let filePath = path.join(CONTENT_PATH, type, `${slug}.mdx`)
+    if (!fs.existsSync(filePath)) {
+      // Fallback: blog posts may live in category subdirectories on disk.
+      // Resolve by basename so public URLs stay flat (/blog/<slug>).
+      const found = findFileByBasename(path.join(CONTENT_PATH, type), `${slug}.mdx`)
+      if (!found) return null
+      filePath = found
+    }
 
-  return {
-    content,
-    frontMatter: {
-      slug,
-      ...data,
-    } as PostMetadata,
+    const source = fs.readFileSync(filePath, "utf8")
+    const { data, content } = matter(source)
+
+    return {
+      content,
+      frontMatter: {
+        slug,
+        ...data,
+      } as PostMetadata,
+    }
+  } catch {
+    return null
   }
 }
 
@@ -107,6 +127,17 @@ export function getAllFilesMetadata(type: ContentType): PostMetadata[] {
 }
 
 export function getLearnStructure(): LearnTrack[] {
+  // Bundled copy first: the only path that works in Cloudflare Workers.
+  if (LEARN_STRUCTURE.length > 0) return LEARN_STRUCTURE
+
+  try {
+    return getLearnStructureFromFs()
+  } catch {
+    return []
+  }
+}
+
+function getLearnStructureFromFs(): LearnTrack[] {
   const learnPath = path.join(CONTENT_PATH, "learn")
   if (!fs.existsSync(learnPath)) return []
 

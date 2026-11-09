@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "prebuild": "node --import tsx scripts/build-search-index.ts",
+    "prebuild": "node --import tsx scripts/build-search-index.ts && node scripts/generate-content-bundle.mjs",
     "build": "next build",
     "search-index": "node --import tsx scripts/build-search-index.ts",
     "start": "next start",
