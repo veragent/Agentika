@@ -21,10 +21,12 @@ worker.
 Usage (from the repo root, after `npx opennextjs-cloudflare build`):
     python3 scripts/populate-r2-cache.py
 Then deploy the already-built worker without re-running populate:
-    CLOUDFLARE_API_TOKEN=<surrogate> OPEN_NEXT_DEPLOY=true wrangler deploy
+    CLOUDFLARE_API_TOKEN=<token> OPEN_NEXT_DEPLOY=true wrangler deploy
 
-The surrogate is fetched from the registered `custom.cloudflare` connection
-at runtime; no credential is stored in this file. Re-run after every rebuild:
+Token resolution: a real CLOUDFLARE_API_TOKEN in the environment is used
+as-is (GitHub Actions); otherwise the surrogate is fetched from the
+registered `custom.cloudflare` connection at runtime (this VM).
+No credential is stored in this file. Re-run after every rebuild:
 a new build has a new build ID, so all cache keys change.
 """
 import hashlib
@@ -34,13 +36,21 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-sys.path.insert(0, "/opt/muse/skills/custom-connector-setup/bin")
-from dynamic_credentials import dynamic_credential_entry
-
 BUCKET = os.environ.get("INC_CACHE_BUCKET", "agentika-staging-inc-cache")
 ACCOUNT_ID = "39058c7c1fe9230c935b19991fa373fe"
 PREFIX = "incremental-cache"
 WORKERS = 8
+
+
+def resolve_token():
+    """Cloudflare API token: real token from env (GitHub Actions) or the
+    surrogate from this VM's registered custom.cloudflare connection."""
+    token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+    if token:
+        return token
+    sys.path.insert(0, "/opt/muse/skills/custom-connector-setup/bin")
+    from dynamic_credentials import dynamic_credential_entry
+    return str(dynamic_credential_entry("custom.cloudflare", "access_token")["surrogate"]).strip()
 
 
 def collect_assets(cache_dir: Path):
@@ -91,7 +101,7 @@ def main():
         return 2
     assets = collect_assets(cache_dir)
     print(f"{len(assets)} cache assets to upload to R2 bucket {BUCKET}")
-    surr = str(dynamic_credential_entry("custom.cloudflare", "access_token")["surrogate"]).strip()
+    surr = resolve_token()
     env = dict(os.environ,
                CLOUDFLARE_API_TOKEN=surr,
                CLOUDFLARE_ACCOUNT_ID=ACCOUNT_ID)

@@ -236,6 +236,19 @@ OPEN_NEXT_DEPLOY=true wrangler deploy -c wrangler.production.jsonc
 Atau pakai skrip yang sudah ada: `cf_deploy_prod.py` (produksi),
 `cf_deploy.py` (staging).
 
+### Auto-deploy (GitHub Actions)
+
+Setiap push ke `main` menjalankan `.github/workflows/deploy-production.yml`:
+gate dulu (lint + typecheck + tes), lalu prosedur deploy yang sama persis
+(prebuild → build OpenNext → populate R2 → `wrangler deploy`).
+Bisa juga dipicu manual dari tab Actions → Deploy production → Run workflow.
+
+Satu-satunya yang harus diisi manual: repo secret `CLOUDFLARE_API_TOKEN`
+(repo → Settings → Secrets and variables → Actions), token API Cloudflare
+dengan template "Edit Cloudflare Workers" + "R2 Storage: Edit" — sama
+seperti yang dipakai deploy manual. Tanpa secret ini workflow gagal di
+langkah pengecekan token dengan pesan yang jelas.
+
 **Secret produksi** (5 secret, diisi lewat dashboard Cloudflare /
 `wrangler secret put`, bukan `.env`): `AI_API_KEY`, `CRON_SECRET`,
 `NEWSLETTER_API_KEY`, `RESEND_API_KEY`, `UPSTASH_REDIS_REST_TOKEN`.

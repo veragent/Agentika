@@ -1,0 +1,87 @@
+name: Deploy production
+
+# Auto-deploy ke Cloudflare Workers (produksi) setiap push ke main.
+# Prosedur deploy sama dengan manual (lihat docs/SETUP.md):
+#   prebuild -> build OpenNext -> populate R2 incremental cache -> wrangler deploy.
+# Rahasia yang wajib ada di repo (Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN — token API Cloudflare (template "Edit Cloudflare
+#   Workers" + "R2 Storage: Edit"), sama seperti yang dipakai deploy manual.
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm run test
+
+  deploy:
+    needs: quality
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: 39058c7c1fe9230c935b19991fa373fe
+      NEXT_PUBLIC_APP_URL: https://www.agentika.web.id
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: G-CF8K7Z0DVD
+      NEXT_PUBLIC_GSC_VERIFICATION: 8znXHfnNXhcz-iuVquIAPQprKVsEltoGWSWLFi0OBBQ
+      NEXT_PUBLIC_ADSENSE_CLIENT: ca-pub-8284519503817385
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Wrangler
+        run: npm install -g wrangler@4.158.0
+
+      - name: Check Cloudflare token secret
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "CLOUDFLARE_API_TOKEN belum diisi di repo secrets (Settings -> Secrets and variables -> Actions)."
+            exit 1
+          fi
+
+      - name: Prebuild (search index + content bundle)
+        run: npm run prebuild
+
+      - name: Build (OpenNext for Cloudflare)
+        run: npx opennextjs-cloudflare build
+
+      - name: Populate R2 incremental cache
+        run: INC_CACHE_BUCKET=agentika-inc-cache python3 scripts/populate-r2-cache.py
+
+      - name: Deploy to Cloudflare Workers
+        run: OPEN_NEXT_DEPLOY=true wrangler deploy -c wrangler.production.jsonc
