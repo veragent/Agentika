@@ -94,36 +94,68 @@ export function getFileBySlug(type: ContentType, slug: string) {
   }
 }
 
-export function getAllFilesMetadata(type: ContentType): PostMetadata[] {
-  const dirPath = path.join(CONTENT_PATH, type)
-  if (!fs.existsSync(dirPath)) return []
+/**
+ * Metadata dari CONTENT_BUNDLE (dibangkitkan saat build). Satu-satunya
+ * sumber yang bekerja di Cloudflare Workers, di mana tidak ada filesystem
+ * saat request. Dipakai sebagai fallback saat direktori konten tidak
+ * terbaca lewat fs, dan bisa dites langsung tanpa mocking fs.
+ */
+export function getAllFilesMetadataFromBundle(type: ContentType): PostMetadata[] {
+  const prefix = `${type}/`
 
-  const files = fs.readdirSync(dirPath, { recursive: true }) as string[]
-
-  return files
-    .reduce((allPosts: PostMetadata[], file: string) => {
-      if (!file.endsWith(".mdx")) return allPosts
-
-      const relativePath = file.replace(/\\/g, "/")
-      const source = fs.readFileSync(path.join(dirPath, file), "utf8")
-      const { data } = matter(source)
-
-      // Blog URLs stay flat (/blog/<slug>); the category subdirectory
-      // on disk is only for organization. Learn/airdrop keep full paths.
+  return Object.entries(CONTENT_BUNDLE)
+    .filter(([key]) => key.startsWith(prefix))
+    .map(([key, entry]) => {
+      const relativePath = key.slice(prefix.length)
+      // Blog URLs stay flat (/blog/<slug>); learn/airdrop keep full paths.
       const slug =
         type === "blog"
-          ? (relativePath.split("/").pop() ?? relativePath).replace(/\.mdx$/, "")
-          : relativePath.replace(/\.mdx$/, "")
+          ? (relativePath.split("/").pop() ?? relativePath)
+          : relativePath
 
-      return [
-        {
-          ...data,
-          slug,
-        } as PostMetadata,
-        ...allPosts,
-      ]
-    }, [])
+      return {
+        ...entry.frontMatter,
+        slug,
+      } as PostMetadata
+    })
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+}
+
+export function getAllFilesMetadata(type: ContentType): PostMetadata[] {
+  const dirPath = path.join(CONTENT_PATH, type)
+  try {
+    if (!fs.existsSync(dirPath)) return getAllFilesMetadataFromBundle(type)
+
+    const files = fs.readdirSync(dirPath, { recursive: true }) as string[]
+
+    return files
+      .reduce((allPosts: PostMetadata[], file: string) => {
+        if (!file.endsWith(".mdx")) return allPosts
+
+        const relativePath = file.replace(/\\/g, "/")
+        const source = fs.readFileSync(path.join(dirPath, file), "utf8")
+        const { data } = matter(source)
+
+        // Blog URLs stay flat (/blog/<slug>); the category subdirectory
+        // on disk is only for organization. Learn/airdrop keep full paths.
+        const slug =
+          type === "blog"
+            ? (relativePath.split("/").pop() ?? relativePath).replace(/\.mdx$/, "")
+            : relativePath.replace(/\.mdx$/, "")
+
+        return [
+          {
+            ...data,
+            slug,
+          } as PostMetadata,
+          ...allPosts,
+        ]
+      }, [])
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  } catch {
+    // fs tidak tersedia (Cloudflare Workers): pakai bundle.
+    return getAllFilesMetadataFromBundle(type)
+  }
 }
 
 export function getLearnStructure(): LearnTrack[] {
