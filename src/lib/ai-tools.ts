@@ -1682,7 +1682,6 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "Clipdrop mendukung remove background, relight, dan upscaling.",
-    newThisWeek: true,
     features: [
       "Hapus background otomatis dengan penanganan tepi rambut dan area transparan",
       "Cleanup: hapus objek, orang, teks, dan cacat foto dengan inpainting kontekstual",
@@ -1711,7 +1710,6 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "PhotoRoom membantu membuat foto katalog dengan background bersih.",
-    newThisWeek: true,
     features: [
       "Hapus background otomatis dari foto produk, termasuk foto dari HP",
       "Background AI studio dan lifestyle plus bayangan realistis agar produk terlihat difoto studio",
@@ -1739,7 +1737,6 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "Krea AI memungkinkan preview gambar secara live saat membuat prompt.",
-    newThisWeek: true,
     features: [
       "Kanvas real-time: gambar berubah saat mengetik atau menggambar, bukan menunggu satu render selesai",
       "Banyak model gambar dan video di satu saldo compute unit, termasuk model sendiri Krea 2/3 dan model mitra",
@@ -1768,7 +1765,6 @@ export const aiTools: AITool[] = [
     category: "Image Generation",
     pricing: "Freemium",
     description: "Artbreeder cocok untuk eksperimen style portrait dan landscape.",
-    newThisWeek: true,
     features: [
       "Splicer: campur gambar dan geser gen seperti usia, struktur wajah, dan palet warna untuk melihat perubahan langsung",
       "Mixer dan Composer: gabung beberapa gambar dan teks menjadi gambar baru",
@@ -2388,6 +2384,7 @@ export const aiTools: AITool[] = [
     pricing: "Freemium",
     description:
       "Suno menghasilkan lagu lengkap dengan vokal dan instrumen dari deskripsi teks; paket gratisnya 50 kredit per hari dengan model v6-mini, tanpa hak komersial dan tanpa jatah unduh lagu bulanan.",
+    newThisWeek: true,
     features: [
       "Text-to-music: deskripsi teks atau lirik sendiri menjadi lagu lengkap dengan vokal dan instrumen, dua lagu per generasi",
       "Simple Mode untuk lagu cepat dari deskripsi singkat dan Custom Mode untuk lirik dan parameter sendiri",
@@ -2419,6 +2416,7 @@ export const aiTools: AITool[] = [
     pricing: "Freemium",
     description:
       "Udio membantu membuat lagu pendek dengan berbagai genre; unduhan dimatikan di semua paket sejak 29 Okt 2025 dan ketentuannya melarang pemakaian komersial, jadi lagu hanya bisa diputar di dalam aplikasi.",
+    newThisWeek: true,
     features: [
       "Text-to-song: deskripsi singkat atau lirik sendiri menjadi dua kandidat lagu bervokal",
       "Extend, Remix, dan Inpainting untuk menambah bagian atau memperbaiki satu bagian lagu saja",
@@ -2448,6 +2446,7 @@ export const aiTools: AITool[] = [
     pricing: "Freemium",
     description:
       "Aiva cocok untuk membuat musik latar dan scoring video; paket gratisnya memberi 3 unduhan per bulan (MP3 + MIDI) untuk pemakaian non-komersial, dan hak cipta penuh baru berpindah di paket Pro.",
+    newThisWeek: true,
     features: [
       "Komposisi instrumental AI dalam 250+ gaya, dari orkestra dan sinematik sampai ambient dan jazz",
       "Editor bawaan (timeline + piano roll): edit not, ganti instrumen, ubah tempo, susun ulang bagian",
@@ -2479,6 +2478,7 @@ export const aiTools: AITool[] = [
     pricing: "Paid",
     description:
       "Soundraw memudahkan membuat soundtrack tanpa klaim hak cipta; paket gratisnya hanya untuk generate dan pratinjau (tidak bisa mengunduh dan tidak memberi lisensi), jadi pemakaian nyata butuh paket berbayar.",
+    newThisWeek: true,
     features: [
       "Generator musik instrumental dari menu: pilih genre, mood, tema, panjang, dan tempo",
       "Editor blok per bagian: atur energi intro/verse/chorus/outro dan regenerasi satu bagian saja",
@@ -2509,6 +2509,7 @@ export const aiTools: AITool[] = [
     pricing: "Paid",
     description:
       "LALAL.AI memisahkan vokal dan instrumen dengan cepat; paket gratis (Starter) hanya untuk pratinjau — 10 menit tanpa unduh hasil — jadi menyimpan hasil butuh paket berbayar.",
+    newThisWeek: true,
     features: [
       "Pisah lagu jadi 11 jenis stem: vokal, drum, bass, piano, gitar, synth, string, dan lainnya",
       "Tiga engine pemisah dengan mode Clear Cut (bleed minimal) dan Deep Extraction (detail maksimal)",
