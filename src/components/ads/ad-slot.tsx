@@ -1,4 +1,3 @@
-import Script from "next/script"
 import { getAdSettings, type AdSection } from "@/lib/ads"
 import { ClientAdSlot } from "@/components/ads/client-ad-slot"
 
@@ -19,13 +18,9 @@ export async function AdSlot({ section, label = "Sponsored", className }: AdSlot
   return (
     <div className={className}>
       <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <Script
-        id={`adsense-script-${settings.clientId}`}
-        async
-        strategy="afterInteractive"
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${settings.clientId}`}
-        crossOrigin="anonymous"
-      />
+      {/* Library adsbygoogle.js dimuat malas oleh root layout
+          (LazyThirdPartyScripts); push ke antrean di ClientAdSlot tetap
+          aman sebelum library termuat. */}
       <ClientAdSlot clientId={settings.clientId} slotId={sectionConfig.slotId} />
     </div>
   )

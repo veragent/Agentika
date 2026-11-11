@@ -1,11 +1,10 @@
 import type { Metadata } from "next"
-import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { GoogleAnalytics } from "@next/third-parties/google"
 import { BRAND } from "@/lib/brand"
 import { Providers } from "@/components/providers"
 import { WebMcpTools } from "@/components/webmcp-tools"
+import { LazyThirdPartyScripts } from "@/components/lazy-third-party"
 import { getAdSettings } from "@/lib/ads"
 import { WEBMCP_ORIGIN_TRIAL_TOKEN } from "@/lib/origin-trial"
 
@@ -19,6 +18,7 @@ const GA_ID =
   "G-CF8K7Z0DVD"
 
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
   title: `${BRAND.name} — Platform AI untuk UMKM Indonesia`,
   description: "Tools AI, tutorial otomatisasi, dan strategi side hustle untuk bisnis online Indonesia.",
   applicationName: BRAND.descriptor,
@@ -47,7 +47,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // Script AdSense global: dibutuhkan untuk verifikasi situs dan Auto ads.
+  // Client ID AdSense untuk lazy loader skrip third-party di bawah.
   // Slot manual tetap dikendalikan adsense.json (globallyEnabled + slotId).
   const adSettings = getAdSettings()
   return (
@@ -74,16 +74,16 @@ export default async function RootLayout({
           </ThemeProvider>
         </Providers>
       </body>
-      {adSettings.clientId && (
-        <Script
-          id={`adsense-script-${adSettings.clientId}`}
-          async
-          strategy="afterInteractive"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSettings.clientId}`}
-          crossOrigin="anonymous"
-        />
-      )}
-      <GoogleAnalytics gaId={GA_ID} />
+      {/* Skrip third-party dimuat malas (setelah window load + idle):
+          baseline CWV 11 Nov 2026 — AdSense ~167 KiB dan GTM ~75 KiB
+          tercatat sebagai unused JavaScript saat load. Kode tetap dimuat
+          (bukan dihapus) supaya verifikasi situs AdSense yang sedang
+          berjalan tidak terganggu; slot iklan tetap dikendalikan
+          adsense.json (globallyEnabled + slotId). */}
+      <LazyThirdPartyScripts
+        adsenseClientId={adSettings.clientId || undefined}
+        gaId={GA_ID}
+      />
     </html>
   )
 }

@@ -34,6 +34,7 @@ export interface PostMetadata {
   category?: string
   tags?: string[]
   excerpt?: string
+  description?: string
   coverImage?: string
   published?: boolean
   featured?: boolean
@@ -53,6 +54,22 @@ interface LearnTrack {
   pages: LearnPage[]
 }
 
+/**
+ * Normalisasi metadata: frontmatter artikel memakai `description:` (35 dari
+ * 52 artikel blog) atau `excerpt:` (17). Semua konsumen — metadata SEO,
+ * kartu terkait, daftar blog — membaca `excerpt`, jadi `description`
+ * dijadikan fallback di sumber agar tidak ada artikel yang kehilangan
+ * deskripsi (temuan CWV 11 Nov 2026: artikel #47 tanpa meta description).
+ */
+function normalizeMetadata(data: Record<string, unknown>, slug: string): PostMetadata {
+  const meta = data as unknown as PostMetadata
+  return {
+    ...meta,
+    slug,
+    excerpt: meta.excerpt ?? meta.description,
+  }
+}
+
 export function getFileBySlug(type: ContentType, slug: string) {
   // Bundled copy first: the only path that works in Cloudflare Workers,
   // where there is no filesystem at request time.
@@ -60,10 +77,7 @@ export function getFileBySlug(type: ContentType, slug: string) {
   if (bundled) {
     return {
       content: bundled.content,
-      frontMatter: {
-        slug,
-        ...bundled.frontMatter,
-      } as PostMetadata,
+      frontMatter: normalizeMetadata(bundled.frontMatter as Record<string, unknown>, slug),
     }
   }
 
@@ -84,10 +98,7 @@ export function getFileBySlug(type: ContentType, slug: string) {
 
     return {
       content,
-      frontMatter: {
-        slug,
-        ...data,
-      } as PostMetadata,
+      frontMatter: normalizeMetadata(data as Record<string, unknown>, slug),
     }
   } catch {
     return null
@@ -113,10 +124,7 @@ export function getAllFilesMetadataFromBundle(type: ContentType): PostMetadata[]
           ? (relativePath.split("/").pop() ?? relativePath)
           : relativePath
 
-      return {
-        ...entry.frontMatter,
-        slug,
-      } as PostMetadata
+      return normalizeMetadata(entry.frontMatter as Record<string, unknown>, slug)
     })
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
 }
@@ -143,13 +151,7 @@ export function getAllFilesMetadata(type: ContentType): PostMetadata[] {
             ? (relativePath.split("/").pop() ?? relativePath).replace(/\.mdx$/, "")
             : relativePath.replace(/\.mdx$/, "")
 
-        return [
-          {
-            ...data,
-            slug,
-          } as PostMetadata,
-          ...allPosts,
-        ]
+        return [normalizeMetadata(data as Record<string, unknown>, slug), ...allPosts]
       }, [])
       .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   } catch {
