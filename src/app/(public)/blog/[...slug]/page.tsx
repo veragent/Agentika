@@ -11,6 +11,15 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Fragment, type ReactNode } from "react"
+import { getAuthorProfile } from "@/lib/authors"
+import { AuthorCard } from "@/components/blog/author-card"
+import { JsonLdScript, buildArticleJsonLd } from "@/components/seo/json-ld-data"
+import { env } from "@/lib/env"
+
+// Hapus heading H1 pertama di awal isi MDX karena <h1> sudah dirender di header halaman
+function stripLeadingH1(mdxContent: string): string {
+  return mdxContent.replace(/^\s*#\s+[^\n]+\r?\n+/, "")
+}
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string[] }>
@@ -83,22 +92,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const readingStats = getReadingStats(post.content)
   const toc = extractToc(post.content)
 
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date,
-    author: {
-      "@type": "Person",
-      name: post.author ?? "Admin",
-    },
-  }
+  const author = getAuthorProfile(post.author)
+  const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://www.agentika.web.id"
+  const articleUrl = `${baseUrl}/blog/${post.slug}`
+
+  const articleJsonLd = buildArticleJsonLd({
+  title: post.title,
+  description: post.excerpt ?? "",
+  url: articleUrl,
+  publishedAt: post.date ?? new Date().toISOString(),
+  authorName: author.name,
+  authorUrl: author.url,
+})
 
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-10 lg:grid-cols-[1fr_280px]">
       <article className="max-w-3xl">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+        <JsonLdScript json={articleJsonLd} id="article-json-ld" />
 
         <div className="mb-8 space-y-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -114,7 +124,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
             <span>{(post.date ?? "").split("T")[0]}</span>
             <span>&bull;</span>
-            <span>By {post.author ?? "Admin"}</span>
+            <span>
+              Oleh{" "}
+                <Link href="/tentang" className="font-medium text-foreground hover:underline">
+                  {author.name}
+                </Link>
+            </span>
             <span>&bull;</span>
             <span>{readingStats.words} words</span>
             <span>&bull;</span>
@@ -125,8 +140,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         <div className="prose prose-zinc max-w-none dark:prose-invert">
-          <MDXRemote source={post.content} components={{ ...components, h2: headingWithId("h2"), h3: headingWithId("h3") }} options={mdxOptions} />
+            <MDXRemote
+              source={stripLeadingH1(post.content)}
+              components={{
+                ...components,
+                // Jaga-jaga jika masih ada `#` di tengah konten MDX, turunkan jadi <h2>
+                h1: headingWithId("h2"),
+                h2: headingWithId("h2"),
+                h3: headingWithId("h3"),
+              }}
+              options={mdxOptions}
+            />
         </div>
+
+        <AuthorCard author={author} />
 
         <AdSlot section="blog_detail_inline" label="Sponsored content" className="mt-8 rounded-xl border p-4" />
 
