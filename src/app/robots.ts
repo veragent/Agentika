@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { env } from "@/lib/env"
 
-const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
+const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://www.agentika.web.id"
 
 export default function robots(): MetadataRoute.Robots {
   return {
