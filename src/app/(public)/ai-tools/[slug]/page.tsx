@@ -26,12 +26,11 @@ export async function generateMetadata({
   const tool = getToolBySlug(slug)
   if (!tool) return {}
   return {
-    title: `${tool.name} — ${tool.tagline}`,
+    title: `${tool.name} - ${tool.tagline}`,
     description: tool.description,
     alternates: { canonical: `/ai-tools/${tool.slug}` },
-    robots: isToolContentFilled(tool)
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
+    // Nonaktifkan indeksasi halaman direktori tipis selama peninjauan AdSense
+    robots: { index: false, follow: true },
   }
 }
 
