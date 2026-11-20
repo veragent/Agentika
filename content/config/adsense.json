@@ -1,6 +1,6 @@
 {
   "clientId": "ca-pub-8284519503817385",
-  "globallyEnabled": true,
+  "globallyEnabled": false,
   "sections": {
     "blog_detail_inline": {
       "enabled": true,
