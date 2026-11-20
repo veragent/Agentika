@@ -16,7 +16,7 @@
     }
   ],
   "main": ".open-next/worker.js",
-  "name": "agentika-staging",
+  "name": "agentika",
   "observability": {
     "enabled": true
   },
