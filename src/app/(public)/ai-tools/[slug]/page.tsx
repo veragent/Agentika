@@ -49,7 +49,7 @@ export default async function ToolDetailPage({
     .slice(0, 3)
   const mentioningPosts = findPostsMentioningTool(tool.slug)
 
-  const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://agentika.my.id"
+  const baseUrl = env.NEXT_PUBLIC_APP_URL ?? "https://www.agentika.web.id"
   const toolJsonLd = buildSoftwareApplicationJsonLd({
     name: tool.name,
     description: tool.description,
